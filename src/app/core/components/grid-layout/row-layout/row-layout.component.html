@@ -1,0 +1,9 @@
+<div class="{{ containerCss }}">
+  <div class="row {{ rowCss }}">
+    <div *ngFor="let config of componentConfigs" class="{{ getGridColumn(config.layoutDefinition) }}">
+      <div class="{{ config.cssClass.col }}">
+        <lqh-col-layout [config]="config"></lqh-col-layout>
+      </div>
+    </div>
+  </div>
+</div>

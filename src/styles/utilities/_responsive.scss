@@ -1,0 +1,28 @@
+$phone-width: 568px;
+$tablet-medium-width: 768px;
+$tablet-large-width: 1024px;
+$desktop-width: 1366px;
+
+@mixin phone {
+  @media (min-width: #{$phone-width}) {
+    @content;
+  }
+}
+
+@mixin tablet-md {
+  @media (min-width: #{$tablet-medium-width}) {
+    @content;
+  }
+}
+
+@mixin tablet-lg {
+  @media (min-width: #{$tablet-large-width}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
