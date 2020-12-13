@@ -38,7 +38,7 @@ export class ComponentBuilderComponent implements OnInit {
   }
 
   loadBuilderConfig(configName: string): BuilderConfig {
-    return this.builder.getCurrentBuilderConfig(configName).type;
+    return this.builder.getCurrentBuilderConfig(configName);
   }
 
 }

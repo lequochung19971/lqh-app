@@ -19,12 +19,8 @@ export class ColLayoutComponent implements OnInit {
 
   renderColumn(): void {
     if (this.config) {
-      const currentType = this.builder.getCurrentComponent(this.config.type);
-      if (!currentType) {
-        console.error(`Component - ${this.config.type} is not mapped`);
-      }
-
-      this.builder.renderDynamicComponent(currentType.type, this.viewContainerRef);
+      const component: any = this.builder.getCurrentComponent(this.config.type);
+      this.builder.renderDynamicComponent(component, this.viewContainerRef);
     }
   }
 

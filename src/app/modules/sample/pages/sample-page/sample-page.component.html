@@ -1,3 +1,8 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <lqh-component-builder [builderConfigName]="'samplePage'"></lqh-component-builder>
-</div>
+</div> -->
+
+<button (click)="onClick()">Click</button>
+<button (click)="onOtherClick()">Other Click</button>
+<pre>{{ (vm$ | async).sampleData }}</pre>
+<pre>{{ (vm$ | async).tempValue }}</pre>
