@@ -1,0 +1,51 @@
+//----------------------------
+//-----------MARGIN-----------
+//----------------------------
+.m-0 {
+  margin: 0;
+}
+
+.ml-0 {
+  margin-left: 0;
+}
+
+.ml-20px {
+  margin-left: 20px;
+}
+
+.mt-30px {
+  margin-top: 30px;
+}
+
+.mt-35px {
+  margin-top: 35px;
+}
+
+.mb-5px {
+  margin-bottom: 5px;
+}
+
+.mb--1rem {
+  margin-bottom: -1rem;
+}
+
+.my-30px {
+  margin: {
+    top: 30px;
+    bottom: 30px;
+  }
+}
+
+.my-35px {
+  margin: {
+    top: 35px;
+    bottom: 35px;
+  }
+}
+
+.my-40px {
+  margin: {
+    top: 40px;
+    bottom: 40px;
+  }
+}

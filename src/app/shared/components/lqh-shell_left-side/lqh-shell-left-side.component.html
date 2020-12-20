@@ -1,0 +1,36 @@
+<ng-container [ngTemplateOutlet]="(isTablet$ | async) ? logoSmall : logo"></ng-container>
+<mat-nav-list class="px-20px pt-0i">
+  <ng-container
+    *ngFor="let item of navList"
+    [ngTemplateOutlet]="(isTablet$ | async) ? navItemSmall : navItem"
+    [ngTemplateOutletContext]="{ item: item }"
+  >
+  </ng-container>
+</mat-nav-list>
+
+<!-- Logo -->
+<ng-template #logo>
+  <mat-toolbar class="logo bg-white my-35px flex-between">
+    <img src="../../../../assets/icons/logo.svg" alt="my-icon" class="primary-shadow" />
+  </mat-toolbar>
+</ng-template>
+
+<ng-template #logoSmall>
+  <mat-toolbar class="logo bg-white my-35px flex-between">
+    <img src="../../../../assets/icons/logo-small.svg" alt="my-icon" class="primary-shadow" />
+  </mat-toolbar>
+</ng-template>
+
+<!-- Nav Item -->
+<ng-template #navItem let-item="item">
+  <div matRipple *ngIf="item.authorize" class="nav-item mb-5px flex-start-center py-16px px-25px" [routerLink]="item.url" routerLinkActive="item-active">
+    <mat-icon fontSet="material-icons-outlined" inline="true">dashboard</mat-icon>
+    <span>{{ item.routerName }}</span>
+  </div>
+</ng-template>
+
+<ng-template #navItemSmall let-item="item">
+  <div matRipple *ngIf="item.authorize" class="nav-item mb-5px flex-between py-16px" [routerLink]="item.url" routerLinkActive="item-active">
+    <mat-icon fontSet="material-icons-outlined" inline="true">dashboard</mat-icon>
+  </div>
+</ng-template>

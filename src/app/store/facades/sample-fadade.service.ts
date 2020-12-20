@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { BaseFacadeService } from '../../core/services/base-facade.service';
 import { initialState, SampleState } from '../states/sample.state';
 import { LocatorFacadeService } from '../../core/services/locator-facade.service';
@@ -12,17 +11,14 @@ import { FacadeConfig } from '../../core/interfaces/facade-config.interface';
   providedIn: 'root',
 })
 export class SampleFadadeService extends BaseFacadeService<SampleState> {
-  protected sampleData$ = this.select('sampleData');
-  protected tempValue$ = this.select('tempValue');
+  get sampleData() {
+    return this.select('sampleData')
+  }
+  get tempValue() {
+    return this.select('tempValue')
+  }
 
-  protected _viewModel$: Observable<SampleState> = combineLatest([
-    this.sampleData$,
-    this.tempValue$,
-  ]).pipe(
-    map(([sampleData, tempValue]) => {
-      return new SampleState({ sampleData, tempValue });
-    })
-  );
+  protected _viewModel$: Observable<SampleState> = this.stateChange(SampleState);
 
   constructor(protected lfs: LocatorFacadeService) {
     super(

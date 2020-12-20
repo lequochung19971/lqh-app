@@ -6,7 +6,7 @@ import { SamplePageComponent } from './pages/sample-page/sample-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: SamplePageComponent
+    component: SamplePageComponent,
   }
 ]
 

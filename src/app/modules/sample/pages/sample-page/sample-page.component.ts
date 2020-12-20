@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { SampleFadadeService } from '../../../../store/facades/sample-fadade.service';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SampleState } from 'src/app/store/states/sample.state';
+import { SampleFadadeService } from '../../../../store/facades/sample-fadade.service';
+import { SampleState } from '../../../../store/states/sample.state';
 
 @Component({
   selector: 'lqh-sample-page',
   templateUrl: './sample-page.component.html',
-  styleUrls: ['./sample-page.component.scss']
+  styleUrls: ['./sample-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SamplePageComponent implements OnInit {
-  vm$: Observable<SampleState>
+  vm$: Observable<SampleState>;
+  sampleData$: Observable<any>;
+  tempValue$: Observable<any>;
+
   constructor(
     protected sampleFacade: SampleFadadeService
   ) { }
@@ -19,6 +23,9 @@ export class SamplePageComponent implements OnInit {
     this.vm$.subscribe(value => {
       console.log(value);
     })
+
+    this.sampleData$ = this.sampleFacade.sampleData;
+    this.tempValue$ = this.sampleFacade.tempValue;
   }
 
   onClick(): void {
@@ -29,4 +36,8 @@ export class SamplePageComponent implements OnInit {
     this.sampleFacade.updateTempValue('Nguyen Thi Hoai Vi');
   }
 
+  onRefresh(): void {
+    this.sampleFacade.updateSampleData('Sample Data');
+    this.sampleFacade.updateTempValue('Temp Value');
+  }
 }

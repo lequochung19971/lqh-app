@@ -4,7 +4,7 @@ import { TypeConfig } from '../interfaces/type-config.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class TypeConfigService {
+export abstract class TypeConfigService {
 
   constructor() { }
 

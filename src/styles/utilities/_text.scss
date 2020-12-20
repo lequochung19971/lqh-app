@@ -1,0 +1,25 @@
+@import '../variables';
+
+.t-align-center {
+  text-align: center;
+}
+
+.t-align-left {
+  text-align: left;
+}
+
+.t-align-right {
+  text-align: right;
+}
+
+.t-align-justify {
+  text-align: justify;
+}
+
+.text-grey {
+  color: $lqh-text-grey;
+}
+
+.text-black {
+  color: $lqh-black;
+}

@@ -1,0 +1,21 @@
+.avatar {
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+
+  &.small {
+    @include w-h-same-size(35px);
+  }
+
+  &.medium {
+    @include w-h-same-size(45px);
+  }
+
+  &.standard {
+    @include w-h-same-size(55px);
+  }
+
+  &.large {
+    @include w-h-same-size(65px);
+  }
+}

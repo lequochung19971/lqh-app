@@ -12,7 +12,7 @@ export class LocatorFacadeService extends TypeConfigService {
   constructor(
     protected injector: Injector,
     @Inject(FACADE_CONFIG_TOKEN) public allFacades: [TypeConfig[]],
-    @Inject(FACADE_ACTION_CONFIG_TOKEN) public allActions: [TypeConfig[]]
+    @Inject(FACADE_ACTION_CONFIG_TOKEN) public allActions: [TypeConfig[]],
   ) { 
     super();
   }

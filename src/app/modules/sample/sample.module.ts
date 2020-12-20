@@ -2,20 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SampleRoutingModule } from './sample-routing.module';
 import { COMPONENT_TYPE_CONFIG_TOKEN, BUILDER_CONFIG_TOKEN } from '../../core/consts/injection-tokens.const';
-import { allSampleTypeConfig } from './components';
+import { allSampleComponentsTypeConfigs } from './components';
 import { allSampleComponents } from './components/index';
 import { allSamplePageComponent } from './pages';
 import { CoreModule } from '../../core/core.module';
 import { allSampleBuilderConfig } from './configs/index';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [...allSamplePageComponent, ...allSampleComponents],
-  imports: [CommonModule, SampleRoutingModule, CoreModule],
+  imports: [CommonModule, SampleRoutingModule, CoreModule, SharedModule],
   providers: [
     {
       provide: COMPONENT_TYPE_CONFIG_TOKEN,
       multi: true,
-      useValue: allSampleTypeConfig,
+      useValue: allSampleComponentsTypeConfigs,
     },
     {
       provide: BUILDER_CONFIG_TOKEN,

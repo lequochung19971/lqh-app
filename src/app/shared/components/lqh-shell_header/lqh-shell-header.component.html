@@ -1,0 +1,33 @@
+<div class="row my-30px">
+  <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+    <div class="flex-start-center flex-wrap h100">
+      <div class="lqh-h2 text-black lh-17 fw-700 w100">{{ breadcrumb }}</div>
+      <div class="lqh-h3 text-grey lh-17 w100">{{ currentDateTime }}</div>
+    </div>
+  </div>
+
+  <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7">
+    <div class="flex-end-center">
+      <div class="flex-grow-7">
+        <mat-form-field appearance="standard" class="w100 mb--1rem">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Search">
+          <mat-icon matSuffix class="text-grey">search</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="ml-20px">
+        <button mat-button class="btn-flat-icon">
+          <mat-icon fontSet="material-icons-outlined">notifications</mat-icon>
+        </button>
+      </div>
+      <div class="ml-20px">
+        <button mat-button class="btn-flat-icon">
+          <img src="../../../../assets/icons/vietnamese-flag.svg" alt="country-icon">
+        </button>
+      </div>
+      <div class="ml-20px">
+        <lqh-avatar [imageSrc]="'images/unnamed.jpg'" [imageSize]="'standard'"></lqh-avatar>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,21 @@
 <!-- <div class="container-fluid">
   <lqh-component-builder [builderConfigName]="'samplePage'"></lqh-component-builder>
 </div> -->
-
-<button (click)="onClick()">Click</button>
-<button (click)="onOtherClick()">Other Click</button>
-<pre>{{ (vm$ | async).sampleData }}</pre>
-<pre>{{ (vm$ | async).tempValue }}</pre>
+<div class="container-fluid bg-white">
+  <button (click)="onClick()">Click</button>
+  <button (click)="onOtherClick()">Other Click</button>
+  <button (click)="onRefresh()">Refresh</button>
+  <pre>{{ (vm$ | async).sampleData }}</pre>
+  <pre>{{ (vm$ | async).tempValue }}</pre>
+  <div class="row">
+    <lqh-skeleton [height]="100" [width]="100" [radius]="5" [variant]="'circle'" class="col-2"></lqh-skeleton>
+    <div class="col-10">
+      <div class="row justify-content-space-evenly flex-column h100">
+        <lqh-skeleton [radius]="5" [variant]="'text'" class="col-12"></lqh-skeleton>
+        <lqh-skeleton [radius]="5" [variant]="'text'" class="col-12"></lqh-skeleton>
+        <lqh-skeleton [radius]="5" [variant]="'text'" class="col-12"></lqh-skeleton>
+        <lqh-skeleton [radius]="5" [variant]="'text'" class="col-12"></lqh-skeleton>
+      </div>
+    </div>
+  </div>
+</div>

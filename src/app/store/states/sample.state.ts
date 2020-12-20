@@ -4,7 +4,7 @@ export class SampleState implements BaseState {
   sampleData: any;
   tempValue: any;
   
-  constructor(props: any) {
+  constructor(props?: any) {
     Object.assign(this, props);
   }
 }

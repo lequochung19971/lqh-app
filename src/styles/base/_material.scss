@@ -1,0 +1,48 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+
+$lqh-web-app-primary: mat-palette($mat-cyan);
+$lqh-web-app-accent: mat-palette($mat-orange);
+$lqh-web-app-error: mat-palette($mat-red, A200);
+
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$lqh-web-app-theme-light: mat-light-theme(
+  (
+    color: (
+      primary: $lqh-web-app-primary,
+      accent: $lqh-web-app-accent,
+      warn: $lqh-web-app-error,
+    ),
+  )
+);
+
+$lqh-web-app-theme-dark: mat-dark-theme(
+  (
+    color: (
+      primary: $lqh-web-app-primary,
+      accent: $lqh-web-app-accent,
+      warn: $lqh-web-app-error,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+// @include angular-material-theme($lqh-web-app-theme-dark);
+@include angular-material-theme($lqh-web-app-theme-light);
+
+// .theme-light {
+//   @include angular-material-theme($lqh-web-app-theme-light);
+// }
+
+// .theme-dark {
+//   @include angular-material-theme($lqh-web-app-theme-dark);
+// }

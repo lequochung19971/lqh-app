@@ -7,7 +7,7 @@ export const allSampleComponents = [
   TwoComponent
 ]
 
-export const allSampleTypeConfig: TypeConfig[] = [
+export const allSampleComponentsTypeConfigs: TypeConfig[] = [
   {
     name: 'one',
     type: OneComponent

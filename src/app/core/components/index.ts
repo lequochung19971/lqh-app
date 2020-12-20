@@ -5,5 +5,5 @@ import { RowLayoutComponent } from './grid-layout/row-layout/row-layout.componen
 export const allCoreComponents = [
   ComponentBuilderComponent,
   ColLayoutComponent,
-  RowLayoutComponent
+  RowLayoutComponent,
 ];

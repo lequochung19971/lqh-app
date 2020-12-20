@@ -1,0 +1,17 @@
+@import '../variables';
+
+.btn-flat-icon {
+  @extend .bd-none;
+  @extend .flex-between;
+  @include w-h-same-size(55px);
+  min-width: 55px !important;
+  background-color: $lqh-white;
+  color: $lqh-text-grey;
+  .mat-icon.mat-icon-inline {
+    @include font-size(22px);
+  }
+
+  .mat-icon {
+    @include font-size(22px);
+  }
+}
