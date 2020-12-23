@@ -10,6 +10,8 @@ export class SkeletonComponent implements OnInit {
   @Input() height: string;
   @Input() variant: string;
   @Input() radius: string;
+  @Input() isLoading: boolean = false; 
+
   constructor() { }
 
   ngOnInit(): void {

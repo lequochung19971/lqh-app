@@ -9,9 +9,12 @@ import { Component, Input, OnInit } from '@angular/core';
 export class LqhAvatarComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() imageSrc: string;
   @Input() imageSize: AvatarSize;
+  @Input() firstName: string = 'Hung';
+  @Input() lastName: string = 'Le';
   avatarId: string;
   url: string;
   currentAvatar: HTMLElement;
+  textAvatar: string = `${this.firstName[0]}${this.lastName[0]}`;
   
   constructor() { }
   get avatarSize() {
@@ -23,35 +26,59 @@ export class LqhAvatarComponent implements OnInit, OnChanges, AfterViewInit {
 
     return this.imageSize;
   }
+
   ngOnChanges(): void {
-    this.initAvatar();
+    this.initAvatarId();
+    this.initAvatarUrl();
   }
 
   ngOnInit(): void {
   }
 
-  initAvatar(): void {
+  ngAfterViewInit(): void {
+    this.currentAvatar = this.currentAvatar || document.getElementById(this.avatarId);
+    if (this.url) {
+      this.generateBackgroundImage(this.currentAvatar);
+    } else {
+      this.generateBackgroundText(this.currentAvatar);
+    }
+  }
+
+  initAvatarId(): void {
     const avtId = this.generateAvatarId();
     this.currentAvatar = document.getElementById(avtId);
-    if (!this.currentAvatar) { this.avatarId = avtId; }
+    if (!this.currentAvatar) { 
+      this.avatarId = avtId; 
+    }
+  }
 
+  generateAvatarId(): string {
+    if (this.imageSrc) {
+      const id = this.imageSrc.split('/').join('-');
+      return `lqh-avatar-${id}-${Math.random()}`;
+    } else {
+      return `lqh-avatar-${this.firstName}-${this.lastName}-${Math.random()}`
+    }
+  }
+
+  initAvatarUrl(): void {
     if (this.imageSrc) {
       this.url = `../../assets/${this.imageSrc}`
     }
   }
 
-  generateAvatarId(): string {
-    const srcId = this.imageSrc.split('/').join('-');
-    return `lqh-avatar-${srcId}-${Math.random()}`;
+  generateBackgroundImage(currentAvatar) {
+    currentAvatar.style.backgroundImage = `url(${this.url})`;
   }
 
-  ngAfterViewInit(): void {
-    this.generateUrl();
+  generateBackgroundText(currentAvatar) {
+    currentAvatar.style.setProperty('--red', this.randomColorRGB());
+    currentAvatar.style.setProperty('--green', this.randomColorRGB());
+    currentAvatar.style.setProperty('--blue', this.randomColorRGB());
   }
 
-  generateUrl() {
-    this.currentAvatar = this.currentAvatar ? this.currentAvatar : document.getElementById(this.avatarId);
-    this.currentAvatar.style.backgroundImage = `url(${this.url})`;
+  randomColorRGB(): string {
+    return Math.floor(Math.random() * 256).toString();
   }
 }
 

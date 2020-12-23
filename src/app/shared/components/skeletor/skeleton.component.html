@@ -1,1 +1,5 @@
-<div class="loader" [ngStyle]="getStyle()"></div>
+<div class="skeleton-container">
+  <div [ngClass]="isLoading ? 'skeleton-loader' : ''">
+    <ng-content #wrapper></ng-content>
+  </div>
+</div>

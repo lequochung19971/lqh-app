@@ -1,0 +1,41 @@
+:root {
+  /* RANDOM BACKGROUND-COLOR AND TEXT-COLOR */
+  // ---------------------------------------------------------------------------
+  /* theme color variables to use in RGB declarations */
+  --red: 200;
+  --green: 60;
+  --blue: 255;
+  /*
+    the threshold at which colors are considered "light". 
+    Range: decimals from 0 to 1,
+    recommended 0.5 - 0.6
+  */
+  --threshold: 0.5;
+  /*
+    the threshold at which a darker border will be applied.
+    Range: decimals from 0 to 1,
+    recommended 0.8+
+  */
+  --border-threshold: 0.8;
+
+  /* 
+    Calcs perceived brightness using the 
+    sRGB Luma method
+    lightness = (red * 0.2126 + green * 0.7152 + blue * 0.0722) / 255
+  */
+
+  --r-text: calc(var(--red) * 0.2126);
+  --g-text: calc(var(--green) * 0.7152);
+  --b-text: calc(var(--blue) * 0.0722);
+  --sum: calc(var(--r-text) + var(--g-text) + var(--b-text));
+  --perceived-lightness: calc(var(--sum) / 255);
+  // ---------------------------------------------------------------------------
+}
+
+.text-lightness-darkness {
+  color: hsl(0, 0%, calc((var(--perceived-lightness) - var(--threshold)) * -10000000%));
+}
+
+.background-color-random {
+  background: rgb(var(--red), var(--green), var(--blue));
+}

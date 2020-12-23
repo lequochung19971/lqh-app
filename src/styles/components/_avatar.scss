@@ -1,21 +1,36 @@
-.avatar {
+@import '../variables';
+
+.lqh-avatar {
   border-radius: 50%;
   background-size: cover;
   background-position: center;
 
+  &.text {
+    @extend .background-color-random;
+    @extend .text-lightness-darkness;
+  }
+
   &.small {
     @include w-h-same-size(35px);
+    font-size: 16px;
+    font-weight: 500;
   }
 
   &.medium {
     @include w-h-same-size(45px);
+    font-size: 18px;
+    font-weight: 500;
   }
 
   &.standard {
     @include w-h-same-size(55px);
+    font-size: 20px;
+    font-weight: 500;
   }
 
   &.large {
     @include w-h-same-size(65px);
+    font-size: 22px;
+    font-weight: 500;
   }
 }

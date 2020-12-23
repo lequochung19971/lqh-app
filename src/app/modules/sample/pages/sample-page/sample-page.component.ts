@@ -19,13 +19,13 @@ export class SamplePageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.vm$ = this.sampleFacade.viewModel;
-    this.vm$.subscribe(value => {
-      console.log(value);
-    })
+    // this.vm$ = this.sampleFacade.viewModel;
+    // this.vm$.subscribe(value => {
+    //   console.log(value);
+    // })
 
-    this.sampleData$ = this.sampleFacade.sampleData;
-    this.tempValue$ = this.sampleFacade.tempValue;
+    // this.sampleData$ = this.sampleFacade.sampleData;
+    // this.tempValue$ = this.sampleFacade.tempValue;
   }
 
   onClick(): void {
