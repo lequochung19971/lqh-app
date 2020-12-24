@@ -10,7 +10,7 @@
     <lqh-shell-left-side></lqh-shell-left-side>
   </mat-sidenav>
 
-  <mat-sidenav-content class="d-flex flex-column bg-dark-white h100 container-fluid px-20px">
+  <mat-sidenav-content class="d-flex flex-column h100 container-fluid px-20px">
     <ng-container [ngTemplateOutlet]="header"></ng-container>
     <ng-container [ngTemplateOutlet]="main"></ng-container>
   </mat-sidenav-content>
@@ -28,20 +28,6 @@
   <mat-toolbar class="logo bg-white my-35px flex-between">
     <img src="../../../../assets/icons/logo-small.svg" alt="my-icon" class="primary-shadow" />
   </mat-toolbar>
-</ng-template>
-
-<!-- Nav Item -->
-<ng-template #navItem let-item="item">
-  <div matRipple *ngIf="item.authorize" class="nav-item mb-5px flex-start-center py-16px px-25px" [routerLink]="item.url" routerLinkActive="item-active">
-    <mat-icon fontSet="material-icons-outlined" inline="true">dashboard</mat-icon>
-    <span>{{ item.routerName }}</span>
-  </div>
-</ng-template>
-
-<ng-template #navItemSmall let-item="item">
-  <div matRipple *ngIf="item.authorize" class="nav-item mb-5px flex-between py-16px" [routerLink]="item.url" routerLinkActive="item-active">
-    <mat-icon fontSet="material-icons-outlined" inline="true">dashboard</mat-icon>
-  </div>
 </ng-template>
 
 <!-- --------------------Right Side-------------------- -->

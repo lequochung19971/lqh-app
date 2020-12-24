@@ -2,6 +2,9 @@ export interface NavigationConfig {
   id: string,
   authorize: boolean,
   routerName: string,
-  matIconName: string,
   url: string,
+  icon: {
+    active: string,
+    inActive: string
+  }
 }

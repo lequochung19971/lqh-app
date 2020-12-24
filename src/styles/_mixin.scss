@@ -171,12 +171,18 @@
   @return $string;
 }
 
-@mixin set-text-color() {
-  $color: red;
-  background-color: unquote('#' + random(1000000));
+@mixin text-color-dynamic($color) {
   @if (lightness($color) > 50) {
     color: $lqh-black;
   } @else {
     color: $lqh-white;
   }
+}
+
+@mixin box-shadow-btn($color) {
+  box-shadow: 0px 3px 4px $color;
+}
+
+@mixin box-shadow-btn-sm($color) {
+  box-shadow: 0px 1px 3px $color;
 }

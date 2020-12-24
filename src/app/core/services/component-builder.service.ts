@@ -23,8 +23,8 @@ export class ComponentBuilderService extends TypeConfigService {
   }
 
   getCurrentBuilderConfig(type: string): BuilderConfig {
-    const builderConfigTypeConfig = this.getTypeConfig(type, this.allBuilderConfig);
-    return _.cloneDeep(builderConfigTypeConfig.type);
+    const builderConfigTypeConfig = this.getTypeConfig(type, this.allBuilderConfig).type;
+    return JSON.parse(builderConfigTypeConfig);
   }
 
   renderDynamicComponent<TComponent>(component: Type<TComponent>, viewContainerRef: ViewContainerRef, params?: any): TComponent {

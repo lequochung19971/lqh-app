@@ -9,6 +9,7 @@ import { SampleModule } from './modules/sample/sample.module';
 import { StoreModule } from './store/store.module';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { EmployeeModule } from './modules/employee/employee.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,12 +17,13 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
     BrowserAnimationsModule,
     CoreModule,
-    SampleModule,
     StoreModule,
     SharedModule,
-    RouterModule 
+    SampleModule,
+    EmployeeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

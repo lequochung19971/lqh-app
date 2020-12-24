@@ -10,12 +10,18 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: LqhShellComponent,
+    redirectTo: '/dashboard', 
+    pathMatch: 'full'
   },
   {
     path: 'dashboard',
     component: LqhShellComponent,
     loadChildren: () => import('./modules/sample/sample.module').then((m) => m.SampleModule),
+  },
+  {
+    path: 'employees',
+    component: LqhShellComponent,
+    loadChildren: () => import('./modules/employee/employee.module').then((m) => m.EmployeeModule),
   }
 ];
 

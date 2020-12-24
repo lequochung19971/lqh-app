@@ -4,6 +4,6 @@ import { samplePageConfig } from './sample-page.config';
 export const allSampleBuilderConfig: TypeConfig[] = [
   {
     name: 'samplePage',
-    type: samplePageConfig
+    type: JSON.stringify(samplePageConfig)
   }
 ]

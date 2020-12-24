@@ -11,6 +11,7 @@ export interface ComponentConfig {
   type: string;
   layoutDefinition?: LayoutDefinition;
   cssClass?:ClassNameConfig;
+  metadata?: any;
 }
 
 export interface ClassNameConfig {

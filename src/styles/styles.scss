@@ -3,31 +3,40 @@
 // ----------------------------------------------------------------
 @import './base/root';
 @import './base/base';
-@import './base/config-border-box';
 @import './base/material';
+@import './base/config-border-box';
 @import './variables';
 @import './mixin';
-// ----------------------------------------------------------------
-// ---------------------------UTILITIES----------------------------
-// ----------------------------------------------------------------
-@import './utilities/grid';
-@import './utilities/responsive';
-@import './utilities/display';
-@import './utilities/flex-layout';
-@import './utilities/background';
-@import './utilities/margin';
-@import './utilities/padding';
-@import './utilities/border';
-@import './utilities/box-shadow';
-@import './utilities/text';
-@import './utilities/button';
-@import './utilities/font';
-@import './utilities/typography';
-@import './utilities/line-height';
-@import './utilities/image';
-// ----------------------------------------------------------------
-// ---------------------------COMPONENT----------------------------
-// ----------------------------------------------------------------
-@import './components/shell';
-@import './components/avatar';
-@import './components/skeleton';
+
+.theme-light,
+.theme-dark {
+  // ----------------------------------------------------------------
+  // ---------------------------UTILITIES----------------------------
+  // ----------------------------------------------------------------
+  @import './utilities/grid';
+  @import './utilities/responsive';
+  @import './utilities/display';
+  @import './utilities/flex-layout';
+  @import './utilities/background';
+  @import './utilities/margin';
+  @import './utilities/padding';
+  @import './utilities/border';
+  @import './utilities/box-shadow';
+  @import './utilities/text';
+  @import './utilities/button';
+  @import './utilities/font';
+  @import './utilities/typography';
+  @import './utilities/line-height';
+  @import './utilities/image';
+  @import './utilities/checkbox';
+  @import './utilities/position';
+  @import './utilities/animations';
+  // ----------------------------------------------------------------
+  // ---------------------------COMPONENT----------------------------
+  // ----------------------------------------------------------------
+  @import './components/shell';
+  @import './components/avatar';
+  @import './components/skeleton';
+  @import './components/table';
+  @import './components/toggle-mode-theme';
+}

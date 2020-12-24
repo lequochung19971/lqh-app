@@ -5,7 +5,6 @@ import { MaterialModule } from '../material/material.module';
 import { RouterModule } from '@angular/router';
 import { JSON_OBJECT_TYPE_CONFIG_TOKEN } from '../core/consts/injection-tokens.const';
 import { allSharedJsonObjectConfigs } from './configs';
-
 @NgModule({
   declarations: [...allSharedComponents],
   imports: [

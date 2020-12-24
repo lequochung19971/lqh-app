@@ -5,7 +5,7 @@
   background-size: cover;
   background-position: center;
 
-  &.text {
+  &.avatar-text {
     @extend .background-color-random;
     @extend .text-lightness-darkness;
   }

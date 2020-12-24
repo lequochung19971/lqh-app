@@ -1,0 +1,14 @@
+.mode-theme {
+  transition: opacity 0.2s;
+  cursor: pointer;
+
+  &.light {
+  }
+  &.dark {
+  }
+}
+
+.bounceIn {
+  animation: bounceIn;
+  animation-duration: 1s;
+}

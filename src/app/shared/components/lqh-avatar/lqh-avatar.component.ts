@@ -57,7 +57,7 @@ export class LqhAvatarComponent implements OnInit, OnChanges, AfterViewInit {
       const id = this.imageSrc.split('/').join('-');
       return `lqh-avatar-${id}-${Math.random()}`;
     } else {
-      return `lqh-avatar-${this.firstName}-${this.lastName}-${Math.random()}`
+      return `lqh-avatar-${this.firstName}-${this.lastName}-${Math.floor(Math.random() * 1000000)}`
     }
   }
 
@@ -67,11 +67,11 @@ export class LqhAvatarComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-  generateBackgroundImage(currentAvatar) {
+  generateBackgroundImage(currentAvatar: HTMLElement) {
     currentAvatar.style.backgroundImage = `url(${this.url})`;
   }
 
-  generateBackgroundText(currentAvatar) {
+  generateBackgroundText(currentAvatar: HTMLElement) {
     currentAvatar.style.setProperty('--red', this.randomColorRGB());
     currentAvatar.style.setProperty('--green', this.randomColorRGB());
     currentAvatar.style.setProperty('--blue', this.randomColorRGB());

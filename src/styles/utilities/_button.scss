@@ -15,3 +15,108 @@
     @include font-size(22px);
   }
 }
+
+.mat-button {
+  &.btn {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 2px solid transparent;
+    padding: 0.32rem 1.575rem;
+    border-radius: 0;
+    transition: all 0.1s;
+    font-size: 1rem;
+    cursor: pointer;
+
+    &.btn-flat-primary {
+      @include text-color-dynamic($lqh-primary);
+      background-color: $lqh-primary;
+      border-color: $lqh-primary;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: $lqh-primary-hover;
+        border-color: $lqh-primary-hover;
+      }
+    }
+
+    &.btn-flat-accent {
+      @include text-color-dynamic($lqh-accent);
+      background-color: $lqh-accent;
+      border-color: $lqh-accent;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: $lqh-accent-hover;
+        border-color: $lqh-accent-hover;
+      }
+    }
+
+    // &.btn-stroked-primary {
+    //   color: $primary;
+    //   background-color: $white-10-opacity;
+    //   border-color: $primary;
+
+    //   &:hover {
+    //     color: $primary-hover;
+    //     border-color: $primary-hover;
+    //   }
+    // }
+
+    &.btn-round-primary {
+      @extend .btn-flat-primary;
+      @include font-size(14px);
+      border-radius: 100px;
+      padding: {
+        top: 0;
+        bottom: 0;
+      }
+    }
+
+    &.btn-round-accent {
+      @extend .btn-flat-accent;
+      @include font-size(14px);
+      border-radius: 100px;
+      padding: {
+        top: 0;
+        bottom: 0;
+      }
+    }
+
+    // &.btn-stroked-accent {
+    //   color: $accent;
+    //   background-color: $white-10-opacity;
+    //   border-color: $accent;
+
+    //   &:hover {
+    //     color: $accent-hover;
+    //     border-color: $accent-hover;
+    //   }
+    // }
+  }
+}
+
+.lqh-status {
+  @include font-size(12px);
+  @extend .bd-radius-4px;
+  display: inherit;
+  padding: 5px 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  &.active {
+    @extend .lqh-status;
+    @include box-shadow-btn-sm($lqh-light-green);
+    color: $lqh-green;
+    background-color: $lqh-light-green;
+  }
+
+  &.inactive {
+    @extend .lqh-status;
+    @include box-shadow-btn-sm($lqh-light-red);
+    color: $lqh-red;
+    background-color: $lqh-light-red;
+  }
+}

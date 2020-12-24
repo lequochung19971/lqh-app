@@ -1,0 +1,38 @@
+@import '../variables';
+
+.table-container {
+  th.mat-header-cell,
+  td.mat-cell,
+  td.mat-footer-cell {
+    border-bottom-width: 0;
+    border-bottom-style: none;
+  }
+
+  th.mat-header-cell {
+    @include font-size(12px);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  thead {
+    background-color: $lqh-primary-10-opacity;
+  }
+
+  tbody {
+    tr.mat-row {
+      transition: all linear 0.2s;
+      height: 60px;
+      &:hover {
+        background-color: $lqh-primary-10-opacity;
+      }
+    }
+  }
+
+  .mat-table-sticky {
+    background-color: transparent;
+  }
+
+  .mat-paginator {
+    background-color: $lqh-primary-20-opacity;
+  }
+}

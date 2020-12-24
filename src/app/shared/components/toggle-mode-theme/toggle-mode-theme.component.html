@@ -1,0 +1,20 @@
+<div class="flex-between">
+  <div
+    *ngIf="(isDarkMode$ | async)"
+    class="mode-theme"
+    [ngStyle]="(isDarkMode$ | async) ? {'opacity': '1'} : {'opacity': '0'}"
+    [ngClass]="(isDarkMode$ | async) ? 'bounceIn' : ''"
+    (click)="switchMode()"
+  >
+    <img src="../../../../assets/icons/dark.svg" alt="dark-mode" />
+  </div>
+  <div
+    *ngIf="(isLightMode$ | async)"
+    class="mode-theme"
+    [ngStyle]="(isLightMode$ | async) ? {'opacity': '1'} : {'opacity': '0'}"
+    [ngClass]="(isLightMode$ | async) ? 'bounceIn' : ''"
+    (click)="switchMode()"
+  >
+    <img src="../../../../assets/icons/light.svg" alt="light-mode" />
+  </div>
+</div>

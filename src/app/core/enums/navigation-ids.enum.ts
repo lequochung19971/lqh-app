@@ -1,4 +1,5 @@
 export enum NavigationId {
   sample = 'sample',
-  dashboard = 'dashboard'
+  dashboard = 'dashboard',
+  employees = 'employees'
 }

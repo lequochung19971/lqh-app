@@ -6,8 +6,23 @@
   padding-top: 0 !important;
 }
 
+.px-0i {
+  padding: {
+    left: 0 !important;
+    right: 0 !important;
+  }
+}
+
+.pb-0i {
+  padding-bottom: 0 !important;
+}
+
 .pb-10px {
   padding-bottom: 10px;
+}
+
+.pb-20px {
+  padding-bottom: 20px;
 }
 
 .px-20px {

@@ -1,0 +1,7 @@
+.lqh-checkbox {
+  &.mat-checkbox {
+    .mat-checkbox-inner-container {
+      @include w-h-same-size(20px);
+    }
+  }
+}
