@@ -1,4 +1,4 @@
-import { BaseAction } from '../../core/interfaces/base-action.interface';
+import { BaseAction } from '../../core/interfaces-abstracts/base-action.interface';
 export enum SampleActionType {
   GET_SAMPLE = '@Sample/Get',
   POST_SAMPLE = '@Sample/Post'

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JsonObjectService } from '../../core/services/json-object.service';
-import { NavigationConfig } from '../../core/interfaces/navigation-config.interface';
+import { NavigationConfig } from '../../core/interfaces-abstracts/navigation-config.interface';
 import { NavigationName } from 'src/app/core/enums/navigation-names.enum';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NavigationId } from '../../core/enums/navigation-ids.enum';

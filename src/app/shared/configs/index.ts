@@ -1,4 +1,4 @@
-import { TypeConfig } from '../../core/interfaces/type-config.interface';
+import { TypeConfig } from '../../core/interfaces-abstracts/type-config.interface';
 import { navigationConfig } from './navigation-config';
 
 export const allSharedJsonObjectConfigs: TypeConfig[] = [

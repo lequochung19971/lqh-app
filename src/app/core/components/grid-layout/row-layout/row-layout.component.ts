@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ComponentConfig, LayoutDefinition, BuilderConfig } from '../../../interfaces/builder-config.interface';
+import { ComponentConfig, LayoutDefinition, BuilderConfig } from '../../../interfaces-abstracts/builder-config.interface';
 import { ComponentBuilderService } from '../../../services/component-builder.service';
 
 @Component({

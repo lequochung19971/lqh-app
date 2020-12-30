@@ -1,12 +1,11 @@
 <mat-card class="mat-elevation-z0 px-0i pb-0i">
   <mat-card-header>
     <mat-card-title class="flex-start-center">
-      <!-- <img src="../../../../../assets/icons/table.svg" alt="table" width="35"> -->
-      <span class="text-black">Table</span> 
+      Table
     </mat-card-title>
   </mat-card-header>
   <mat-card-actions class="mx-0i t-aligh-right">
-    <button mat-button class="btn btn-round-accent mr-20pxi">
+    <button mat-button class="btn btn-round-accent mr-20pxi" (click)="createEmployee()">
       <mat-icon>add</mat-icon>
       Create Employee
     </button>
@@ -17,8 +16,8 @@
 </mat-card>
 
 <ng-template #table>
-  <div class="table-container">
-    <table mat-table [dataSource]="dataSource" matSort class="w100">
+  <lqh-skeleton class="table-container" [isLoading]="true">
+    <table mat-table [dataSource]="dataSource" matSort class="w100 skt-table">
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef class="pos-relative min-w-70px w-100px">
@@ -48,14 +47,14 @@
         <td mat-cell *matCellDef="let element">
           <div class="flex-start-center">
             <div>
-              <lqh-avatar [imageSrc]="'images/unnamed.jpg'" [imageSize]="'small'"></lqh-avatar>
+              <lqh-avatar [lqhSkeletonAvatar]="!(element.avatar && element.avatar)" [imageSrc]="element.avatar" [imageSize]="'small'"></lqh-avatar>
             </div>
-            <div class="ml-30px">
+            <div class="ml-30px" [lqhSkeletonMultipleText]="!(element.fullName && element.email)">
               <div class="text-black">
-                {{ element.fullName }}
+                {{ element?.fullName }}
               </div>
               <div class="text-grey">
-                {{ element.email }}
+                {{ element?.email }}
               </div>
             </div>
           </div>
@@ -66,8 +65,8 @@
       <ng-container matColumnDef="department">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
         <td mat-cell *matCellDef="let element">
-          <span [ngClass]="'employee ' + element.department | lowercase">
-            {{ element.department }}
+          <span [lqhSkeletonText]="!element.department">
+            {{ element?.department }}
           </span>
         </td>
       </ng-container>
@@ -75,21 +74,27 @@
       <!-- Position Column -->
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
-        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        <td mat-cell *matCellDef="let element">
+          <span [lqhSkeletonText]="!element.position">{{ element?.position }}</span>
+        </td>
       </ng-container>
 
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
         <td mat-cell *matCellDef="let element">
-          <div mat-ripple class="lqh-status {{element.status}}">{{ element.status }}</div>
+          <div [lqhSkeletonText]="!element.status" class='lqh-status {{ element.status }}'>
+            {{ element?.status }}
+          </div>
         </td>
       </ng-container>
 
       <!-- Phone Column -->
       <ng-container matColumnDef="phone">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
-        <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+        <td mat-cell *matCellDef="let element">
+          <span [lqhSkeletonText]="!element.phone">{{ element?.phone }}</span>
+        </td>
       </ng-container>
 
       <!-- Action Column -->
@@ -130,5 +135,5 @@
       class="bg-primary-20-opacity"
     >
     </mat-paginator>
-  </div>
+  </lqh-skeleton>
 </ng-template>

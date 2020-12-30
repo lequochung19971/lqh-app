@@ -1,0 +1,20 @@
+{
+  "invalidDate": "Invalid Date",
+  "required": "Required",
+  "invalidEmail": "Invalid Email",
+  "maxLengthOfFieldName": "Max length of {{fieldName}} is not more than {{max}}",
+  "invalidPassword": "Invalid Password",
+  "invalidConfirmPassword": "Invalid Confirmation Password",
+  "maxLength": "Max length",
+  "minLength": "Min length",
+  "EmployeefullName": "Full Name",
+  "EmployeeDepartments": "Departments",
+  "EmployeeDOB": "Date of birth",
+  "EmployeeAge": "Age",
+  "EmployeePhone": "Phone",
+  "EmployeeEmail": "Email",
+  "EmployeePassword": "Password",
+  "EmployeeCreating": "Create Employee",
+  "submit": "Submit",
+  "cancel": "Cancel"
+}

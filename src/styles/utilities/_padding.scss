@@ -1,3 +1,39 @@
+// Padding All------------------------------------
+.p-0 {
+  padding: 0;
+}
+
+// Padding Left Right------------------------------------
+.px-0i {
+  @include padding-x(0!important);
+}
+
+.px-16px {
+  @include padding-x(16px);
+}
+
+.px-20px {
+  @include padding-x(20px);
+}
+
+.px-25px {
+  @include padding-x(25px);
+}
+
+.px-30px {
+  @include padding-x(30px);
+}
+
+// Padding Top Bottom------------------------------------
+.py-16px {
+  @include padding-y(16px);
+}
+
+.py-40px {
+  @include padding-y(40px);
+}
+
+// Padding Top------------------------------------
 .pt-0 {
   padding-top: 0;
 }
@@ -6,13 +42,7 @@
   padding-top: 0 !important;
 }
 
-.px-0i {
-  padding: {
-    left: 0 !important;
-    right: 0 !important;
-  }
-}
-
+// Padding Bottom------------------------------------
 .pb-0i {
   padding-bottom: 0 !important;
 }
@@ -25,23 +55,15 @@
   padding-bottom: 20px;
 }
 
-.px-20px {
-  padding: {
-    left: 20px;
-    right: 20px;
-  }
-}
+// Padding Left------------------------------------
 
-.px-25px {
-  padding: {
-    left: 25px;
-    right: 25px;
-  }
-}
+// Padding Right------------------------------------
 
-.py-16px {
+// Other
+.p-col-30px {
   padding: {
-    top: 16px;
-    bottom: 16px;
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
   }
 }

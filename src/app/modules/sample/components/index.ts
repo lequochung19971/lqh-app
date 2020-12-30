@@ -1,5 +1,5 @@
 import { OneComponent } from './one/one.component';
-import { TypeConfig } from '../../../core/interfaces/type-config.interface';
+import { TypeConfig } from '../../../core/interfaces-abstracts/type-config.interface';
 import { TwoComponent } from './two/two.component';
 
 export const allSampleComponents = [

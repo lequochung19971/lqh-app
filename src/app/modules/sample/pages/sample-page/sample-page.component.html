@@ -1,14 +1,23 @@
-<div class="container-fluid">
-  <lqh-component-builder [builderConfigName]="'samplePage'"></lqh-component-builder>
-</div>
-  <!-- <div class="container-fluid bg-white">
-  <lqh-skeleton [isLoading]="!(vm$ | async)">
+<!-- <lqh-component-builder [builderConfigName]="'samplePage'"></lqh-component-builder> -->
+  <div>
     <button (click)="onClick()">Click</button>
     <button (click)="onOtherClick()">Other Click</button>
     <button (click)="onRefresh()">Refresh</button>
     <p>{{ (vm$ | async)?.sampleData }}</p>
-    <p>{{ (vm$ | async)?.tempValue }}</p>
-    
-  </lqh-skeleton>
-</div> -->
+    <p>{{ (tempValue$ | async)[0] }}</p>
+  </div>
+<!-- <div class="skeleton-container">
+  <div class="skeleton-loader">
+    <div [lqhSkeletonText]="!temp">
+      {{temp}}
+    </div>
+    <div [lqhSkeletonMultipleText]="!temp2">
+      {{temp2}}
+    </div>
+  </div>
+</div>
+
+<button (click)="tempClick()">click</button>
+<button (click)="tempClick2()">click 2</button> -->
+
 

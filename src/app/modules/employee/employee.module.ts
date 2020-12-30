@@ -9,9 +9,9 @@ import { allEmployeeComponents } from './components';
 import { COMPONENT_TYPE_CONFIG_TOKEN, BUILDER_CONFIG_TOKEN } from '../../core/consts/injection-tokens.const';
 import { allEmployeeComponentConfigs } from './components/index';
 import { allEmployeeBuilderConfigs } from './configs';
-
+import { allEmployeeDialogs } from './dialogs';
 @NgModule({
-  declarations: [...allEmployeePages, ...allEmployeeComponents],
+  declarations: [...allEmployeePages, ...allEmployeeComponents, ...allEmployeeDialogs],
   imports: [
     CommonModule,
     EmployeeRoutingModule,

@@ -5,15 +5,20 @@ import { MaterialModule } from '../material/material.module';
 import { RouterModule } from '@angular/router';
 import { JSON_OBJECT_TYPE_CONFIG_TOKEN } from '../core/consts/injection-tokens.const';
 import { allSharedJsonObjectConfigs } from './configs';
+import { allDirective } from './directives';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
-  declarations: [...allSharedComponents],
+  declarations: [...allSharedComponents, ...allDirective],
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
-    ...allSharedComponents
+    ...allSharedComponents,
+    ...allDirective
   ],
   providers: [
     {

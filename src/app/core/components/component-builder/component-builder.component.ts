@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { BuilderConfig } from '../../interfaces/builder-config.interface';
+import { BuilderConfig } from '../../interfaces-abstracts/builder-config.interface';
 import { ComponentBuilderService } from '../../services/component-builder.service';
 import { RowLayoutComponent } from '../grid-layout/row-layout/row-layout.component';
 
@@ -8,7 +8,7 @@ import { RowLayoutComponent } from '../grid-layout/row-layout/row-layout.compone
   templateUrl: './component-builder.component.html',
 })
 export class ComponentBuilderComponent implements OnInit {
-  @ViewChild('dynamicForm', { read: ViewContainerRef, static: true }) viewContainerRef: ViewContainerRef;
+  @ViewChild('dynamicComponent', { read: ViewContainerRef, static: true }) viewContainerRef: ViewContainerRef;
   @Input() builderConfig: BuilderConfig;
   @Input() builderConfigName: string;
 

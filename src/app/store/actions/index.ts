@@ -1,4 +1,4 @@
-import { TypeConfig } from '../../core/interfaces/type-config.interface';
+import { TypeConfig } from '../../core/interfaces-abstracts/type-config.interface';
 import { GetSample, PostSample, SampleActionType } from './sample.action';
 
 export const allActionConfig: TypeConfig[] = [

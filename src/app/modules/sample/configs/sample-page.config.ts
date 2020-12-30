@@ -1,4 +1,4 @@
-import { BuilderConfig } from '../../../core/interfaces/builder-config.interface';
+import { BuilderConfig } from '../../../core/interfaces-abstracts/builder-config.interface';
 
 export const samplePageConfig: BuilderConfig  = {
   metadata: {

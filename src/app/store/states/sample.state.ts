@@ -1,15 +1,17 @@
-import { BaseState } from '../../core/interfaces/base-state.interface';
+import { BaseState } from '../../core/interfaces-abstracts/base-state.abstract';
 
-export class SampleState implements BaseState {
+export class SampleState extends BaseState {
   sampleData: any;
   tempValue: any;
   
   constructor(props?: any) {
-    Object.assign(this, props);
+    super(props);
   }
 }
 
-export const initialState: SampleState = {
+export const initialState: SampleState = new SampleState({
   sampleData: '123456789',
-  tempValue: '123'
-}
+  tempValue: [
+    1, 2, 4, 6
+  ]
+})

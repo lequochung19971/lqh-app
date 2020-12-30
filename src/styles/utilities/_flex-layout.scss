@@ -69,6 +69,12 @@
   @extend .al-item-center;
 }
 
+.flex-space-between-center {
+  @extend .d-flex;
+  @extend .justify-content-space-between;
+  @extend .al-item-center;
+}
+
 .flex-grow-1 {
   flex-grow: 1;
 }

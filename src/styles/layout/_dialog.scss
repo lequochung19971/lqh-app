@@ -1,0 +1,21 @@
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+.lqh-dialog-shell {
+  &__header {
+  }
+
+  &__main {
+  }
+
+  .left-side {
+  }
+
+  .right-side {
+    background-image: url('../../assets/images/employee-form-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+  }
+}

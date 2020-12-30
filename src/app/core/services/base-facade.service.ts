@@ -1,42 +1,42 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject, combineLatest } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-import { BaseAction } from '../interfaces/base-action.interface';
-import { BaseReducer } from '../interfaces/base-reducer.interface';
-import { FacadeConfig } from '../interfaces/facade-config.interface';
+import { BaseAction } from '../interfaces-abstracts/base-action.interface';
+import { BaseReducer, ActionReducer } from '../interfaces-abstracts/base-reducer.interface';
+import { FacadeConfig } from '../interfaces-abstracts/facade-config.interface';
 import { LocatorFacadeService } from './locator-facade.service';
+import { BaseState } from '../interfaces-abstracts/base-state.abstract';
+import * as logger from '../../shared/services/logger.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export abstract class BaseFacadeService<TState> {
-  protected _state: TState;
+export abstract class BaseFacadeService<TState extends BaseState> {
+  private _state: TState;
   private _storeSubject: BehaviorSubject<TState>;
   private _state$: Observable<TState>;  
-  private _childStates$: Observable<TState>[];
-  private _stateKeys: string[];
+  // private _childStates$: Observable<TState>[];
+  // private _stateKeys: string[];
 
   private _actionSubject: Subject<BaseAction>;
   private _action$: Observable<BaseAction>;
 
-  private _reducerSubject: Subject<BaseAction>;
-  private _reducer$: Observable<BaseAction>;
-  private _actionReducer: BaseReducer;
-
-  protected abstract _viewModel$: Observable<TState>;
+  private _reducerSubject: Subject<BaseReducer>;
+  private _reducer$: Observable<BaseReducer>;
+  private _actionReducer: ActionReducer;
 
   constructor(
-    public config: FacadeConfig,
+    protected facadeConfig: FacadeConfig,
     protected lfs: LocatorFacadeService
   ) { 
-    this.initState(config.state);
-    this.initReducer(config.reducer);
+    this.initState(facadeConfig.state);
+    this.initReducer(facadeConfig.actionReducer);
     this.initAction();
-    this.generateChildStates();
+    // this.generateChildStates();
   }
 
-  get viewModel(): Observable<TState> {
-    return this._viewModel$;
+  get viewModel(): TState {
+    return this._state;
   }
 
   private initState(state: TState) {
@@ -53,32 +53,50 @@ export abstract class BaseFacadeService<TState> {
       distinctUntilChanged()
     ).subscribe((action: BaseAction) => {
       if (this.checkAction(action)) {
-        this._reducerSubject.next(action);
+        this._reducerSubject.next({state: this._state, action});
       }
     })
   }
 
-  private initReducer(reducer: BaseReducer): void {
+  private initReducer(reducer: ActionReducer): void {
     this._actionReducer = reducer;
     this._reducerSubject = new Subject();
     this._reducer$ = this._reducerSubject.asObservable();
 
     this._reducer$.pipe(
       distinctUntilChanged()
-    ).subscribe((action: BaseAction) => {
-      this.dispatch(this._actionReducer.reduce(this._state, action));
+    ).subscribe(({action, state}: BaseReducer) => {
+      this.FacadeLogging(action);
+      this.dispatch(this._actionReducer.reduce({state, action}));
     })
+  }
+  
+  public stateChange(): Observable<TState> {
+    return this._state$.pipe(
+      distinctUntilChanged(),
+      map(state => {
+        return state;
+      })
+    );
   }
 
-  private generateChildStates(): void {
-    this._childStates$ = this._childStates$ || []; 
-    this._stateKeys = this._stateKeys || [];
-    Object.keys(this._state).forEach(key => {
-      const ob = this.select(key);
-      this._stateKeys.push(key);
-      this._childStates$.push(ob);
-    })
-  }
+  // private generateChildStates(): void {
+  //   this._childStates$ = this._childStates$ || []; 
+  //   this._stateKeys = this._stateKeys || [];
+  //   Object.keys(this._state).forEach(key => {
+  //     const observer = this.select(key);
+  //     this._stateKeys.push(key);
+  //     this._childStates$.push(observer);
+  //   })
+  // }
+
+  // public stateInstanceChange(): Observable<TState> {
+  //   return combineLatest(this._childStates$).pipe(
+  //     map((_) => {
+  //       return this._state;
+  //     })
+  //   )
+  // }
 
   private dispatch(state: TState): void {
     this._storeSubject.next(this._state = state);
@@ -95,14 +113,14 @@ export abstract class BaseFacadeService<TState> {
     }
     
     return this._state$.pipe(
-      map((state: TState) => state[property]), 
-      distinctUntilChanged())
+      map((state: TState) => state[property])
+    );
   }
 
   private hasStateProperty(property: string): boolean {
     const findedKey = Object.keys(this._state).find(key => key === property) 
     if (!findedKey) {
-      console.error(`Property (${property}) doesn't exist in current state`);
+      logger.error(`Property (${property}) doesn't exist in current state`);
       return false;
     }
 
@@ -111,27 +129,22 @@ export abstract class BaseFacadeService<TState> {
   
   private checkAction(action: BaseAction): boolean {
     if (action === undefined || action === null) {
-      console.error(`Actions must be objects`);
+      logger.error(`Actions must be objects`);
       return false;
     }
     
     if (action.type === undefined || action.type === null) {
-      console.error(`Actions must have type property`);
+      logger.error(`Actions must have type property`);
       return false;
     }
 
     return true;
   }
 
-  public stateChange(stateModel?: any): any {
-    return combineLatest(this._childStates$).pipe(
-      map((data) => {
-        const stateResult = stateModel ? new stateModel() : {};
-        for (const index in data) {
-          stateResult[this._stateKeys[index]] = data[index];
-        }
-        return stateResult;
-      })
-    )
+  private FacadeLogging(action: BaseAction) {
+    logger.log('-------------------------------------------');
+    logger.log('+ Action Type:', action.type);
+    logger.log('+ Action payload:', action.payload);
+    logger.log('-------------------------------------------');
   }
 }

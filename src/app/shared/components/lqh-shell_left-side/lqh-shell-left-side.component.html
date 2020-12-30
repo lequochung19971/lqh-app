@@ -19,13 +19,15 @@
 <!-- Logo -->
 <ng-template #logo>
   <div class="logo my-40px flex-between">
-    <img src="../../../../assets/icons/logo.svg" alt="my-icon" class="primary-shadow" />
+    <img *ngIf="(isLightMode$ | async)" src="../../../../assets/icons/logo.svg" alt="my-icon" class="primary-shadow" />
+    <img *ngIf="(isDarkMode$ | async)" src="../../../../assets/icons/logo-dark.svg" alt="my-icon" class="primary-shadow" />
   </div>
 </ng-template>
 
 <ng-template #logoSmall>
   <div class="logo my-40px flex-between">
-    <img src="../../../../assets/icons/logo-small.svg" alt="my-icon" class="primary-shadow" />
+    <img *ngIf="(isLightMode$ | async)" src="../../../../assets/icons/logo-small.svg" alt="my-icon" class="primary-shadow" />
+    <img *ngIf="(isDarkMode$ | async)" src="../../../../assets/icons/logo-small-dark.svg" alt="my-icon" class="primary-shadow" />
   </div>
 </ng-template>
 

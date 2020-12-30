@@ -1,0 +1,7 @@
+@import '../../../variables';
+
+.lqh-gender {
+  &.mat-button-toggle-group {
+    @include gender-toggle($lqh-black-20-opacity);
+  }
+}

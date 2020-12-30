@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { BaseComponent } from '../../../../core/components/base/base.component';
 
 @Component({
   selector: 'lqh-employee-page',
@@ -6,9 +7,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./employee-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EmployeePageComponent implements OnInit {
+export class EmployeePageComponent extends BaseComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    super();
+  }
 
   ngOnInit(): void {
   }

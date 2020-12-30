@@ -7,7 +7,10 @@
 @import './base/config-border-box';
 @import './variables';
 @import './mixin';
+@import './base/custom-light-mode';
+@import './base/custom-dark-mode';
 
+// ---------------------------BOTH----------------------------
 .theme-light,
 .theme-dark {
   // ----------------------------------------------------------------
@@ -31,6 +34,12 @@
   @import './utilities/checkbox';
   @import './utilities/position';
   @import './utilities/animations';
+  @import './utilities/over-flow';
+  @import './utilities/cursor';
+  // ----------------------------------------------------------------
+  // ---------------------------LAYOUT------------------------------
+  // ----------------------------------------------------------------
+  @import './layout/dialog';
   // ----------------------------------------------------------------
   // ---------------------------COMPONENT----------------------------
   // ----------------------------------------------------------------
@@ -39,4 +48,13 @@
   @import './components/skeleton';
   @import './components/table';
   @import './components/toggle-mode-theme';
+}
+
+// ---------------------------LIGHT_MODE----------------------------
+.theme-light {
+  @import './theme/light/components/gender-toggle';
+}
+// ---------------------------DARK_MODE----------------------------
+.theme-dark {
+  @import './theme/dark/components/gender-toggle';
 }

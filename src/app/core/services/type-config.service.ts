@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TypeConfig } from '../interfaces/type-config.interface';
+import { TypeConfig } from '../interfaces-abstracts/type-config.interface';
 
 @Injectable({
   providedIn: 'root'

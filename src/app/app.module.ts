@@ -10,6 +10,13 @@ import { StoreModule } from './store/store.module';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { EmployeeModule } from './modules/employee/employee.module';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+
+export function HttpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +30,14 @@ import { EmployeeModule } from './modules/employee/employee.module';
     StoreModule,
     SharedModule,
     SampleModule,
-    EmployeeModule
+    EmployeeModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

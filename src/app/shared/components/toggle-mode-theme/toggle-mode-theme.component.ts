@@ -11,10 +11,10 @@ import { ModeTheme } from '../../../core/enums/mode-theme.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToggleModeThemeComponent implements OnInit {
-  currentTheme: string;
+  currentTheme: ModeTheme;
   isClicked: boolean = true;
-  isLightMode$: Observable<boolean> = this.modeThemeService.isLightMode;
-  isDarkMode$: Observable<boolean> = this.modeThemeService.isDarkMode;
+  isLightMode$: Observable<boolean> = this.modeThemeService.isLightModeObs;
+  isDarkMode$: Observable<boolean> = this.modeThemeService.isDarkModeObs;
 
   constructor(
     @Inject(DOCUMENT) private document: Document, private renderer: Renderer2,
@@ -22,7 +22,7 @@ export class ToggleModeThemeComponent implements OnInit {
   ) { }
   
   ngOnInit(): void {
-    this.currentTheme = localStorage.getItem('mode-theme') || ModeTheme.light
+    this.currentTheme = (localStorage.getItem('mode-theme') as ModeTheme) || ModeTheme.light
     this.updateMode();
   }
 
@@ -35,6 +35,6 @@ export class ToggleModeThemeComponent implements OnInit {
   updateMode() {
     localStorage.setItem('mode-theme', this.currentTheme);
     this.renderer.setAttribute(this.document.body, 'class', this.currentTheme);
-    this.modeThemeService.updateModeTheme(this.currentTheme)
+    this.modeThemeService.setModeTheme(this.currentTheme)
   }
 }

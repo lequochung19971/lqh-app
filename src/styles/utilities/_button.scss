@@ -32,38 +32,35 @@
 
     &.btn-flat-primary {
       @include text-color-dynamic($lqh-primary);
+      @extend .primary-shadow;
       background-color: $lqh-primary;
       border-color: $lqh-primary;
       transition: all 0.2s;
 
-      &:hover {
-        background-color: $lqh-primary-hover;
-        border-color: $lqh-primary-hover;
-      }
+      // &:hover {
+      //   background-color: $lqh-primary-hover;
+      //   border-color: $lqh-primary-hover;
+      // }
     }
 
     &.btn-flat-accent {
       @include text-color-dynamic($lqh-accent);
+      @extend .accent-shadow;
       background-color: $lqh-accent;
       border-color: $lqh-accent;
       transition: all 0.2s;
 
-      &:hover {
-        background-color: $lqh-accent-hover;
-        border-color: $lqh-accent-hover;
-      }
+      // &:hover {
+      //   background-color: $lqh-accent-hover;
+      //   border-color: $lqh-accent-hover;
+      // }
     }
 
-    // &.btn-stroked-primary {
-    //   color: $primary;
-    //   background-color: $white-10-opacity;
-    //   border-color: $primary;
-
-    //   &:hover {
-    //     color: $primary-hover;
-    //     border-color: $primary-hover;
-    //   }
-    // }
+    &.btn-flat-basic {
+      color: $lqh-grey;
+      background-color: $lqh-light-grey;
+      border-color: $lqh-light-grey;
+    }
 
     &.btn-round-primary {
       @extend .btn-flat-primary;

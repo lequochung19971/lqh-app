@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { TypeConfig } from '../interfaces/type-config.interface';
+import { TypeConfig } from '../interfaces-abstracts/type-config.interface';
 
 export const BUILDER_CONFIG_TOKEN = new InjectionToken<TypeConfig>('BUILDER_CONFIG_TOKEN');
 export const COMPONENT_TYPE_CONFIG_TOKEN = new InjectionToken<TypeConfig>('COMPONENT_TYPE_CONFIG_TOKEN');

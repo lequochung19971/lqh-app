@@ -1,9 +1,9 @@
 import { ComponentFactoryResolver, Inject, Injectable, Type, ViewContainerRef } from '@angular/core';
 import { BUILDER_CONFIG_TOKEN, COMPONENT_TYPE_CONFIG_TOKEN } from '../consts/injection-tokens.const';
-import { TypeConfig } from '../interfaces/type-config.interface';
+import { TypeConfig } from '../interfaces-abstracts/type-config.interface';
 import { TypeConfigService } from './type-config.service';
 import * as _ from 'lodash-es';
-import { BuilderConfig } from '../interfaces/builder-config.interface';
+import { BuilderConfig } from '../interfaces-abstracts/builder-config.interface';
 @Injectable({
   providedIn: 'root'
 })

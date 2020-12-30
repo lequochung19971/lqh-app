@@ -186,3 +186,63 @@
 @mixin box-shadow-btn-sm($color) {
   box-shadow: 0px 1px 3px $color;
 }
+
+@mixin padding-x($val) {
+  padding: {
+    left: $val;
+    right: $val;
+  }
+}
+
+@mixin padding-y($val) {
+  padding: {
+    top: $val;
+    bottom: $val;
+  }
+}
+
+@mixin gender-toggle($bgColor) {
+  box-shadow: none;
+  .mat-button-toggle {
+    border: 0;
+    @include w-h-same-size(51px);
+    @extend .flex-between;
+
+    border: transparent solid 2px;
+    border-radius: 4px;
+
+    .mat-button-toggle-ripple {
+      border-radius: 4px;
+    }
+
+    .mat-button-toggle-label-content {
+      padding: 0;
+    }
+
+    &:nth-child(1) {
+      margin-right: 20px;
+    }
+
+    &.male {
+      background-color: $bgColor;
+      transition: all 0.2s;
+
+      &.mat-button-toggle-checked {
+        @extend .primary-shadow;
+        background-color: $lqh-primary;
+        border-color: $lqh-primary;
+      }
+    }
+
+    &.female {
+      background-color: $bgColor;
+      transition: all 0.2s;
+
+      &.mat-button-toggle-checked {
+        @extend .accent-shadow;
+        background-color: $lqh-accent;
+        border-color: $lqh-accent;
+      }
+    }
+  }
+}

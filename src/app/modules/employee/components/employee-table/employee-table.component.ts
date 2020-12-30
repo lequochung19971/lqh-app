@@ -1,5 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
+import { EmployeeService } from '../../services/employee.service';
+import { DialogData } from '../../../../core/interfaces-abstracts/dialog-data.interface';
 
 @Component({
   selector: 'lqh-employee-table',
@@ -18,12 +20,13 @@ export class EmployeeTableComponent implements OnInit {
   selection = new SelectionModel(true, []);
   dataSource = [
     {
-      fullName: 'Le Quoc Hung',
-      email: 'lequochung19971@gmail.com',
-      department: 'Admin',
-      position: 'Position A',
-      phone: '0987654321',
-      status: 'inactive'
+      fullName: '',
+      email: '',
+      department: '',
+      position: '',
+      phone: '',
+      status: '',
+      avatar: ''
     },
     {
       fullName: 'Le Quoc Hung',
@@ -31,8 +34,8 @@ export class EmployeeTableComponent implements OnInit {
       department: 'Admin',
       position: 'Position A',
       phone: '0987654321',
-      status: 'active'
-
+      status: 'active',
+      avatar: 'images/unnamed.jpg'
     },
     {
       fullName: 'Le Quoc Hung',
@@ -40,8 +43,8 @@ export class EmployeeTableComponent implements OnInit {
       department: 'Admin',
       position: 'Position A',
       phone: '0987654321',
-      status: 'active'
-
+      status: 'active',
+      avatar: 'images/unnamed.jpg'
     },
     {
       fullName: 'Le Quoc Hung',
@@ -49,8 +52,8 @@ export class EmployeeTableComponent implements OnInit {
       department: 'Admin',
       position: 'Position A',
       phone: '0987654321',
-      status: 'active'
-
+      status: 'active',
+      avatar: 'images/unnamed.jpg'
     },
     {
       fullName: 'Le Quoc Hung',
@@ -58,8 +61,8 @@ export class EmployeeTableComponent implements OnInit {
       department: 'Admin',
       position: 'Position A',
       phone: '0987654321',
-      status: 'active'
-
+      status: 'active',
+      avatar: 'images/unnamed.jpg'
     },
     {
       fullName: 'Le Quoc Hung',
@@ -67,8 +70,8 @@ export class EmployeeTableComponent implements OnInit {
       department: 'Admin',
       position: 'Position A',
       phone: '0987654321',
-      status: 'active'
-
+      status: 'active',
+      avatar: 'images/unnamed.jpg'
     },
     {
       fullName: 'Le Quoc Hung',
@@ -76,8 +79,8 @@ export class EmployeeTableComponent implements OnInit {
       department: 'Admin',
       position: 'Position A',
       phone: '0987654321',
-      status: 'active'
-
+      status: 'active',
+      avatar: 'images/unnamed.jpg'
     },
     {
       fullName: 'Le Quoc Hung',
@@ -85,8 +88,17 @@ export class EmployeeTableComponent implements OnInit {
       department: 'Admin',
       position: 'Position A',
       phone: '0987654321',
-      status: 'active'
-
+      status: 'active',
+      avatar: 'images/unnamed.jpg'
+    },
+    {
+      fullName: '',
+      email: '',
+      department: '',
+      position: '',
+      phone: '',
+      status: '',
+      avatar: ''
     },
     {
       fullName: 'Le Quoc Hung',
@@ -94,8 +106,8 @@ export class EmployeeTableComponent implements OnInit {
       department: 'Admin',
       position: 'Position A',
       phone: '0987654321',
-      status: 'active'
-
+      status: 'active',
+      avatar: 'images/unnamed.jpg'
     },
     {
       fullName: 'Le Quoc Hung',
@@ -103,8 +115,8 @@ export class EmployeeTableComponent implements OnInit {
       department: 'Admin',
       position: 'Position A',
       phone: '0987654321',
-      status: 'active'
-
+      status: 'active',
+      avatar: 'images/unnamed.jpg'
     },
     {
       fullName: 'Le Quoc Hung',
@@ -112,20 +124,11 @@ export class EmployeeTableComponent implements OnInit {
       department: 'Admin',
       position: 'Position A',
       phone: '0987654321',
-      status: 'active'
-
-    },
-    {
-      fullName: 'Le Quoc Hung',
-      email: 'lequochung19971@gmail.com',
-      department: 'Admin',
-      position: 'Position A',
-      phone: '0987654321',
-      status: 'active'
-
+      status: 'active',
+      avatar: 'images/unnamed.jpg'
     },
   ]
-  constructor() { }
+  constructor(protected employeeService: EmployeeService) { }
 
   ngOnInit(): void {
     this.selection.changed.subscribe(data => {
@@ -163,5 +166,12 @@ export class EmployeeTableComponent implements OnInit {
 
   selectAllSelections() {
     this.dataSource.forEach(row => this.selection.select(row))
+  }
+
+  createEmployee() {
+    const dialogData: DialogData = {
+      title: 'Create Employee'
+    }
+    this.employeeService.openFormDialog(dialogData)
   }
 }

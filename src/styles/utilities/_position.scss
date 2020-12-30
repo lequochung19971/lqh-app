@@ -5,3 +5,13 @@
 .pos-absolute {
   position: absolute;
 }
+
+.pos-fixed {
+  position: fixed;
+}
+
+.pos-fixed-top-right {
+  @extend .pos-fixed;
+  top: 0;
+  right: 0;
+}

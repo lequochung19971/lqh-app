@@ -1,8 +1,8 @@
 import { Inject, Injectable, Injector } from '@angular/core';
 import { FACADE_CONFIG_TOKEN, FACADE_ACTION_CONFIG_TOKEN } from '../consts/injection-tokens.const';
-import { TypeConfig } from '../interfaces/type-config.interface';
+import { TypeConfig } from '../interfaces-abstracts/type-config.interface';
 import { TypeConfigService } from './type-config.service';
-import { BaseAction } from '../interfaces/base-action.interface';
+import { BaseAction } from '../interfaces-abstracts/base-action.interface';
 
 @Injectable({
   providedIn: 'root'
