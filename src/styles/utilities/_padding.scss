@@ -8,6 +8,10 @@
   @include padding-x(0!important);
 }
 
+.px-14px {
+  @include padding-x(14px);
+}
+
 .px-16px {
   @include padding-x(16px);
 }
@@ -22,6 +26,10 @@
 
 .px-30px {
   @include padding-x(30px);
+}
+
+.px-55px {
+  @include padding-x(55px);
 }
 
 // Padding Top Bottom------------------------------------
@@ -42,9 +50,17 @@
   padding-top: 0 !important;
 }
 
+.pt-15px {
+  padding-top: 15px;
+}
+
 // Padding Bottom------------------------------------
 .pb-0i {
   padding-bottom: 0 !important;
+}
+
+.pb-5px {
+  padding-bottom: 5px;
 }
 
 .pb-10px {
@@ -56,7 +72,9 @@
 }
 
 // Padding Left------------------------------------
-
+.pl-35pxi {
+  padding-left: 35px !important;
+}
 // Padding Right------------------------------------
 
 // Other

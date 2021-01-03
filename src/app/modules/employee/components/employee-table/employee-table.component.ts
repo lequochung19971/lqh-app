@@ -1,7 +1,9 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
-import { DialogData } from '../../../../core/interfaces-abstracts/dialog-data.interface';
+import { DialogConfig } from '../../../../core/interfaces-abstracts/dialog-config.interface';
+import { DialogService } from '../../../../shared/services/dialog.service';
+import { EmployeeFormDialogComponent } from '../../dialogs/employee-form-dialog/employee-form-dialog.component';
 
 @Component({
   selector: 'lqh-employee-table',
@@ -128,7 +130,7 @@ export class EmployeeTableComponent implements OnInit {
       avatar: 'images/unnamed.jpg'
     },
   ]
-  constructor(protected employeeService: EmployeeService) { }
+  constructor(protected employeeService: EmployeeService, protected dialogService: DialogService) { }
 
   ngOnInit(): void {
     this.selection.changed.subscribe(data => {
@@ -168,10 +170,16 @@ export class EmployeeTableComponent implements OnInit {
     this.dataSource.forEach(row => this.selection.select(row))
   }
 
-  createEmployee() {
-    const dialogData: DialogData = {
-      title: 'Create Employee'
+  createEmployee(): void {
+    this.openDialogForm('Create Employee');
+  }
+
+  openDialogForm(title: string): void {
+    const dialogConfig: DialogConfig = {
+      title: title,
+      component: EmployeeFormDialogComponent,
+      rightSide: true
     }
-    this.employeeService.openFormDialog(dialogData)
+    this.dialogService.openDialogFullPage(dialogConfig);
   }
 }

@@ -1,0 +1,25 @@
+@import '../variables';
+
+.address-container {
+  .mat-list-single-selected-option,
+  .theme-light .mat-list-single-selected-option:hover,
+  .theme-light .mat-list-single-selected-option:focus {
+    background-color: $lqh-primary-10-opacity;
+    &::after {
+      content: '';
+      @extend .border-left-inside;
+    }
+  }
+
+  .mat-list-option {
+    position: relative;
+    &:hover {
+      background-color: $lqh-primary-10-opacity;
+
+      &::after {
+        content: '';
+        @extend .border-left-inside;
+      }
+    }
+  }
+}

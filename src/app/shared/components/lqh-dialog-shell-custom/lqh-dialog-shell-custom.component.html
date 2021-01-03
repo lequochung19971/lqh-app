@@ -1,0 +1,21 @@
+<div class="container-fluid h100">
+  <div class="lqh-dialog-shell-custom h100 over-flow-hidden">
+    <div class="row h100">
+      <div class="col-12 p-0">
+        <div *ngIf="true" class="lqh-dialog-shell-custom__header">
+          <mat-toolbar class="h-55px">
+            <div class="w100 flex-space-between-center">
+              <span class="fw-500 ml-20px fs-18">{{ title }}</span>
+              <button mat-icon-button>
+                <mat-icon (click)="onClose()">close</mat-icon>
+              </button>
+            </div>
+          </mat-toolbar>
+        </div>
+        <div class="lqh-dialog-shell-custom__main over-flow-auto">
+          <ng-container #currentDialog></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

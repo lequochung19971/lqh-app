@@ -1,7 +1,8 @@
-import { Injectable, Type } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogData } from 'src/app/core/interfaces-abstracts/dialog-data.interface';
+import { Injectable } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogConfig } from 'src/app/core/interfaces-abstracts/dialog-config.interface';
 import { LqhDialogShellComponent } from '../components/lqh-dialog-shell/lqh-dialog-shell.component';
+import { LqhDialogShellCustomComponent } from '../components/lqh-dialog-shell-custom/lqh-dialog-shell-custom.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +14,31 @@ export class DialogService {
     
   ) { }
 
-  openDialogFullPage<TDialog>(component: Type<TDialog>, data?: DialogData) {
+  openCustomDialog(dialogConfig: DialogConfig): MatDialogRef<LqhDialogShellComponent> {
+    return this.dialog.open(LqhDialogShellCustomComponent, {
+      width: dialogConfig?.width,
+      height: dialogConfig?.height,
+      maxHeight: dialogConfig?.maxHeight,
+      maxWidth: dialogConfig?.maxWidth,
+      position: dialogConfig?.position,
+      disableClose: dialogConfig?.disableClose || false,
+      autoFocus: dialogConfig?.autoFocus || false,
+      panelClass: dialogConfig?.panelClass || 'lqh-dialog',
+      data: dialogConfig
+    });
+  }
+
+  openDialogFullPage(dialogConfig: DialogConfig): MatDialogRef<LqhDialogShellComponent> {
     return this.dialog.open(LqhDialogShellComponent, {
-      width: data?.width || '100%',
-      height: data?.height || '100%',
-      maxHeight: data?.maxHeight ||'100%',
-      maxWidth: data?.maxWidth || '100%',
-      position: data?.position || { top: '0' },
-      disableClose: data?.disableClose || true,
-      autoFocus: data?.autoFocus || true,
-      panelClass: data?.panelClass || 'lqh-full-dialog',
-      data: { ...(data ? data : {}), component }
+      width: '100%',
+      height: '100%',
+      maxHeight: '100%',
+      maxWidth: '100%',
+      position: { top: '0' },
+      disableClose: dialogConfig?.disableClose || true,
+      autoFocus: dialogConfig?.autoFocus || true,
+      panelClass: dialogConfig?.panelClass || 'lqh-full-dialog',
+      data: dialogConfig
     });
   }
 }

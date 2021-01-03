@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as dayjs from 'dayjs';
 import { NavigationName } from '../../../core/enums/navigation-names.enum';
 import { NavigationService } from '../../services/navigation.service';
+import dayjs from 'dayjs';
 
 @Component({
   selector: 'lqh-shell-header',

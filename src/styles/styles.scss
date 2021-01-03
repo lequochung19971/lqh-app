@@ -40,6 +40,7 @@
   // ---------------------------LAYOUT------------------------------
   // ----------------------------------------------------------------
   @import './layout/dialog';
+  @import './layout/chip-list';
   // ----------------------------------------------------------------
   // ---------------------------COMPONENT----------------------------
   // ----------------------------------------------------------------
@@ -48,13 +49,20 @@
   @import './components/skeleton';
   @import './components/table';
   @import './components/toggle-mode-theme';
+  @import './components/address';
 }
 
 // ---------------------------LIGHT_MODE----------------------------
 .theme-light {
   @import './theme/light/components/gender-toggle';
+  @import './theme/light/layouts/chip-list';
+
+  @import './theme/light/layouts/label';
 }
 // ---------------------------DARK_MODE----------------------------
 .theme-dark {
   @import './theme/dark/components/gender-toggle';
+  @import './theme/dark/layouts/chip-list';
+
+  @import './theme/dark/layouts/label';
 }

@@ -1,0 +1,28 @@
+<div class="address-container px-55px pt-15px">
+  <div>
+    <mat-form-field appearance="standard" class="w100">
+      <mat-label>Search</mat-label>
+      <input matInput [formControl]="searchControl" placeholder="Search">
+      <mat-icon matSuffix class="text-grey">search</mat-icon>
+    </mat-form-field>
+  </div>
+  <div *ngIf="isFullAddressMode">
+    <mat-chip-list class="lqh-chip-list">
+      <mat-chip *ngFor="let chip of addressChipList" color="primary" class="medium" selected>
+        <span class="px-20px lh-15">
+          {{chip.nameWithType}}
+        </span>
+        <mat-icon (click)="removeAddress(chip)" class="cursor-pointer">close</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+  <div>
+    <mat-selection-list #shoes [multiple]="false">
+      <mat-list-option *ngFor="let data of dataSource" [value]="data.code" (click)="onSelectedAddress(data)">
+        <span class="pl-35pxi">
+          {{data.name}}
+        </span>
+      </mat-list-option>
+    </mat-selection-list>  
+  </div>
+</div>

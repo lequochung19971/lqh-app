@@ -3,13 +3,16 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { FormControl } from '@angular/forms';
 import { GenderMetadata } from 'src/app/core/interfaces-abstracts/gender-metadata.interface';
 import { Gender } from 'src/app/core/enums/gender.enum';
+import { Subscription } from 'rxjs';
+import { BaseControl } from '../../../core/components/base-control/base-control.component';
 
 @Component({
   selector: 'lqh-gender-toggle',
   templateUrl: './gender-toggle.component.html',
   styleUrls: ['./gender-toggle.component.scss']
 })
-export class GenderToggleComponent implements OnInit {
+export class GenderToggleComponent extends BaseControl implements OnInit {
+  @Input() formControl: FormControl = new FormControl(Gender.male);
   @Input() metadata: GenderMetadata[] = [
     {
       label: 'Male',
@@ -20,37 +23,33 @@ export class GenderToggleComponent implements OnInit {
       value: Gender.female
     }
   ];
-  control: FormControl = new FormControl(Gender.male);
-  protected selection = new SelectionModel(false, []);
+  protected selection = new SelectionModel(false, [this.formControl.value]);
   
-  constructor() { }
+  constructor() { 
+    super();
+  }
 
   
   ngOnInit(): void {
-    this.setDefaultValue();
     this.toggleValueChange();
   }
 
-  toggleValueChange() {
-    return this.control.valueChanges.subscribe((value: Gender) => this.toggleSelection(value));
+  toggleValueChange(): Subscription {
+    return this.formControl.valueChanges.subscribe(val => this.toggleSelection(val));
   }
 
-  setDefaultValue() {
-    this.toggleSelection(this.control.value);
-  }
-  
-  isSelected(value: Gender) {
+  isSelected(value: Gender): boolean {
     return this.selection.isSelected(value);
   }
 
-  toggleSelection(value: Gender) {
+  toggleSelection(value: Gender): void {
     if (!this.isSelected(value)) {
       this.clearAllSelection();
       this.selection.toggle(value);
     }
   }
 
-  clearAllSelection() {
+  clearAllSelection(): void {
     this.selection.clear();
   }
 }

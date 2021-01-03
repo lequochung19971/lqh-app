@@ -7,8 +7,9 @@ import { JSON_OBJECT_TYPE_CONFIG_TOKEN } from '../core/consts/injection-tokens.c
 import { allSharedJsonObjectConfigs } from './configs';
 import { allDirective } from './directives';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { allSharedPipes } from './pipes';
 @NgModule({
-  declarations: [...allSharedComponents, ...allDirective],
+  declarations: [...allSharedComponents, ...allDirective, ...allSharedPipes],
   imports: [
     CommonModule,
     MaterialModule,
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     ...allSharedComponents,
-    ...allDirective
+    ...allDirective,
+    ...allSharedPipes
   ],
   providers: [
     {

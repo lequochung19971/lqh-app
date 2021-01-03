@@ -18,7 +18,7 @@ export class SamplePageComponent implements OnInit {
   temp2: string;
   vm: SampleState;
   constructor(
-    protected sampleFacade: SampleFadadeService
+    protected sampleFacade: SampleFadadeService,
   ) { }
 
   ngOnInit(): void {

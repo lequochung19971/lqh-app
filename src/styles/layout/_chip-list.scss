@@ -1,0 +1,32 @@
+@import '../variables';
+
+.lqh-chip-list {
+  mat-chip {
+    border-radius: 50px;
+
+    &.small {
+      height: 32px !important;
+    }
+
+    &.medium {
+      height: 40px !important;
+    }
+    &.large {
+      height: 48px !important;
+    }
+  }
+
+  .mat-primary {
+    @extend .primary-shadow;
+  }
+
+  .mat-accent {
+    @extend .accent-shadow;
+  }
+}
+
+.mat-chip-list-wrapper {
+  mat-chip:last-child {
+    margin-right: 15px;
+  }
+}

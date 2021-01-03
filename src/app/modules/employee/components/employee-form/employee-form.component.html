@@ -1,52 +1,50 @@
 <div class="employee-form-container py-40px">
 <div class="row">
   <div class="col-6 p-col-30px">
-    <mat-form-field appearance="legacy" class="w100">
+    <mat-form-field appearance="standard" class="w100">
       <mat-label>First Name</mat-label>
-      <input matInput placeholder="Placeholder" autocomplete="off" required>
+      <input matInput placeholder="First Name" autocomplete="off" required>
     </mat-form-field>
   </div>
   <div class="col-6 p-col-30px">
-    <mat-form-field appearance="legacy" class="w100">
+    <mat-form-field appearance="standard" class="w100">
       <mat-label>Last Name</mat-label>
-      <input matInput placeholder="Placeholder" autocomplete="off" required>
+      <input matInput placeholder="Last Name" autocomplete="off" required>
     </mat-form-field>
   </div>
-  <div class="col-6 p-col-30px">
+  <div class="col-12 p-col-30px">
     <lqh-gender-toggle></lqh-gender-toggle>
   </div>
   <div class="col-6 p-col-30px">
-    <mat-form-field appearance="legacy">
-      <mat-label>Full Name</mat-label>
-      <input matInput placeholder="Placeholder" autocomplete="off" required>
+    <mat-form-field appearance="standard" class="w100">
+      <mat-label>Date of birth</mat-label>
+      <input matInput placeholder="Date of birth" autocomplete="off" required>
     </mat-form-field>
   </div>
   <div class="col-6 p-col-30px">
-    <mat-form-field appearance="legacy">
-      <mat-label>Full Name</mat-label>
-      <input matInput placeholder="Placeholder" autocomplete="off" required>
+    <mat-form-field appearance="standard">
+      <mat-label>Age</mat-label>
+      <input matInput placeholder="Age" autocomplete="off" required>
     </mat-form-field>
   </div>
   <div class="col-6 p-col-30px">
-    <mat-form-field appearance="legacy">
-      <mat-label>Full Name</mat-label>
-      <input matInput placeholder="Placeholder" autocomplete="off" required>
+    <mat-form-field appearance="standard" class="w100">
+      <mat-label>ID card</mat-label>
+      <input matInput placeholder="ID card" autocomplete="off" required>
     </mat-form-field>
   </div>
   <div class="col-6 p-col-30px">
-    <mat-form-field appearance="legacy">
-      <mat-label>Full Name</mat-label>
-      <input matInput placeholder="Placeholder" autocomplete="off" required>
+    <mat-form-field appearance="standard">
+      <mat-label>Create Date</mat-label>
+      <input matInput placeholder="Create Date" autocomplete="off" required>
     </mat-form-field>
   </div>
   <div class="col-6 p-col-30px">
-    <mat-form-field appearance="legacy">
-      <mat-label>Full Name</mat-label>
-      <input matInput placeholder="Placeholder" autocomplete="off" required>
-    </mat-form-field>
+    <div class="lqh-label-field">Created Place</div>
+    <lqh-chip-list-popup [dialogConfig]="getChiplistPopupConfig()" [dataSourceMetadata]="getChiplistDataSourceMetadata()"></lqh-chip-list-popup>
   </div>
   <div class="col-6 p-col-30px">
-    <mat-form-field appearance="legacy">
+    <mat-form-field appearance="standard">
       <mat-label>Full Name</mat-label>
       <input matInput placeholder="Placeholder" autocomplete="off" required>
     </mat-form-field>
