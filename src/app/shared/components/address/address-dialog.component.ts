@@ -77,6 +77,9 @@ export class AddressDialogComponent implements OnInit {
   }
 
   protected onSelectedAddress(address: Address) {
+    const { length: chipListLength } = this.addressChipList;
+    if (chipListLength === 3) { return; }
+
     if (this.isFullAddressMode) {
       if (this.isProvince(address)) {
         this.originalDataSource = this.districts.filter(district => district.parentCode === address.code);
@@ -121,10 +124,11 @@ export class AddressDialogComponent implements OnInit {
       this.originalDataSource = this.districts.filter(district => district.parentCode === this.addressModel.province.code);
     } else if (this.isWard(address)) {
       this.addressChipList.splice(2, 1)
-      this.originalDataSource = this.wards.filter(ward => ward.parentCode === this.addressModel.district.code);
+      // this.originalDataSource = this.wards.filter(ward => ward.parentCode === this.addressModel.district.code);
       this.addressModel.ward = null;
     }
 
+    this.dataSource = this.originalDataSource;
     this.resetSearchControl();
   }
   
