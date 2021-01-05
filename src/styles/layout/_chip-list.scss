@@ -23,6 +23,10 @@
   .mat-accent {
     @extend .accent-shadow;
   }
+
+  .mat-warn {
+    @extend .warn-shadow;
+  }
 }
 
 .mat-chip-list-wrapper {

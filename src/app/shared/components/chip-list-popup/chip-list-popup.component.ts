@@ -15,7 +15,7 @@ export class ChipListPopupComponent extends BaseControl implements OnInit {
     label: 'label',
     value: 'value'
   }
-  @Input() allowAdd: boolean = true;
+  @Input() allowAdd: boolean = false;
   @Input() dialogConfig: DialogConfig;
   @Input() formControl: FormControl = new FormControl([]);
   dataSource: any;
@@ -28,21 +28,13 @@ export class ChipListPopupComponent extends BaseControl implements OnInit {
     this.initDataSource();
   }
 
-  initDataSource() {
+  protected initDataSource() {
     this.dataSource = this.formControl.value;
   }
 
-  openPopup() {
-    this.dialogService.openCustomDialog(this.dialogConfig).afterClosed().subscribe(data => {
-      if (data) {
-        this.handleAfterDialogClose(data);
-      }
-    })
-  }
-
-  handleAfterDialogClose(data) {
+  protected handleAfterDialogClose(data) {
     if (this.allowAdd) {
-      this.addToDataSource(data);
+      this.updateMoreForDataSource(data);
     } else {
       this.replaceCurrentData(data);
     }
@@ -57,21 +49,29 @@ export class ChipListPopupComponent extends BaseControl implements OnInit {
     return data[this.dataSourceMetadata.value];
   }
 
-  addToDataSource(data: any) {
+  openPopup() {
+    this.dialogService.openCustomDialog(this.dialogConfig).afterClosed().subscribe(data => {
+      if (data) {
+        this.handleAfterDialogClose(data);
+      }
+    })
+  }
+
+  protected updateMoreForDataSource(data: any) {
     if (!this.checkExistence(data)) {
       this.dataSource.push(data);
     }
   }
 
-  checkExistence(data: any) {
+  protected checkExistence(data: any) {
     return !!this.dataSource.find(source => source === data || this.getValue(source) === this.getValue(data));
   }
 
-  replaceCurrentData(data: any) {
+  protected replaceCurrentData(data: any) {
     if (this.dataSource?.length) {
       this.dataSource[0] = data;
     } else {
-      this.addToDataSource(data);
+      this.updateMoreForDataSource(data);
     }
   }
 }

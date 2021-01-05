@@ -5,3 +5,7 @@
 .accent-shadow {
   @include box-shadow-btn(rgba(255, 152, 0, 0.25));
 }
+
+.warn-shadow {
+  @include box-shadow-btn(rgba(255, 82, 82, 0.25));
+}

@@ -2,6 +2,12 @@
   padding: 0 !important;
 }
 
+.lqh-dialog {
+  .mat-dialog-container {
+    @extend .bd-radius-15px;
+  }
+}
+
 .lqh-dialog-shell {
   &__header {
   }

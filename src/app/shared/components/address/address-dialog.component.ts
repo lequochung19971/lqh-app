@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, map } from 'rxjs/operators';
 import { Address, AddressModel } from '../../../core/models/address.model';
 import { AddressTypes, ProvinceType, DistrictType, WardType } from 'src/app/core/enums/address-types.enum';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'lqh-address-dialog',
@@ -11,7 +12,7 @@ import { AddressTypes, ProvinceType, DistrictType, WardType } from 'src/app/core
   styleUrls: ['./address-dialog.component.scss']
 })
 export class AddressDialogComponent implements OnInit {
-  @Input() isFullAddressMode: boolean = true;
+  @Input() isFullAddressMode: boolean = false;
   @Input() addressModel: AddressModel = new AddressModel();
 
   originalDataSource: Address[] = [];
@@ -27,8 +28,10 @@ export class AddressDialogComponent implements OnInit {
 
   searchControl: FormControl = new FormControl('');
 
-  constructor(protected jsonConfigService: JsonConfigService) { 
-  }
+  constructor(
+    protected jsonConfigService: JsonConfigService,
+    protected dialogRef: MatDialogRef<AddressDialogComponent>,
+    ) { }
 
   ngOnInit(): void {
     this.initAddressConfig();
@@ -89,12 +92,13 @@ export class AddressDialogComponent implements OnInit {
         this.addressModel.district = address;
       } else if (this.isWard(address)) {
         this.addressModel.ward = address;
-        console.log(address);
       }
 
       this.addressChipList.push(address);
       this.dataSource = this.originalDataSource;
       this.resetSearchControl();
+    } else {
+      this.dialogRef.close(address);
     }
   }
 
@@ -124,7 +128,6 @@ export class AddressDialogComponent implements OnInit {
       this.originalDataSource = this.districts.filter(district => district.parentCode === this.addressModel.province.code);
     } else if (this.isWard(address)) {
       this.addressChipList.splice(2, 1)
-      // this.originalDataSource = this.wards.filter(ward => ward.parentCode === this.addressModel.district.code);
       this.addressModel.ward = null;
     }
 
@@ -135,5 +138,4 @@ export class AddressDialogComponent implements OnInit {
   protected resetSearchControl() {
     this.searchControl.patchValue('');
   }
-
 }

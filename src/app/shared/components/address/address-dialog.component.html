@@ -1,14 +1,13 @@
 <div class="address-container px-55px pt-15px">
-  <div>
+  <div class="bg-temp pos-sticky top-0 left-0">
     <mat-form-field appearance="standard" class="w100">
       <mat-label>Search</mat-label>
       <input matInput [formControl]="searchControl" placeholder="Search">
       <mat-icon matSuffix class="text-grey">search</mat-icon>
     </mat-form-field>
-  </div>
-  <div *ngIf="isFullAddressMode">
-    <mat-chip-list class="lqh-chip-list">
-      <mat-chip *ngFor="let chip of addressChipList" color="primary" class="medium" selected>
+
+    <mat-chip-list *ngIf="isFullAddressMode" class="lqh-chip-list">
+      <mat-chip *ngFor="let chip of addressChipList" [color]="isProvince(chip) ? 'primary' : isDistrict(chip) ? 'accent' : 'warn'" class="medium" selected>
         <span class="px-20px lh-15">
           {{chip.nameWithType}}
         </span>
