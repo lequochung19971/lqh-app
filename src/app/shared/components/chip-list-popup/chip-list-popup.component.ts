@@ -15,7 +15,8 @@ export class ChipListPopupComponent extends BaseControl implements OnInit {
     label: 'label',
     value: 'value'
   }
-  @Input() allowAdd: boolean = false;
+  @Input() allowAdd: boolean = true;
+  @Input() allowDuplicate: boolean = false;
   @Input() dialogConfig: DialogConfig;
   @Input() formControl: FormControl = new FormControl([]);
   dataSource: any;
@@ -30,15 +31,6 @@ export class ChipListPopupComponent extends BaseControl implements OnInit {
 
   protected initDataSource() {
     this.dataSource = this.formControl.value;
-  }
-
-  protected handleAfterDialogClose(data) {
-    if (this.allowAdd) {
-      this.updateMoreForDataSource(data);
-    } else {
-      this.replaceCurrentData(data);
-    }
-    this.patchControlValue(this.dataSource);
   }
   
   getLabel(data: any) {
@@ -57,21 +49,22 @@ export class ChipListPopupComponent extends BaseControl implements OnInit {
     })
   }
 
-  protected updateMoreForDataSource(data: any) {
-    if (!this.checkExistence(data)) {
-      this.dataSource.push(data);
-    }
+  protected handleAfterDialogClose(data) {
+    this.updateDataSource(data);
+    this.patchControlValue(this.dataSource);
   }
 
-  protected checkExistence(data: any) {
-    return !!this.dataSource.find(source => source === data || this.getValue(source) === this.getValue(data));
-  }
-
-  protected replaceCurrentData(data: any) {
-    if (this.dataSource?.length) {
-      this.dataSource[0] = data;
+  protected updateDataSource(data: any) {
+    if (this.allowAdd || !this.dataSource?.length) {
+      if (this.allowDuplicate || !this.checkDuplicate(data)) {
+        this.dataSource.push(data);
+      }
     } else {
-      this.updateMoreForDataSource(data);
+      this.dataSource[0] = data;
     }
+  }
+
+  protected checkDuplicate(data: any) {
+    return !!this.dataSource.find(source => source === data || this.getValue(source) === this.getValue(data));
   }
 }

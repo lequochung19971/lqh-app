@@ -1,3 +1,5 @@
+@import '../variables';
+
 .primary-shadow {
   @include box-shadow-btn(rgba(0, 188, 212, 0.25));
 }
@@ -8,4 +10,8 @@
 
 .warn-shadow {
   @include box-shadow-btn(rgba(255, 82, 82, 0.25));
+}
+
+.black-shadow {
+  @include card-shadow($lqh-black-10-opacity);
 }
