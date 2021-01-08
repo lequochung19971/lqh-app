@@ -18,80 +18,61 @@
 
 .mat-button {
   &.btn {
-    display: inline-block;
     font-weight: 500;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    border: 2px solid transparent;
     padding: 0.32rem 1.575rem;
-    border-radius: 0;
-    transition: all 0.1s;
+    border-radius: 4px;
     font-size: 1rem;
-    cursor: pointer;
 
-    &.btn-flat-primary {
-      @include text-color-dynamic($lqh-primary);
-      @extend .primary-shadow;
-      background-color: $lqh-primary;
-      border-color: $lqh-primary;
-      transition: all 0.2s;
+    
 
-      // &:hover {
-      //   background-color: $lqh-primary-hover;
-      //   border-color: $lqh-primary-hover;
-      // }
+    &.btn-raised {
+      min-width: 180px;
+      height: 55px;
+      &.btn-primary {
+        @extend .primary-shadow;
+        background-color: $lqh-primary;
+        border-color: $lqh-primary;
+        transition: all 0.2s;
+        color: #ffffff;
+
+        // &:hover {
+        //   background-color: $lqh-primary-hover;
+        //   border-color: $lqh-primary-hover;
+        // }
+      }
+
+      &.btn-accent {
+        @extend .accent-shadow;
+        background-color: $lqh-accent;
+        border-color: $lqh-accent;
+        transition: all 0.2s;
+        color: #ffffff;
+  
+        // &:hover {
+        //   background-color: $lqh-accent-hover;
+        //   border-color: $lqh-accent-hover;
+        // }
+      }
+
+      &.btn-basic {
+        color: $lqh-grey;
+        background-color: $lqh-light-grey;
+        border-color: $lqh-light-grey;
+      }
     }
 
-    &.btn-flat-accent {
-      @include text-color-dynamic($lqh-accent);
-      @extend .accent-shadow;
-      background-color: $lqh-accent;
-      border-color: $lqh-accent;
-      transition: all 0.2s;
-
-      // &:hover {
-      //   background-color: $lqh-accent-hover;
-      //   border-color: $lqh-accent-hover;
-      // }
-    }
-
-    &.btn-flat-basic {
-      color: $lqh-grey;
-      background-color: $lqh-light-grey;
-      border-color: $lqh-light-grey;
-    }
-
-    &.btn-round-primary {
-      @extend .btn-flat-primary;
-      @include font-size(14px);
+    &.btn-round {
+      @extend .btn-raised;
+      height: 40px;
       border-radius: 100px;
       padding: {
         top: 0;
         bottom: 0;
       }
     }
-
-    &.btn-round-accent {
-      @extend .btn-flat-accent;
-      @include font-size(14px);
-      border-radius: 100px;
-      padding: {
-        top: 0;
-        bottom: 0;
-      }
-    }
-
-    // &.btn-stroked-accent {
-    //   color: $accent;
-    //   background-color: $white-10-opacity;
-    //   border-color: $accent;
-
-    //   &:hover {
-    //     color: $accent-hover;
-    //     border-color: $accent-hover;
-    //   }
-    // }
   }
 }
 

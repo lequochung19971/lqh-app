@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
-import { FormControl } from '@angular/forms';
 import { GenderMetadata } from 'src/app/core/interfaces-abstracts/gender-metadata.interface';
 import { Gender } from 'src/app/core/enums/gender.enum';
 import { Subscription } from 'rxjs';
@@ -11,8 +10,7 @@ import { BaseControl } from '../../../core/components/base-control/base-control.
   templateUrl: './gender-toggle.component.html',
   styleUrls: ['./gender-toggle.component.scss']
 })
-export class GenderToggleComponent extends BaseControl implements OnInit {
-  @Input() formControl: FormControl = new FormControl(Gender.male);
+export class GenderToggleComponent extends BaseControl  {
   @Input() metadata: GenderMetadata[] = [
     {
       label: 'Male',
@@ -23,7 +21,8 @@ export class GenderToggleComponent extends BaseControl implements OnInit {
       value: Gender.female
     }
   ];
-  protected selection = new SelectionModel(false, [this.formControl.value]);
+  initialFormControlValue: Gender = Gender.male;
+  protected selection;
   
   constructor() { 
     super();
@@ -31,7 +30,13 @@ export class GenderToggleComponent extends BaseControl implements OnInit {
 
   
   ngOnInit(): void {
+    super.ngOnInit();
     this.toggleValueChange();
+    this.initSelection();
+  }
+
+  protected initSelection(): void {
+    this.selection = new SelectionModel(false, [this.formControl.value]);
   }
 
   toggleValueChange(): Subscription {

@@ -19,6 +19,9 @@ export class EmployeeFormComponent implements OnInit {
     return {
       title: 'Provinces',
       component: AddressDialogComponent,
+      componentInstance: {
+        isFullAddressMode: true
+      },
       height: '550px',
       width: '850px',
       maxHeight: '550px',

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { ComponentConfig } from '../../../interfaces-abstracts/builder-config.interface';
+import { BuilderConfig, ComponentConfig } from '../../../interfaces-abstracts/builder-config.interface';
 import { ComponentBuilderService } from '../../../services/component-builder.service';
 
 @Component({
@@ -9,7 +9,8 @@ import { ComponentBuilderService } from '../../../services/component-builder.ser
 })
 export class ColLayoutComponent implements OnInit {
   @ViewChild('dynamicCol', { read: ViewContainerRef, static: true }) viewContainerRef: ViewContainerRef;
-  @Input() config: ComponentConfig;
+  @Input() componentConfig: ComponentConfig;
+  @Input() builderConfig: BuilderConfig;
 
   constructor(protected builder: ComponentBuilderService) { }
 
@@ -17,10 +18,18 @@ export class ColLayoutComponent implements OnInit {
     this.renderColumn();
   }
 
+  componentInstance() {
+    return {
+      componentConfig: this.componentConfig,
+      builderConfig: this.builderConfig
+    }
+  }
+
   renderColumn(): void {
-    if (this.config) {
-      const component: any = this.builder.getCurrentComponent(this.config.type);
-      this.builder.renderDynamicComponent(component, this.viewContainerRef);
+    const params = this.componentInstance();
+    if (this.componentConfig) {
+      const component: any = this.builder.getCurrentComponent(this.componentConfig.type);
+      this.builder.renderDynamicComponent(component, this.viewContainerRef, params);
     }
   }
 

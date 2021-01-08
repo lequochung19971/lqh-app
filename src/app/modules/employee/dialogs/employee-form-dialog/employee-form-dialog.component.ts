@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../../../../shared/services/dialog.service';
-import { BaseComponent } from '../../../../core/components/base/base.component';
+import { BaseComponent } from '../../../../core/components/base-component/base.component';
 
 @Component({
   selector: 'lqh-employee-form-dialog',

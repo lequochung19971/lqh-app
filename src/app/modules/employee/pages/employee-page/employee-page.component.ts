@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { BaseComponent } from '../../../../core/components/base/base.component';
+import { BaseComponent } from '../../../../core/components/base-component/base.component';
 
 @Component({
   selector: 'lqh-employee-page',

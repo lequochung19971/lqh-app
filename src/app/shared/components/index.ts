@@ -7,9 +7,10 @@ import { ToggleModeThemeComponent } from './toggle-mode-theme/toggle-mode-theme.
 import { LqhDialogShellComponent } from './lqh-dialog-shell/lqh-dialog-shell.component';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { GenderToggleComponent } from './gender-toggle/gender-toggle.component';
-import { ChipListPopupComponent } from './chip-list-popup/chip-list-popup.component';
 import { LqhDialogShellCustomComponent } from './lqh-dialog-shell-custom/lqh-dialog-shell-custom.component';
 import { AddressDialogComponent } from './address/address-dialog.component';
+import { ChipListOpenDialogComponent } from './chip-list-open-dialog/chip-list-open-dialog.component';
+import { InputOpenDialogComponent } from './input-open-dialog/input-open-dialog.component';
 
 export const allSharedComponents = [
   LqhShellComponent,
@@ -22,6 +23,7 @@ export const allSharedComponents = [
   LqhDialogShellCustomComponent,
   ErrorMessageComponent,
   GenderToggleComponent,
-  ChipListPopupComponent,
-  AddressDialogComponent
+  AddressDialogComponent,
+  ChipListOpenDialogComponent,
+  InputOpenDialogComponent
 ]

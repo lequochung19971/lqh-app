@@ -2,9 +2,15 @@
   padding: 0 !important;
 }
 
-.lqh-dialog {
+// .lqh-dialog {
+//   .mat-dialog-container {
+//     @extend .bd-radius-15px;
+//   }
+// }
+
+.lqh-full-dialog {
   .mat-dialog-container {
-    @extend .bd-radius-15px;
+    border-radius: 0;
   }
 }
 
