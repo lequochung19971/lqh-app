@@ -1,0 +1,147 @@
+[
+  {
+    "id": "financeManagerPos",
+    "name": "Finance Manager",
+    "departmentId": "financeAndAccountingDep"
+  },
+  {
+    "id": "accountsManagerPos",
+    "name": "Account Manager",
+    "departmentId": "financeAndAccountingDep"
+  },
+  {
+    "id": "seniorAccountantPos",
+    "name": "Senior Accountant",
+    "departmentId": "financeAndAccountingDep"
+  },
+  {
+    "id": "juniorAccountantPos",
+    "name": "Junior Accountant",
+    "departmentId": "financeAndAccountingDep"
+  },
+  {
+    "id": "payrollAccountantPos",
+    "name": "Payroll Accountant",
+    "departmentId": "financeAndAccountingDep"
+  },
+  {
+    "id": "dataEntryPos",
+    "name": "Data Entry",
+    "departmentId": "financeAndAccountingDep"
+  },
+  {
+    "id": "HRManagerPos",
+    "name": "Human Resources Manager",
+    "departmentId": "HRDep"
+  },
+  {
+    "id": "seniorAdministratorPos",
+    "name": "Senior Administrator",
+    "departmentId": "HRDep"
+  },
+  {
+    "id": "govermentalOfficerPos",
+    "name": "Govermental Officer",
+    "departmentId": "HRDep"
+  },
+  {
+    "id": "coordinatorPos",
+    "name": "Coordinator",
+    "departmentId": "HRDep"
+  },
+  {
+    "id": "payrollOfficerPos",
+    "name": "Payroll Officer",
+    "departmentId": "HRDep"
+  },
+  {
+    "id": "salesAssociatePos",
+    "name": "Sales Associate",
+    "departmentId": "salesDep"
+  },
+  {
+    "id": "salesOperationCoordinatorPos",
+    "name": "Sales Operation Coordinator",
+    "departmentId": "salesDep"
+  },
+  {
+    "id": "retailStoreManagerPos",
+    "name": "Retail Store Manager",
+    "departmentId": "salesDep"
+  },
+  {
+    "id": "majorAccountManagerPos",
+    "name": "Major Account Manager",
+    "departmentId": "salesDep"
+  },
+  {
+    "id": "directorOfSalesPos",
+    "name": "Director of Sales",
+    "departmentId": "salesDep"
+  },
+  {
+    "id": "itManagerPos",
+    "name": "IT Manager",
+    "departmentId": "ITDep"
+  },
+  {
+    "id": "programmingEngineerPos",
+    "name": "Programming Engineer",
+    "departmentId": "ITDep"
+  },
+  {
+    "id": "hardwareMaintemancePos",
+    "name": "Hardware Maintemance",
+    "departmentId": "ITDep"
+  },
+  {
+    "id": "troubleShootingPos",
+    "name": "Trouble Shooting",
+    "departmentId": "ITDep"
+  },
+  {
+    "id": "networkingPos",
+    "name": "Networking",
+    "departmentId": "ITDep"
+  },
+  {
+    "id": "marketingCoordinatorPos",
+    "name": "Marketing Coordinator",
+    "departmentId": "marketingDep"
+  },
+  {
+    "id": "marketingAnalystPos",
+    "name": "Marketing Analyst",
+    "departmentId": "marketingDep"
+  },
+  {
+    "id": "marketingSpecialistPos",
+    "name": "Marketing Specialist",
+    "departmentId": "marketingDep"
+  },
+  {
+    "id": "accountExecutivePos",
+    "name": "Account Executive",
+    "departmentId": "marketingDep"
+  },
+  {
+    "id": "marketingAssociatePos",
+    "name": "Marketing Associate",
+    "departmentId": "marketingDep"
+  },
+  {
+    "id": "marketingAssistantPos",
+    "name": "Marketing Assistant",
+    "departmentId": "marketingDep"
+  },
+  {
+    "id": "marketingManagerPos",
+    "name": "Marketing Manager",
+    "departmentId": "marketingDep"
+  },
+  {
+    "id": "onlineMarketingSpecialistPos",
+    "name": "Online Marketing Specialist",
+    "departmentId": "marketingDep"
+  }
+]

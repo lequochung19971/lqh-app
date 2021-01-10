@@ -1,8 +1,7 @@
 export enum Departments {
-  DIRECTOR = 'Director',
-  MANAGER = 'Manager',
-  STAFF = 'Staff',
-  ASSISTANT = 'Assistant',
-  ACCOUNTANT = 'Accountant',
-  CHAIRMAN = 'Chairman',
+  financeAndAccountingDep = 'financeAndAccountingDep',
+  HRDep = 'HRDep',
+  salesDep = 'salesDep',
+  ITDep = 'ITDep',
+  marketingDep = 'marketingDep'
 }
