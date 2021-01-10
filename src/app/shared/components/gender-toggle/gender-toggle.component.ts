@@ -4,6 +4,7 @@ import { GenderMetadata } from 'src/app/core/interfaces-abstracts/gender-metadat
 import { Gender } from 'src/app/core/enums/gender.enum';
 import { Subscription } from 'rxjs';
 import { BaseControl } from '../../../core/components/base-control/base-control.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'lqh-gender-toggle',
@@ -21,7 +22,6 @@ export class GenderToggleComponent extends BaseControl  {
       value: Gender.female
     }
   ];
-  initialFormControlValue: Gender = Gender.male;
   protected selection;
   
   constructor() { 
@@ -31,6 +31,7 @@ export class GenderToggleComponent extends BaseControl  {
   
   ngOnInit(): void {
     super.ngOnInit();
+    this.formControl = new FormControl(Gender.male)
     this.toggleValueChange();
     this.initSelection();
   }

@@ -5,6 +5,7 @@ import { debounceTime, map } from 'rxjs/operators';
 import { Address, AddressModel } from '../../../core/models/address.model';
 import { AddressTypes, ProvinceType, DistrictType, WardType } from 'src/app/core/enums/address-types.enum';
 import { MatDialogRef } from '@angular/material/dialog';
+import * as _ from 'lodash-es';
 
 @Component({
   selector: 'lqh-address-dialog',
@@ -12,12 +13,13 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./address-dialog.component.scss']
 })
 export class AddressDialogComponent implements OnInit {
-  @Input() isFullAddressMode: boolean = false;
-  @Input() addressModel: AddressModel = new AddressModel();
-
+  @Input() isFullAddressMode: boolean;
+  @Input() dataModel: AddressModel;
+  
   originalDataSource: Address[] = [];
   dataSource: Address[] = [];
   addressChipList: Address[];
+  addressModel: AddressModel;
 
   provinces: Address[];
   provinceTypes: AddressTypes[];
@@ -26,7 +28,7 @@ export class AddressDialogComponent implements OnInit {
   wards: Address[];
   wardTypes: AddressTypes[];
 
-  searchControl: FormControl = new FormControl('');
+  searchControl: FormControl;
 
   constructor(
     protected jsonConfigService: JsonConfigService,
@@ -34,6 +36,7 @@ export class AddressDialogComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.initAddressModel();
     this.initAddressConfig();
     this.initAddressDataSource();
     this.initAddressChiplist();
@@ -51,19 +54,44 @@ export class AddressDialogComponent implements OnInit {
 
   protected initAddressDataSource() {
     this.originalDataSource = this.provinces;
+
+    if (this.addressModel.province) {
+      this.originalDataSource = this.districts.filter(district => district.parentCode === this.addressModel.province.code);
+    }
+
+    if (this.addressModel.district) {
+      this.originalDataSource = this.wards.filter(district => district.parentCode === this.addressModel.district.code);
+    }
+
+    if (this.addressModel.district) {
+      this.originalDataSource = this.wards.filter(district => district.parentCode === this.addressModel.district.code);
+    }
+
     this.dataSource = this.originalDataSource;
   }
 
   protected initAddressChiplist() {
     this.addressChipList = [];
-    if (this.addressModel.province || this.addressModel.district || this.addressModel.ward) {
+
+    if (this.addressModel?.province) {
       this.addressChipList.push(this.addressModel.province);
+    }
+
+    if (this.addressModel?.district) {
       this.addressChipList.push(this.addressModel.district);
+    }
+
+    if (this.addressModel?.ward) {
       this.addressChipList.push(this.addressModel.ward);
     }
   }
 
+  protected initAddressModel() {
+    this.addressModel = this.dataModel ? _.cloneDeep(this.dataModel) : new AddressModel();
+  }
+
   protected startSearchingAddress() {
+    this.searchControl = new FormControl('');
     this.searchControl.valueChanges.pipe(
       debounceTime(500),
       map((key: string) => {
@@ -92,14 +120,24 @@ export class AddressDialogComponent implements OnInit {
         this.addressModel.district = address;
       } else if (this.isWard(address)) {
         this.addressModel.ward = address;
+        this.updateDataModel();
+        this.dialogRef.close(address);
       }
 
       this.addressChipList.push(address);
       this.dataSource = this.originalDataSource;
       this.resetSearchControl();
     } else {
+      // this.updateDataModel();
       this.dialogRef.close(address);
     }
+  }
+
+  updateDataModel() {
+    const { province, district, ward } = this.addressModel;
+    this.dataModel.province = province;
+    this.dataModel.district = district;
+    this.dataModel.ward = ward;
   }
 
   protected isProvince(address: Address): boolean {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { BaseAction } from '../interfaces-abstracts/base-action.interface';
 import { BaseReducer, ActionReducer } from '../interfaces-abstracts/base-reducer.interface';
@@ -29,13 +29,13 @@ export abstract class BaseFacadeService<TState extends BaseState> {
     protected facadeConfig: FacadeConfig,
     protected lfs: LocatorFacadeService
   ) { 
-    this.initState(facadeConfig.state);
+    this.initState(facadeConfig.initialState);
     this.initReducer(facadeConfig.actionReducer);
     this.initAction();
     // this.generateChildStates();
   }
 
-  get viewModel(): TState {
+  get stateValue(): TState {
     return this._state;
   }
 
@@ -107,25 +107,21 @@ export abstract class BaseFacadeService<TState extends BaseState> {
     this._actionSubject.next(action);
   }
 
-  protected select(property: string): Observable<null | TState> {
-    if (!this.hasStateProperty(property)) {
-      return of(null);
-    }
-    
+  protected select(stateFunction: (state: TState) => any): Observable<null | TState | any> {
     return this._state$.pipe(
-      map((state: TState) => state[property])
+      map(stateFunction)
     );
   }
 
-  private hasStateProperty(property: string): boolean {
-    const findedKey = Object.keys(this._state).find(key => key === property) 
-    if (!findedKey) {
-      logger.error(`Property (${property}) doesn't exist in current state`);
-      return false;
-    }
+  // private hasStateProperty(property: string): boolean {
+  //   const findedKey = Object.keys(this._state).find(key => key === property) 
+  //   if (!findedKey) {
+  //     logger.error(`Property (${property}) doesn't exist in current state`);
+  //     return false;
+  //   }
 
-    return true;
-  }
+  //   return true;
+  // }
   
   private checkAction(action: BaseAction): boolean {
     if (action === undefined || action === null) {

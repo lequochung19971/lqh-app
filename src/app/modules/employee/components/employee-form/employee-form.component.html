@@ -1,79 +1,101 @@
 <div class="employee-form-container py-40px">
-<div class="row">
-  <div class="col-5 px-30px pb-10px">
-    <mat-form-field appearance="standard" class="w100">
-      <mat-label>First Name</mat-label>
-      <input matInput floatLabel="never" placeholder="First Name" autocomplete="off" required>
-    </mat-form-field>
+  <div class="row">
+    <div class="col-5 px-30px pb-10px">
+      <mat-form-field appearance="standard" class="w100">
+        <mat-label>{{ 'firstName' | translate }}</mat-label>
+        <input
+          matInput
+          floatLabel="never"
+          placeholder="{{ 'firstName' | translate }}"
+          autocomplete="off"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="col-5 px-30px pb-10px">
+      <mat-form-field appearance="standard" class="w100">
+        <mat-label>{{ 'lastName' | translate }}</mat-label>
+        <input matInput placeholder="{{ 'lastName' | translate }}" autocomplete="off" required />
+      </mat-form-field>
+    </div>
+    <div class="col-10 px-30px pb-10px">
+      <div class="lqh-label-field">{{ 'gender' | translate }}</div>
+      <lqh-gender-toggle></lqh-gender-toggle>
+    </div>
+    <div class="col-5 px-30px pb-10px">
+      <mat-form-field appearance="standard" class="w100">
+        <mat-label>{{ 'DOB' | translate }}</mat-label>
+        <input matInput placeholder="{{ 'DOB' | translate }}" autocomplete="off" required />
+      </mat-form-field>
+    </div>
+    <div class="col-5 px-30px pb-10px">
+      <mat-form-field appearance="standard" class="w100">
+        <mat-label>{{ 'age' | translate }}</mat-label>
+        <input matInput placeholder="{{ 'age' | translate }}" autocomplete="off" required />
+      </mat-form-field>
+    </div>
+    <div class="col-5 px-30px pb-10px">
+      <mat-form-field appearance="standard" class="w100">
+        <mat-label>{{ 'idCard' | translate }}</mat-label>
+        <input matInput placeholder="{{ 'idCard' | translate }}" autocomplete="off" required />
+      </mat-form-field>
+    </div>
+    <div class="col-5 px-30px pb-10px">
+      <mat-form-field appearance="standard" class="w100">
+        <mat-label>{{ 'createDate' | translate }}</mat-label>
+        <input matInput placeholder="{{ 'createDate' | translate }}" autocomplete="off" required />
+      </mat-form-field>
+    </div>
+    <div class="col-10 px-30px pb-10px">
+      <div class="lqh-label-field">{{ 'createPlace' | translate }}</div>
+      <lqh-chip-list-open-dialog
+        [dialogConfig]="getDialogConfigForChipList()"
+        [dataSourceMetadata]="getChiplistDataSourceMetadata()"
+      ></lqh-chip-list-open-dialog>
+    </div>
+    <div class="col-5 px-30px pb-10px">
+      <mat-form-field appearance="standard" class="w100">
+        <mat-label>{{ 'departments' | translate }}</mat-label>
+        <mat-select>
+          <mat-option value="admin">Admin</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-5 px-30px pb-10px">
+      <mat-form-field appearance="standard" class="w100">
+        <mat-label>{{ 'positions' | translate }}</mat-label>
+        <mat-select>
+          <mat-option value="dev">Developer</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-5 px-30px pb-10px">
+      <mat-form-field appearance="standard" class="w100">
+        <mat-label>{{ 'phone' | translate }}</mat-label>
+        <input matInput placeholder="{{ 'phone' | translate }}" autocomplete="off" required />
+      </mat-form-field>
+    </div>
+    <div class="col-5 px-30px pb-10px">
+      <mat-form-field appearance="standard" class="w100">
+        <mat-label>{{ 'email' | translate }}</mat-label>
+        <input matInput placeholder="{{ 'email' | translate }}" autocomplete="off" required />
+      </mat-form-field>
+    </div>
+    <div class="col-10 px-30px pb-10px">
+      <lqh-input-open-dialog
+        [label]="'wards/district/province'"
+        [placeholder]="'wards/district/province'"
+        [dialogConfig]="getDialogConfigForAddressInput()"
+        [dialogOnClosed]="onDialogClosedForAddressInput.bind(this)"
+        [formControl]="addressInfoControl"
+      ></lqh-input-open-dialog>
+    </div>
+    <div class="col-10 px-30px pb-10px">
+      <lqh-avatar-uploading-card></lqh-avatar-uploading-card>
+    </div>
+    <div class="col-10 px-30px pb-10px">
+      <button mat-button class="btn btn-raised btn-accent mr-30px">{{ 'save' | translate }}</button>
+      <button mat-button class="btn btn-raised btn-basic">{{ 'cancel' | translate }}</button>
+    </div>
   </div>
-  <div class="col-5 px-30px pb-10px">
-    <mat-form-field appearance="standard" class="w100">
-      <mat-label>Last Name</mat-label>
-      <input matInput placeholder="Last Name" autocomplete="off" required>
-    </mat-form-field>
-  </div>
-  <div class="col-10 px-30px pb-10px">
-    <lqh-gender-toggle></lqh-gender-toggle>
-  </div>
-  <div class="col-5 px-30px pb-10px">
-    <mat-form-field appearance="standard" class="w100">
-      <mat-label>Date of birth</mat-label>
-      <input matInput placeholder="Date of birth" autocomplete="off" required>
-    </mat-form-field>
-  </div>
-  <div class="col-5 px-30px pb-10px">
-    <mat-form-field appearance="standard" class="w100">
-      <mat-label>Age</mat-label>
-      <input matInput placeholder="Age" autocomplete="off" required>
-    </mat-form-field>
-  </div>
-  <div class="col-5 px-30px pb-10px">
-    <mat-form-field appearance="standard" class="w100">
-      <mat-label>ID card</mat-label>
-      <input matInput placeholder="ID card" autocomplete="off" required>
-    </mat-form-field>
-  </div>
-  <div class="col-5 px-30px pb-10px">
-    <mat-form-field appearance="standard" class="w100">
-      <mat-label>Create Date</mat-label>
-      <input matInput placeholder="Create Date" autocomplete="off" required>
-    </mat-form-field>
-  </div>
-  <div class="col-10 px-30px pb-10px">
-    <div class="lqh-label-field">Created Place</div>
-    <lqh-chip-list-open-dialog [dialogConfig]="getChiplistPopupConfig()" [dataSourceMetadata]="getChiplistDataSourceMetadata()"></lqh-chip-list-open-dialog>
-  </div>
-  <div class="col-5 px-30px pb-10px">
-    <mat-form-field appearance="standard" class="w100">
-      <mat-label>Departments</mat-label>
-      <mat-select>
-        <mat-option value="admin">Admin</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="col-5 px-30px pb-10px">
-    <mat-form-field appearance="standard" class="w100">
-      <mat-label>Positions</mat-label>
-      <mat-select>
-        <mat-option value="dev">Developer</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="col-5 px-30px pb-10px">
-    <mat-form-field appearance="standard" class="w100">
-      <mat-label>Phone</mat-label>
-      <input matInput placeholder="Phone" autocomplete="off" required>
-    </mat-form-field>
-  </div>
-  <div class="col-5 px-30px pb-10px">
-    <mat-form-field appearance="standard" class="w100">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Email" autocomplete="off" required>
-    </mat-form-field>
-  </div>
-  <div class="col-10 px-30px pb-10px">
-    <button mat-button class="btn btn-raised btn-accent mr-30px">Save</button>
-    <button mat-button class="btn btn-raised btn-basic">Cancel</button>
-  </div>
-</div>
 </div>

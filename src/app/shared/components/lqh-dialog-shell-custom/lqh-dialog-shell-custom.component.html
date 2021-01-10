@@ -5,7 +5,7 @@
         <div *ngIf="true" class="lqh-dialog-shell-custom__header">
           <mat-toolbar class="h-55px">
             <div class="w100 flex-space-between-center">
-              <span class="fw-500 ml-20px fs-18">{{ title }}</span>
+              <span class="fw-500 ml-20px fs-18">{{ title | translate }}</span>
               <button mat-icon-button>
                 <mat-icon (click)="onClose()">close</mat-icon>
               </button>

@@ -1,1 +1,12 @@
-<p>input-open-dialog works!</p>
+<mat-form-field appearance="standard" class="w100">
+  <mat-label>{{ label | translate }}</mat-label>
+  <input
+    matInput
+    placeholder="{{ label | translate }}"
+    autocomplete="off"
+    [required]="required"
+    [formControl]="formControl"
+    (click)="openDialog()"
+    lqhPreventChar
+  />
+</mat-form-field>

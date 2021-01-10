@@ -4,6 +4,8 @@ import { DialogConfig } from '../../../core/interfaces-abstracts/dialog-config.i
 import { DatasourceMetadata } from '../../../core/interfaces-abstracts/data-source-metadata.interface';
 import { BaseControl } from '../../../core/components/base-control/base-control.component';
 import { ControlOpenDialog } from 'src/app/core/interfaces-abstracts/control-open-dialog.interface';
+import { TranslateService } from '@ngx-translate/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'lqh-chip-list-open-dialog',
@@ -15,20 +17,23 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
     label: 'label',
     value: 'value'
   }
-  @Input() allowAdd: boolean = true;
+  @Input() allowAdd: boolean = false;
   @Input() allowDuplicate: boolean = false;
   @Input() dialogConfig: DialogConfig;
   @Input() disable: boolean;
 
-  initialFormControlValue: any[] = [];
   dataSource: any;
   
-  constructor(protected dialogService: DialogService) { 
+  constructor(
+    protected dialogService: DialogService,
+    protected translateService: TranslateService
+  ) { 
     super();
   }
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.formControl = new FormControl([]); //Temp
     this.initDataSource();
   }
 
@@ -37,11 +42,11 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
   }
 
   getLabel(data: any) {
-    return data[this.dataSourceMetadata.label];
+    return this.translateService.instant(data[this.dataSourceMetadata.label] || '');
   }
 
   getValue(data: any) {
-    return data[this.dataSourceMetadata.value];
+    return this.translateService.instant(data[this.dataSourceMetadata.value] || '');
   }
 
   openDialog() {

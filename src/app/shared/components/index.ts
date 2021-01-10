@@ -11,6 +11,8 @@ import { LqhDialogShellCustomComponent } from './lqh-dialog-shell-custom/lqh-dia
 import { AddressDialogComponent } from './address/address-dialog.component';
 import { ChipListOpenDialogComponent } from './chip-list-open-dialog/chip-list-open-dialog.component';
 import { InputOpenDialogComponent } from './input-open-dialog/input-open-dialog.component';
+import { AvatarUploadingCardComponent } from './avatar-uploading/avatar-uploading-card/avatar-uploading-card.component';
+import { AvatarUploadingDialogComponent } from './avatar-uploading/avatar-uploading-dialog/avatar-uploading-dialog.component';
 
 export const allSharedComponents = [
   LqhShellComponent,
@@ -25,5 +27,7 @@ export const allSharedComponents = [
   GenderToggleComponent,
   AddressDialogComponent,
   ChipListOpenDialogComponent,
-  InputOpenDialogComponent
+  InputOpenDialogComponent,
+  AvatarUploadingCardComponent,
+  AvatarUploadingDialogComponent
 ]

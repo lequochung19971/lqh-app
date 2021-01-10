@@ -10,6 +10,10 @@ import { COMPONENT_TYPE_CONFIG_TOKEN, BUILDER_CONFIG_TOKEN } from '../../core/co
 import { allEmployeeComponentConfigs } from './components/index';
 import { allEmployeeBuilderConfigs } from './configs';
 import { allEmployeeDialogs } from './dialogs';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpTranslateLoader } from '../../core/services/http-translate-loader.service';
+
 @NgModule({
   declarations: [...allEmployeePages, ...allEmployeeComponents, ...allEmployeeDialogs],
   imports: [
@@ -17,7 +21,14 @@ import { allEmployeeDialogs } from './dialogs';
     EmployeeRoutingModule,
     CoreModule, 
     SharedModule, 
-    MaterialModule
+    MaterialModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [
     {

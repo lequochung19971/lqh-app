@@ -1,6 +1,6 @@
 import { ActionReducer } from './base-reducer.interface';
 
 export interface FacadeConfig {
-  state: any,
+  initialState: any,
   actionReducer: ActionReducer
 }

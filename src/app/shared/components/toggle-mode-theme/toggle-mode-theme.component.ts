@@ -1,8 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, Renderer2, ChangeDetectionStrategy } from '@angular/core';
-import { ModeThemeService } from '../../services/mode-theme.service';
 import { Observable } from 'rxjs';
 import { ModeTheme } from '../../../core/enums/mode-theme.enum';
+import { ModeThemeFacadeService } from 'src/app/store/facades/mode-theme-facade.service';
 
 @Component({
   selector: 'lqh-toggle-mode-theme',
@@ -13,12 +13,12 @@ import { ModeTheme } from '../../../core/enums/mode-theme.enum';
 export class ToggleModeThemeComponent implements OnInit {
   currentTheme: ModeTheme;
   isClicked: boolean = true;
-  isLightMode$: Observable<boolean> = this.modeThemeService.isLightModeObs;
-  isDarkMode$: Observable<boolean> = this.modeThemeService.isDarkModeObs;
+  isLightMode$: Observable<boolean> = this.modeThemeFacadeService.isLightModeObs;
+  isDarkMode$: Observable<boolean> = this.modeThemeFacadeService.isDarkModeObs;
 
   constructor(
     @Inject(DOCUMENT) private document: Document, private renderer: Renderer2,
-    protected modeThemeService: ModeThemeService
+    protected modeThemeFacadeService: ModeThemeFacadeService
   ) { }
   
   ngOnInit(): void {
@@ -35,6 +35,6 @@ export class ToggleModeThemeComponent implements OnInit {
   updateMode() {
     localStorage.setItem('mode-theme', this.currentTheme);
     this.renderer.setAttribute(this.document.body, 'class', this.currentTheme);
-    this.modeThemeService.setModeTheme(this.currentTheme)
+    this.modeThemeFacadeService.setModeTheme(this.currentTheme)
   }
 }

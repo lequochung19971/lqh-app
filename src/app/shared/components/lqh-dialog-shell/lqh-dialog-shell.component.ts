@@ -22,7 +22,7 @@ export class LqhDialogShellComponent implements OnInit {
   ngOnInit(): void {
     this.title = this.dialogConfig.title;
     this.rightSide = this.dialogConfig.rightSide;
-    this.builder.renderDynamicComponent(this.dialogConfig.component, this.viewContainerRef);
+    this.builder.renderDynamicComponent(this.dialogConfig.component, this.viewContainerRef, this.dialogConfig.componentInstance);
   }
 
   onClose(): void {

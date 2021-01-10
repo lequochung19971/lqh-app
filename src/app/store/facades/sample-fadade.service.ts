@@ -11,15 +11,15 @@ import { FacadeConfig } from '../../core/interfaces-abstracts/facade-config.inte
 })
 export class SampleFadadeService extends BaseFacadeService<SampleState> {
   get sampleData() {
-    return this.select('sampleData')
+    return this.select(state => state.sampleData);
   }
   get tempValue() {
-    return this.select('tempValue')
+    return this.select(state => state.tempValue);
   }
 
   constructor(protected lfs: LocatorFacadeService) {
     super(
-      { state: initialState, actionReducer: new SampleActionReducer() } as FacadeConfig,
+      { initialState, actionReducer: new SampleActionReducer() } as FacadeConfig,
       lfs
     );
   }

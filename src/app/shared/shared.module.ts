@@ -8,6 +8,9 @@ import { allSharedJsonObjectConfigs } from './configs';
 import { allDirective } from './directives';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { allSharedPipes } from './pipes';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpTranslateLoader } from '../core/services/http-translate-loader.service';
+import { HttpClient } from '@angular/common/http';
 @NgModule({
   declarations: [...allSharedComponents, ...allDirective, ...allSharedPipes],
   imports: [
@@ -16,6 +19,13 @@ import { allSharedPipes } from './pipes';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
   ],
   exports: [
     ...allSharedComponents,

@@ -10,13 +10,10 @@ import { StoreModule } from './store/store.module';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { EmployeeModule } from './modules/employee/employee.module';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpTranslateLoader } from './core/services/http-translate-loader.service';
 
-export function HttpTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
 @NgModule({
   declarations: [
     AppComponent,

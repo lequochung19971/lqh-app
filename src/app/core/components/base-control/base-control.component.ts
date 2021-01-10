@@ -1,19 +1,16 @@
-import { Input, Injectable, OnInit } from '@angular/core';
+import { Input, OnInit, Directive } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-@Injectable()
+@Directive()
 export abstract class BaseControl implements OnInit {
   @Input() formControl: FormControl;
-  abstract initialFormControlValue: any;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.initFormControl();
   }
 
   initFormControl() {
-    this.formControl = new FormControl(this.initialFormControlValue);
   }
 
   patchControlValue(value: any) {

@@ -1,0 +1,23 @@
+<div class="lqh-avatar-uploading-card">
+  <div class="avatar-card-container" [ngClass]="hasImage ? 'has-image' : 'empty'" (click)="onOpenUploading()">
+    <div class="avatar-card">
+      <div class="avatar-card__image">
+        <div class="image">
+          <img src="../../../../../assets/icons/person-avt.svg" alt="person-avatar">
+        </div>
+        <div class="sub-icon">
+          <img *ngIf="hasImage" src="../../../../../assets/icons/v_success.svg" alt="success">
+          <img *ngIf="!hasImage" src="../../../../../assets/icons/camera_alt.svg" alt="camera">
+        </div>
+      </div>
+      <div class="avatar-card__label">
+        <div class="click-here">
+          Click here to upload photo
+        </div>
+        <div class="supported-image-type">
+          Supports: JPG, PNG  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
