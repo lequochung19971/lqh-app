@@ -12,7 +12,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpTranslateLoader } from '../core/services/http-translate-loader.service';
 import { HttpClient } from '@angular/common/http';
 @NgModule({
-  declarations: [...allSharedComponents, ...allDirective, ...allSharedPipes],
+  declarations: [...allSharedComponents, ...allDirective, ...allSharedPipes ],
   imports: [
     CommonModule,
     MaterialModule,

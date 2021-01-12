@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { DialogConfig } from '../../../../core/interfaces-abstracts/dialog-config.interface';
 import { DatasourceMetadata } from '../../../../core/interfaces-abstracts/data-source-metadata.interface';
 import { AddressDialogComponent } from '../../../../shared/components/address/address-dialog.component';
-import { FormControl } from '@angular/forms';
-import { AddressModel, Address } from '../../../../core/models/address.model';
+import { FormGroup } from '@angular/forms';
+import { EmployeeService } from '../../services/employee.service';
+import { UtilitiesService } from '../../../../shared/services/utilities.service';
+import { Dayjs } from 'dayjs';
 
 @Component({
   selector: 'lqh-employee-form',
@@ -11,15 +13,26 @@ import { AddressModel, Address } from '../../../../core/models/address.model';
   styleUrls: ['./employee-form.component.scss']
 })
 export class EmployeeFormComponent implements OnInit {
+  form: FormGroup;
+  viewModel: any;
 
-  constructor() { }
+  constructor(
+    protected employeeService: EmployeeService,
+    protected utilitiesService: UtilitiesService
+  ) { 
+  }
 
   ngOnInit(): void {
+    this.form = this.employeeService.getCurrentForm();
+    this.viewModel = this.employeeService.getViewModel();
+    this.form.valueChanges.subscribe(val => {
+      console.log(val);
+    })
   }
 
   getDialogConfigForChipList(): DialogConfig {
     return {
-      title: 'provincesAddressDialogTitle',
+      title: 'PROVINCE_ADDRESS_DIALOG_TITLE',
       component: AddressDialogComponent,
       componentInstance: {
         isFullAddressMode: false
@@ -36,24 +49,16 @@ export class EmployeeFormComponent implements OnInit {
     }
   }
 
-  addressInfoModel: any = new AddressModel();
-  getDialogConfigForAddressInput(): DialogConfig {
-    return {
-      title: 'provincesAddressDialogTitle',
-      component: AddressDialogComponent,
-      componentInstance: {
-        isFullAddressMode: true,
-        dataModel: this.addressInfoModel
-      },
-      height: '550px',
-      width: '850px'
+  dateChange() {
+    const dobControl = this.form.get('dob');
+    if (dobControl.valid) {
+      this.updateAge(dobControl?.value);
     }
   }
 
-  addressInfoControl: FormControl = new FormControl('');
-  onDialogClosedForAddressInput(data: Address) {
-    if (data) {
-      this.addressInfoControl.patchValue(data.pathWithType);
-    }
+  updateAge(date: Dayjs | string) {
+    const ageControl = this.form.get('age');
+    const age: string = this.utilitiesService.calculateAgeByDOB(date);
+    ageControl.patchValue(age);
   }
 }

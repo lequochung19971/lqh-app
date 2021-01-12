@@ -6,15 +6,16 @@ import { Address, AddressModel } from '../../../core/models/address.model';
 import { AddressTypes, ProvinceType, DistrictType, WardType } from 'src/app/core/enums/address-types.enum';
 import { MatDialogRef } from '@angular/material/dialog';
 import * as _ from 'lodash-es';
+import { BaseComponent } from 'src/app/core/components/base-component/base.component';
 
 @Component({
   selector: 'lqh-address-dialog',
   templateUrl: './address-dialog.component.html',
   styleUrls: ['./address-dialog.component.scss']
 })
-export class AddressDialogComponent implements OnInit {
+export class AddressDialogComponent extends BaseComponent implements OnInit {
   @Input() isFullAddressMode: boolean;
-  @Input() dataModel: AddressModel;
+  @Input() viewModel: AddressModel;
   
   originalDataSource: Address[] = [];
   dataSource: Address[] = [];
@@ -33,7 +34,9 @@ export class AddressDialogComponent implements OnInit {
   constructor(
     protected jsonConfigService: JsonConfigService,
     protected dialogRef: MatDialogRef<AddressDialogComponent>,
-    ) { }
+    ) { 
+      super();
+    }
 
   ngOnInit(): void {
     this.initAddressModel();
@@ -87,7 +90,7 @@ export class AddressDialogComponent implements OnInit {
   }
 
   protected initAddressModel() {
-    this.addressModel = this.dataModel ? _.cloneDeep(this.dataModel) : new AddressModel();
+    this.addressModel = this.viewModel ? _.cloneDeep(this.viewModel) : new AddressModel();
   }
 
   protected startSearchingAddress() {
@@ -121,7 +124,7 @@ export class AddressDialogComponent implements OnInit {
       } else if (this.isWard(address)) {
         this.addressModel.ward = address;
         this.updateDataModel();
-        this.dialogRef.close(address);
+        this.dialogRef.close(this.addressModel);
       }
 
       this.addressChipList.push(address);
@@ -134,10 +137,12 @@ export class AddressDialogComponent implements OnInit {
   }
 
   updateDataModel() {
-    const { province, district, ward } = this.addressModel;
-    this.dataModel.province = province;
-    this.dataModel.district = district;
-    this.dataModel.ward = ward;
+    if (this.viewModel) {
+      const { province, district, ward } = this.addressModel;
+      this.viewModel.province = province;
+      this.viewModel.district = district;
+      this.viewModel.ward = ward;
+    }
   }
 
   protected isProvince(address: Address): boolean {

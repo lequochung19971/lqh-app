@@ -1,12 +1,12 @@
 {
-  "invalidDate": "Invalid Date",
+  "INVALID_DATE": "Invalid Date",
   "required": "Required",
-  "invalidEmail": "Invalid Email",
-  "maxLengthOfFieldName": "Max length of {{fieldName}} is not more than {{max}}",
-  "invalidPassword": "Invalid Password",
-  "invalidConfirmPassword": "Invalid Confirmation Password",
-  "maxLength": "Max length",
-  "minLength": "Min length",
+  "INVALID_EMAIL": "Invalid Email",
+  "MAX_LENGTH_OF_FIELD_NAME": "Max length of {{fieldName}} is not more than {{max}}",
+  "INVALID_PASSWORD": "Invalid Password",
+  "INVALID_CONFIRM_PASSWORD": "Invalid Confirmation Password",
+  "MAX_LENGTH": "Max length",
+  "MIN_LENGTH": "Min length",
   "EmployeefullName": "Full Name",
   "EmployeeDepartments": "Departments",
   "EmployeeDOB": "Date of birth",
@@ -16,5 +16,5 @@
   "EmployeePassword": "Password",
   "EmployeeCreating": "Create Employee",
   "submit": "Submit",
-  "cancel": "Cancel"
+  "CANCEL_LABEL": "Cancel"
 }

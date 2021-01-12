@@ -13,11 +13,14 @@ import { allEmployeeDialogs } from './dialogs';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpTranslateLoader } from '../../core/services/http-translate-loader.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [...allEmployeePages, ...allEmployeeComponents, ...allEmployeeDialogs],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     EmployeeRoutingModule,
     CoreModule, 
     SharedModule, 

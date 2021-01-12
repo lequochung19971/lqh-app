@@ -13,6 +13,9 @@ import { ChipListOpenDialogComponent } from './chip-list-open-dialog/chip-list-o
 import { InputOpenDialogComponent } from './input-open-dialog/input-open-dialog.component';
 import { AvatarUploadingCardComponent } from './avatar-uploading/avatar-uploading-card/avatar-uploading-card.component';
 import { AvatarUploadingDialogComponent } from './avatar-uploading/avatar-uploading-dialog/avatar-uploading-dialog.component';
+import { SampleInputCustomComponent } from './sample-input-custom/sample-input-custom.component';
+import { AddressInputComponent } from './address-input/address-input.component';
+import { DateInputComponent } from './date-input/date-input.component';
 
 export const allSharedComponents = [
   LqhShellComponent,
@@ -29,5 +32,8 @@ export const allSharedComponents = [
   ChipListOpenDialogComponent,
   InputOpenDialogComponent,
   AvatarUploadingCardComponent,
-  AvatarUploadingDialogComponent
+  AvatarUploadingDialogComponent,
+  SampleInputCustomComponent,
+  AddressInputComponent,
+  DateInputComponent
 ]

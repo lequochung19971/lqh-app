@@ -1,8 +1,9 @@
 <div class="gender-container">
   <mat-button-toggle-group
-  [formControl]="formControl"
   class="lqh-gender h100 pb-5px"
   appearance="legacy"
+  (change)="toggleSelection($event.value)"
+  [value]="value"
 >
   <mat-button-toggle [value]="metadata[0].value" class="male">
     <img *ngIf="!isSelected(metadata[0].value)" src="../../../../assets/icons/male-grey.svg" alt="male-icon">

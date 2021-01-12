@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Optional, Self } from '@angular/core';
 import { DialogService } from '../../services/dialog.service';
 import { DialogConfig } from '../../../core/interfaces-abstracts/dialog-config.interface';
 import { DatasourceMetadata } from '../../../core/interfaces-abstracts/data-source-metadata.interface';
-import { BaseControl } from '../../../core/components/base-control/base-control.component';
 import { ControlOpenDialog } from 'src/app/core/interfaces-abstracts/control-open-dialog.interface';
 import { TranslateService } from '@ngx-translate/core';
-import { FormControl } from '@angular/forms';
+import { NgControl } from '@angular/forms';
+import { BaseControl } from 'src/app/core/components/base-control/base-control.component';
 
 @Component({
   selector: 'lqh-chip-list-open-dialog',
@@ -25,20 +25,31 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
   dataSource: any;
   
   constructor(
+    @Optional() @Self() public ngControl: NgControl,
     protected dialogService: DialogService,
     protected translateService: TranslateService
   ) { 
-    super();
+    super(ngControl);
   }
 
   ngOnInit(): void {
-    super.ngOnInit();
-    this.formControl = new FormControl([]); //Temp
-    this.initDataSource();
   }
 
-  protected initDataSource() {
-    this.dataSource = this.formControl.value;
+  writeValue(val: any): void {
+    if (this.dataSource) {
+      this.updateDataSource(val);
+    }
+
+    if (!this.dataSource && val) {
+      this.initDataSource(val)
+    }
+
+    this.onTouched();
+    this.onChanged(this.dataSource);
+  }
+
+  protected initDataSource(value: any) {
+    this.dataSource = value;
   }
 
   getLabel(data: any) {
@@ -57,9 +68,8 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
     })
   }
 
-  protected handleAfterDialogClose(data) {
-    this.updateDataSource(data);
-    this.patchControlValue(this.dataSource);
+  protected handleAfterDialogClose(data: any) {
+    this.writeValue(data);
   }
 
   protected updateDataSource(data: any) {

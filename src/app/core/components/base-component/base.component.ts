@@ -1,14 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Directive, Input, OnInit } from '@angular/core';
 import { BuilderConfig, ComponentConfig } from '../../interfaces-abstracts/builder-config.interface';
+import { BaseModel } from '../../models/base.model';
 
-@Component({
-  selector: 'lqh-base',
-  templateUrl: './base.component.html',
-  styleUrls: ['./base.component.scss']
-})
+@Directive()
 export abstract class BaseComponent implements OnInit {
   @Input() builderConfig: BuilderConfig;
   @Input() componentConfig: ComponentConfig;
+  @Input() viewModel: BaseModel;
 
   constructor() { }
 

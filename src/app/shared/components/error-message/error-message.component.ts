@@ -22,5 +22,7 @@ export class ErrorMessageComponent implements OnInit {
         return this.errorMessagesService.getErrorMessage(errorValue, errorName);
       }
     }
+
+    return '';
   }
 }

@@ -1,4 +1,4 @@
-export enum Position {
+export enum Positions {
   financeManagerPos = 'financeManagerPos',
   accountsManagerPos = 'accountsManagerPos',
   seniorAccountantPos = 'seniorAccountantPos',

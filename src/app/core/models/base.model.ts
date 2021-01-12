@@ -1,9 +1,11 @@
 export class BaseModel {
   constructor(props?: any) {
-    this.mappingProperties(props)
+    if (props) {
+      this.mappingProperties(props)
+    }
   }
 
-  private mappingProperties(props: any) {
+  private mappingProperties?(props: any) {
     Object.assign(this, props);
   }
 }

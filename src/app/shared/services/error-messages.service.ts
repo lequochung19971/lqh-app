@@ -10,17 +10,17 @@ export class ErrorMessagesService {
 
   messages(errorValue: ErrorParams) {
     return {
-      invalidDate: this.showMessage('invalidDate'),
-      required: this.showMessage('required'),
-      maxLength: this.showMessage('maxLength'),
-      minLength: this.showMessage('minLength'),
-      email: this.showMessage('invalidEmail'),
-      maxLengthWithNumberAndFieldName: this.showMessage('maxLengthOfFieldName', {
+      invalidDate: this.showMessage('INVALID_DATE'),
+      required: this.showMessage('REQUIRED'),
+      maxLength: this.showMessage('MAX_LENGTH'),
+      minLength: this.showMessage('MIN_LENGTH'),
+      email: this.showMessage('INVALID_EMAIL'),
+      maxLengthWithNumberAndFieldName: this.showMessage('MAX_LENGTH_OF_FIELD_NAME', {
         fieldName: errorValue.fieldName,
         max: errorValue.max,
       }),
-      invalidPassword: this.showMessage('invalidPassword'),
-      invalidConfirmPassword: this.showMessage('invalidConfirmPassword'),
+      invalidPassword: this.showMessage('INVALID_PASSWORD'),
+      invalidConfirmPassword: this.showMessage('INVALID_CONFIRM_PASSWORD'),
     };
   }
 

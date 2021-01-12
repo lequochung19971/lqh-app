@@ -1,0 +1,4 @@
+<mat-form-field appearance="standard" class="w100">
+  <mat-label>{{ 'Sample Custom Input' | translate }}</mat-label>
+  <input matInput placeholder="{{ 'Sample Custom Input' | translate }}" [value]="value" (change)="changeValue($event)" autocomplete="off" required />
+</mat-form-field>
