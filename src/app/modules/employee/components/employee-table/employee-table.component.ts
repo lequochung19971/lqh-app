@@ -1,9 +1,10 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../../services/employee.service';
-import { DialogConfig } from '../../../../core/interfaces-abstracts/dialog-config.interface';
-import { DialogService } from '../../../../shared/services/dialog.service';
-import { EmployeeFormDialogComponent } from '../../dialogs/employee-form-dialog/employee-form-dialog.component';
+import { DialogConfig } from '@core/interfaces-abstracts/dialog-config.interface';
+import { EmployeeFormDialogComponent } from '@modules/employee/dialogs/employee-form-dialog/employee-form-dialog.component';
+import { EmployeeService } from '@modules/employee/services/employee.service';
+import { DialogService } from '@shared/services/dialog.service';
+import { EmployeeFE } from '../../../../core/models/employee-fe.model';
 
 @Component({
   selector: 'lqh-employee-table',
@@ -130,7 +131,10 @@ export class EmployeeTableComponent implements OnInit {
       avatar: 'images/unnamed.jpg'
     },
   ]
-  constructor(protected employeeService: EmployeeService, protected dialogService: DialogService) { }
+  constructor(
+    protected employeeService: EmployeeService, 
+    protected dialogService: DialogService
+  ) { }
 
   ngOnInit(): void {
     this.selection.changed.subscribe(data => {
@@ -180,6 +184,11 @@ export class EmployeeTableComponent implements OnInit {
       component: EmployeeFormDialogComponent,
       rightSide: true
     }
-    this.dialogService.openDialogFullPage(dialogConfig);
+
+    this.dialogService.openDialogFullPage(dialogConfig).afterClosed().subscribe((employee: EmployeeFE) => {
+      if(employee) {
+
+      }
+    });
   }
 }

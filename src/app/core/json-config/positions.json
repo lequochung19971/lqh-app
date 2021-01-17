@@ -1,147 +1,147 @@
 [
   {
     "id": "financeManagerPos",
-    "name": "Finance Manager",
+    "name": "FINANCE_MANAGER_POSITION",
     "departmentId": "financeAndAccountingDep"
   },
   {
     "id": "accountsManagerPos",
-    "name": "Account Manager",
+    "name": "ACCOUNTS_MANAGER_POSITION",
     "departmentId": "financeAndAccountingDep"
   },
   {
     "id": "seniorAccountantPos",
-    "name": "Senior Accountant",
+    "name": "SENIOR_ACCOUNTANT_POSITION",
     "departmentId": "financeAndAccountingDep"
   },
   {
     "id": "juniorAccountantPos",
-    "name": "Junior Accountant",
+    "name": "JUNIOR_ACCOUNTANT_POSITION",
     "departmentId": "financeAndAccountingDep"
   },
   {
     "id": "payrollAccountantPos",
-    "name": "Payroll Accountant",
+    "name": "PAYROLL_ACCOUNTANT_POSITION",
     "departmentId": "financeAndAccountingDep"
   },
   {
     "id": "dataEntryPos",
-    "name": "Data Entry",
+    "name": "DATA_ENTRY_POSITION",
     "departmentId": "financeAndAccountingDep"
   },
   {
     "id": "HRManagerPos",
-    "name": "Human Resources Manager",
+    "name": "HR_MANAGER_POSITION",
     "departmentId": "HRDep"
   },
   {
     "id": "seniorAdministratorPos",
-    "name": "Senior Administrator",
+    "name": "SENIOR_ADMINISTRATOR_POSITION",
     "departmentId": "HRDep"
   },
   {
     "id": "govermentalOfficerPos",
-    "name": "Govermental Officer",
+    "name": "GOVERMENTAL_OFFICER_POSITION",
     "departmentId": "HRDep"
   },
   {
     "id": "coordinatorPos",
-    "name": "Coordinator",
+    "name": "COORDINATOR_POSITION",
     "departmentId": "HRDep"
   },
   {
     "id": "payrollOfficerPos",
-    "name": "Payroll Officer",
+    "name": "PAYROLL_OFFICER_POSITION",
     "departmentId": "HRDep"
   },
   {
     "id": "salesAssociatePos",
-    "name": "Sales Associate",
+    "name": "SALES_ASSOCIATE_POSITION",
     "departmentId": "salesDep"
   },
   {
     "id": "salesOperationCoordinatorPos",
-    "name": "Sales Operation Coordinator",
+    "name": "SALES_OPERATION_COORDINATOR_POSITION",
     "departmentId": "salesDep"
   },
   {
     "id": "retailStoreManagerPos",
-    "name": "Retail Store Manager",
+    "name": "RETAIL_STORE_MANAGER_POSITION",
     "departmentId": "salesDep"
   },
   {
     "id": "majorAccountManagerPos",
-    "name": "Major Account Manager",
+    "name": "MAJOR_ACCOUNT_MANAGER_POSITION",
     "departmentId": "salesDep"
   },
   {
     "id": "directorOfSalesPos",
-    "name": "Director of Sales",
+    "name": "DIRECTOR_OF_SALES_POSITION",
     "departmentId": "salesDep"
   },
   {
     "id": "itManagerPos",
-    "name": "IT Manager",
+    "name": "IT_MANAGER_POSITION",
     "departmentId": "ITDep"
   },
   {
     "id": "programmingEngineerPos",
-    "name": "Programming Engineer",
+    "name": "PROGRAMMING_ENGINEER_POSITION",
     "departmentId": "ITDep"
   },
   {
-    "id": "hardwareMaintemancePos",
-    "name": "Hardware Maintemance",
+    "id": "hardwareMaintenancePos",
+    "name": "HARDWARE_MAINTENANCE_POSITION",
     "departmentId": "ITDep"
   },
   {
     "id": "troubleShootingPos",
-    "name": "Trouble Shooting",
+    "name": "TROUBLE_SHOOTING_POSITION",
     "departmentId": "ITDep"
   },
   {
     "id": "networkingPos",
-    "name": "Networking",
+    "name": "NETWORKING_POSITION",
     "departmentId": "ITDep"
   },
   {
     "id": "marketingCoordinatorPos",
-    "name": "Marketing Coordinator",
+    "name": "MARKETING_COORDINATOR_POSITION",
     "departmentId": "marketingDep"
   },
   {
     "id": "marketingAnalystPos",
-    "name": "Marketing Analyst",
+    "name": "MARKETING_ANALYST_POSITION",
     "departmentId": "marketingDep"
   },
   {
     "id": "marketingSpecialistPos",
-    "name": "Marketing Specialist",
+    "name": "MARKETING_SPECIALIST_POSITION",
     "departmentId": "marketingDep"
   },
   {
     "id": "accountExecutivePos",
-    "name": "Account Executive",
+    "name": "ACCOUNT_EXECUTIVE_POSITION",
     "departmentId": "marketingDep"
   },
   {
     "id": "marketingAssociatePos",
-    "name": "Marketing Associate",
+    "name": "MARKETING_ASSOCIATE_POSITION",
     "departmentId": "marketingDep"
   },
   {
     "id": "marketingAssistantPos",
-    "name": "Marketing Assistant",
+    "name": "MARKETING_ASSISTANT_POSITION",
     "departmentId": "marketingDep"
   },
   {
     "id": "marketingManagerPos",
-    "name": "Marketing Manager",
+    "name": "MARKETING_MANAGER_POSITION",
     "departmentId": "marketingDep"
   },
   {
     "id": "onlineMarketingSpecialistPos",
-    "name": "Online Marketing Specialist",
+    "name": "ONLINE_MARKETING_SPECIALIST_POSITION",
     "departmentId": "marketingDep"
   }
 ]

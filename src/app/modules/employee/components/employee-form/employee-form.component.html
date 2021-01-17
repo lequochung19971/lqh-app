@@ -1,53 +1,76 @@
 <div class="employee-form-container py-40px">
-  <form class="row" *ngIf="form" [formGroup]="form">
+  <div class="row" *ngIf="form" [formGroup]="form">
     <div class="col-5 px-30px pb-10px">
-      <mat-form-field appearance="standard" class="w100">
-        <mat-label>{{ 'FIRST_NAME_LABEL' | translate }}</mat-label>
-        <input
-          matInput
-          formControlName="firstName"  
-          placeholder="{{ 'FIRST_NAME_LABEL' | translate }}"
-          autocomplete="off"
-          required
-        />
-        <mat-error>
-          <lqh-error-message [control]="form.controls.firstName"></lqh-error-message>
-        </mat-error>
-      </mat-form-field>
-
+      <lqh-input
+        formControlName="firstName"
+        label="{{ 'FIRST_NAME_LABEL' | translate }}"
+        placeholder="{{ 'FIRST_NAME_LABEL' | translate }}"
+        lqhInputLetter
+        required="true"
+      ></lqh-input>
     </div>
     <div class="col-5 px-30px pb-10px">
-      <mat-form-field appearance="standard" class="w100">
-        <mat-label>{{ 'LAST_NAME_LABEL' | translate }}</mat-label>
-        <input matInput placeholder="{{ 'LAST_NAME_LABEL' | translate }}" formControlName="lastName" autocomplete="off" required />
-        <mat-error>
-          <lqh-error-message [control]="form.controls.lastName"></lqh-error-message>
-        </mat-error>
-      </mat-form-field>
+      <lqh-input
+        formControlName="lastName"
+        label="{{ 'LAST_NAME_LABEL' | translate }}"
+        placeholder="{{ 'LAST_NAME_LABEL' | translate }}"
+        lqhInputLetter
+        required="true"
+      ></lqh-input>
+    </div>
+    <div class="col-5 px-30px pb-10px">
+      <lqh-password-input
+        formControlName="password"
+        label="PASSWORD_LABEL"
+        placeholder="PASSWORD_LABEL"
+        required="true"
+      ></lqh-password-input>
+    </div>
+    <div class="col-5 px-30px pb-10px">
+      <lqh-password-input
+        formControlName="confirmPassword"
+        label="CONFIRM_PASSWORD_LABEL"
+        placeholder="CONFIRM_PASSWORD_LABEL"
+      ></lqh-password-input>
     </div>
     <div class="col-10 px-30px pb-10px">
       <div class="lqh-label-field">{{ 'GENDER_LABEL' | translate }}</div>
       <lqh-gender-toggle formControlName="gender"></lqh-gender-toggle>
     </div>
     <div class="col-5 px-30px pb-10px">
-      <lqh-date-input formControlName="dob" [label]="'DOB_LABEL'" [placeholder]="'DOB_LABEL'" (change)="dateChange()"></lqh-date-input>
+      <lqh-date-input
+        formControlName="dob"
+        label="DOB_LABEL"
+        placeholder="DOB_LABEL"
+        (change)="dateChange()"
+        required="true"
+      ></lqh-date-input>
     </div>
     <div class="col-5 px-30px pb-10px">
-      <mat-form-field appearance="standard" class="w100">
-        <mat-label>{{ 'AGE_LABEL' | translate }}</mat-label>
-        <input matInput formControlName="age" placeholder="{{ 'AGE_LABEL' | translate }}" [appDisableControl]="!!form.controls.age.value" autocomplete="off" />
-      </mat-form-field>
+      <lqh-input
+        formControlName="age"
+        label="{{ 'AGE_LABEL' | translate }}"
+        [lqhDisableControl]="!!form.controls.age.value"
+        placeholder="{{ 'AGE_LABEL' | translate }}"
+        required="true"
+      ></lqh-input>
     </div>
     <div class="col-10 id-card-info">
-      <div class="row"formGroupName="idCardInfo" >
+      <div class="row" formGroupName="idCardInfo">
         <div class="col-6 px-30px pb-10px">
-          <mat-form-field appearance="standard" class="w100">
-            <mat-label>{{ 'ID_CARD_LABEL' | translate }}</mat-label>
-            <input matInput formControlName="idNumber" placeholder="{{ 'ID_CARD_LABEL' | translate }}" autocomplete="off" required />
-          </mat-form-field>
+          <lqh-input
+            formControlName="idNumber"
+            label="{{ 'ID_CARD_LABEL' | translate }}"
+            placeholder="{{ 'ID_CARD_LABEL' | translate }}"
+            required="true"
+          ></lqh-input>
         </div>
         <div class="col-6 px-30px pb-10px">
-          <lqh-date-input formControlName="createDate" [label]="'CREATE_DATE_LABEL'" [placeholder]="'CREATE_DATE_LABEL'"></lqh-date-input>
+          <lqh-date-input
+            formControlName="createDate"
+            label="CREATE_DATE_LABEL"
+            placeholder="CREATE_DATE_LABEL"
+          ></lqh-date-input>
         </div>
         <div class="col-12 px-30px pb-10px">
           <div class="lqh-label-field">{{ 'CREATE_PLACE_LABEL' | translate }}</div>
@@ -62,8 +85,14 @@
     <div class="col-5 px-30px pb-10px">
       <mat-form-field appearance="standard" class="w100">
         <mat-label>{{ 'DEPARTMENTS_LABEL' | translate }}</mat-label>
-        <mat-select>
-          <mat-option value="admin">Admin</mat-option>
+        <mat-select
+          formControlName="department"
+          placeholder="{{ 'DEPARTMENTS_LABEL' | translate }}"
+          required
+        >
+          <mat-option *ngFor="let department of departments" [value]="department">{{
+            department.name | translate
+          }}</mat-option>
         </mat-select>
         <mat-error>
           <lqh-error-message [control]="form.controls.departments"></lqh-error-message>
@@ -71,10 +100,16 @@
       </mat-form-field>
     </div>
     <div class="col-5 px-30px pb-10px">
-      <mat-form-field appearance="standard" class="w100">
+      <mat-form-field *ngIf="positions?.length" appearance="standard" class="w100">
         <mat-label>{{ 'POSITIONS_LABEL' | translate }}</mat-label>
-        <mat-select required>
-          <mat-option value="dev">Developer</mat-option>
+        <mat-select
+          formControlName="position"
+          placeholder="{{ 'POSITIONS_LABEL' | translate }}"
+          required
+        >
+          <mat-option *ngFor="let position of positions" [value]="position">{{
+            position.name | translate
+          }}</mat-option>
         </mat-select>
         <mat-error>
           <lqh-error-message [control]="form.controls.positions"></lqh-error-message>
@@ -82,46 +117,47 @@
       </mat-form-field>
     </div>
     <div class="col-5 px-30px pb-10px">
-      <mat-form-field appearance="standard" class="w100">
-        <mat-label>{{ 'PHONE_LABEL' | translate }}</mat-label>
-        <input matInput placeholder="{{ 'PHONE_LABEL' | translate }}" autocomplete="off" required />
-        <mat-error>
-          <lqh-error-message [control]="form.controls.phone"></lqh-error-message>
-        </mat-error>
-      </mat-form-field>
+      <lqh-input
+        formControlName="phone"
+        label="{{ 'PHONE_LABEL' | translate }}"
+        placeholder="{{ 'PHONE_LABEL' | translate }}"
+        lqhInputNumber
+        required="true"
+      ></lqh-input>
     </div>
     <div class="col-5 px-30px pb-10px">
-      <mat-form-field appearance="standard" class="w100">
-        <mat-label>{{ 'EMAIL_LABEL' | translate }}</mat-label>
-        <input
-          matInput
-          placeholder="{{ 'EMAIL_LABEL' | translate }}"
-          autocomplete="off"
-          required
-        />
-        <mat-error>
-          <lqh-error-message [control]="form.controls.email"></lqh-error-message>
-        </mat-error>
-      </mat-form-field>
+      <lqh-input
+        formControlName="email"
+        label="{{ 'EMAIL_LABEL' | translate }}"
+        placeholder="{{ 'EMAIL_LABEL' | translate }}"
+        required="true"
+      ></lqh-input>
     </div>
     <div class="col-10 px-30px pb-10px">
       <lqh-address-input
-        [label]="'WARDS_DISTRICT_PROVINCE_LABEL'"
-        [placeholder]="'WARDS_DISTRICT_PROVINCE_LABEL'"
+        label="WARDS_DISTRICT_PROVINCE_LABEL"
+        placeholder="WARDS_DISTRICT_PROVINCE_LABEL"
         [viewModel]="viewModel.addressInfo"
         [parentViewModel]="viewModel"
         formControlName="addressInfo"
+        required="true"
       ></lqh-address-input>
     </div>
-    <!-- <div class="col-5 px-30px pb-10px">
-        <lqh-sample-input-custom formControlName="samepleInput"></lqh-sample-input-custom>
-    </div> -->
     <div class="col-10 px-30px pb-10px">
       <lqh-avatar-uploading-card></lqh-avatar-uploading-card>
     </div>
     <div class="col-10 px-30px pb-10px">
-      <button mat-button class="btn btn-raised btn-accent mr-30px">{{ 'SAVE_LABEL' | translate }}</button>
-      <button mat-button class="btn btn-raised btn-basic">{{ 'CANCEL_LABEL' | translate }}</button>
+      <button
+        mat-button
+        class="btn btn-raised btn-accent mr-30px"
+        [disabled]="formHasError()"
+        (click)="saveEmployee()"
+      >
+        {{ 'SAVE_LABEL' | translate }}
+      </button>
+      <button mat-button class="btn btn-raised btn-basic" [mat-dialog-close]="false">
+        {{ 'CANCEL_LABEL' | translate }}
+      </button>
     </div>
-  </form>
+  </div>
 </div>

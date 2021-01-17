@@ -6,7 +6,7 @@
           <mat-toolbar class="h-64pxks">
             <div class="w100 flex-start-center">
               <button mat-icon-button>
-                <mat-icon (click)="onClose()">close</mat-icon>
+                <mat-icon (click)="onClose()" [mat-dialog-close]="false">close</mat-icon>
               </button>
               <span class="fw-500 ml-25px fs-19">{{ title }}</span>
             </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from 'src/app/core/components/base-component/base.component';
+import { BaseComponent } from '@core/components/base-component/base.component';
 
 @Component({
   selector: 'lqh-two',

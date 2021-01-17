@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { DateTimeUtilities } from '@core/interfaces-abstracts/utilities/datetime-utilities.interface';
+import { FormUtilities } from '@core/interfaces-abstracts/utilities/form-utilities.interface';
+import { RandomUitilities } from '@core/interfaces-abstracts/utilities/random-utilities.interface';
 import dayjs, { Dayjs } from 'dayjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
-export class UtilitiesService {
+export class UtilitiesService implements DateTimeUtilities, FormUtilities, RandomUitilities {
+  dateFormat: string = 'DD/MM/YYYY';
 
   constructor() { }
 
   calculateAgeByDOB(date: Dayjs | string) {
     if (typeof date === 'string') {
-      return '';
+      date = this.convertDateStringToDateDayjs(date, this.dateFormat);
     }
 
     if (typeof date === 'object') {
@@ -18,4 +23,42 @@ export class UtilitiesService {
       return `${now.diff(date, 'year')}`;
     }
   }
+
+  convertDateDayJsToDateString(date: Dayjs, format: string): string {
+    return date ? date.format(format) : '';
+  }
+
+  convertDateStringToDateDayjs(date: string, format: string): Dayjs {
+    const dateReverse = date.split('/').reverse().join('/');
+    return dayjs(dateReverse, {format: format, utc: true})
+  }
+
+  formGroupHasErrors(group: FormGroup): boolean {
+    let hasError = false;
+
+      Object.values(group.controls).forEach((control: FormControl) => {
+        if (control.errors || control.invalid) {
+          hasError = true;
+        }
+      })
+
+    return hasError; 
+  }
+
+  getRandomByDate(): string {
+    return String(new Date().getMilliseconds());
+  }
+
+  getRandomStringByLength(length: number) {
+    let result = '';
+    let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (let i = 0; i < length; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    return result;
+
+  }
+
 }

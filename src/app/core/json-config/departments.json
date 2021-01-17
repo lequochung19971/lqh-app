@@ -1,22 +1,22 @@
 [
   {
     "id": "financeAndAccountingDep",
-    "name": "Finance & Accounting"
+    "name": "FINANCE_ACCOUNTING_DEPARTMENT"
   },
   {
     "id": "HRDep",
-    "name": "Human Resources"
+    "name": "HR_DEPARTMENT"
   },
   {
     "id": "ITDep",
-    "name": "IT"
+    "name": "IT_DEPARTMENT"
   },
   {
     "id": "salesDep",
-    "name": "Sales"
+    "name": "SALE_DEPARTMENT"
   },
   {
     "id": "marketingDep",
-    "name": "Marketing"
+    "name": "MARKETING_DEPARTMENT"
   }
 ]

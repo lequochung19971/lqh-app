@@ -26,8 +26,6 @@
     border-radius: 4px;
     font-size: 1rem;
 
-    
-
     &.btn-raised {
       min-width: 180px;
       height: 55px;
@@ -38,10 +36,10 @@
         transition: all 0.2s;
         color: #ffffff;
 
-        // &:hover {
-        //   background-color: $lqh-primary-hover;
-        //   border-color: $lqh-primary-hover;
-        // }
+        &.mat-button-disabled {
+          background-color: $lqh-primary-50-opacity;
+          border-color: $lqh-primary-50-opacity;
+        }
       }
 
       &.btn-accent {
@@ -50,17 +48,17 @@
         border-color: $lqh-accent;
         transition: all 0.2s;
         color: #ffffff;
-  
-        // &:hover {
-        //   background-color: $lqh-accent-hover;
-        //   border-color: $lqh-accent-hover;
-        // }
+
+        &.mat-button-disabled {
+          background-color: $lqh-accent-50-opacity;
+          border-color: $lqh-accent-50-opacity;
+        }
       }
 
       &.btn-basic {
         color: $lqh-grey;
-        background-color: $lqh-light-grey;
-        border-color: $lqh-light-grey;
+        background-color: $lqh-black-08-opacity;
+        border-color: $lqh-black-08-opacity;
       }
     }
 

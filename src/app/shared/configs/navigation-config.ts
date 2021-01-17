@@ -1,6 +1,6 @@
-import { NavigationId } from 'src/app/core/enums/navigation-ids.enum';
-import { NavigationName } from 'src/app/core/enums/navigation-names.enum';
-import { NavigationConfig } from '../../core/interfaces-abstracts/navigation-config.interface';
+import { NavigationId } from "@core/enums/navigation-ids.enum";
+import { NavigationName } from "@core/enums/navigation-names.enum";
+import { NavigationConfig } from "@core/interfaces-abstracts/navigation-config.interface";
 
 
 export const navigationConfig: NavigationConfig[] = [

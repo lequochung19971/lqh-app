@@ -1,11 +1,11 @@
 import { Component, Input, Optional, Self } from '@angular/core';
-import { DialogService } from '../../services/dialog.service';
-import { DialogConfig } from '../../../core/interfaces-abstracts/dialog-config.interface';
-import { DatasourceMetadata } from '../../../core/interfaces-abstracts/data-source-metadata.interface';
-import { ControlOpenDialog } from 'src/app/core/interfaces-abstracts/control-open-dialog.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { NgControl } from '@angular/forms';
-import { BaseControl } from 'src/app/core/components/base-control/base-control.component';
+import { BaseControl } from '@core/components/base-control/base-control.component';
+import { ControlOpenDialog } from '@core/interfaces-abstracts/control-open-dialog.interface';
+import { DatasourceMetadata } from '@core/interfaces-abstracts/data-source-metadata.interface';
+import { DialogConfig } from '@core/interfaces-abstracts/dialog-config.interface';
+import { DialogService } from '@shared/services/dialog.service';
 
 @Component({
   selector: 'lqh-chip-list-open-dialog',
@@ -22,7 +22,7 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
   @Input() dialogConfig: DialogConfig;
   @Input() disable: boolean;
 
-  dataSource: any;
+  dataSource: any[];
   
   constructor(
     @Optional() @Self() public ngControl: NgControl,
@@ -49,7 +49,8 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
   }
 
   protected initDataSource(value: any) {
-    this.dataSource = value;
+    this.dataSource = [];
+    this.dataSource.push(value);
   }
 
   getLabel(data: any) {

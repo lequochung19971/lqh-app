@@ -21,15 +21,15 @@ export abstract class BaseControl implements OnInit, ControlValueAccessor {
     }
   }
 
-  abstract writeValue(obj: any): void;
+  abstract writeValue(value: any): void;
   
-  bindingToView(params?: any): any {
-    this.value = params;
-  };
+  // bindingToView(params?: any): any {
+  //   this.value = params;
+  // };
   
-  bindingToModel(params?: any): any {
-    this.viewModel = params;
-  };  
+  // bindingToModel(params?: any): any {
+  //   this.viewModel = params;
+  // };  
 
   registerOnChange(fn: any): void {
     this.onChanged = fn;
@@ -43,7 +43,7 @@ export abstract class BaseControl implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit(): void {
-    this.formControl = this.ngControl.control as FormControl; 
+    this.formControl = this.ngControl ? this.ngControl.control as FormControl : new FormControl(); 
   }
 
   ngAfterViewInit(): void {

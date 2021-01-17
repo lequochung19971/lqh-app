@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { ControlOpenDialog } from 'src/app/core/interfaces-abstracts/control-open-dialog.interface';
-import { DialogConfig } from 'src/app/core/interfaces-abstracts/dialog-config.interface';
-import { DialogService } from '../../services/dialog.service';
-import { DatasourceMetadata } from '../../../core/interfaces-abstracts/data-source-metadata.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { FormControl } from '@angular/forms';
+import { ControlOpenDialog } from '@core/interfaces-abstracts/control-open-dialog.interface';
+import { DatasourceMetadata } from '@core/interfaces-abstracts/data-source-metadata.interface';
+import { DialogConfig } from '@core/interfaces-abstracts/dialog-config.interface';
+import { DialogService } from '@shared/services/dialog.service';
 
 @Component({
   selector: 'lqh-input-open-dialog',

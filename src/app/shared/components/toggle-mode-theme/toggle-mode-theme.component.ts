@@ -1,8 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, Renderer2, ChangeDetectionStrategy } from '@angular/core';
+import { ModeTheme } from '@core/enums/mode-theme.enum';
+import { ModeThemeFacadeService } from 'app/store/facades/mode-theme-facade.service';
 import { Observable } from 'rxjs';
-import { ModeTheme } from '../../../core/enums/mode-theme.enum';
-import { ModeThemeFacadeService } from 'src/app/store/facades/mode-theme-facade.service';
 
 @Component({
   selector: 'lqh-toggle-mode-theme',

@@ -18,7 +18,7 @@ export class ErrorMessageComponent implements OnInit {
       if (this.control && this.control.errors) {
         const errorName = Object.keys(this.control.errors)[0] as string;
         const errorValue = this.control.errors[errorName] as any;
-
+        
         return this.errorMessagesService.getErrorMessage(errorValue, errorName);
       }
     }

@@ -1,6 +1,14 @@
 <mat-form-field appearance="standard" class="w100">
   <mat-label>{{ label | translate }}</mat-label>
-  <input matInput [(ngModel)]="value" placeholder="{{ placeholder | translate }}" autocomplete="off" appInputDate (change)="inputChange($event.target.value)" required />
+  <input
+    matInput
+    placeholder="{{ placeholder | translate }}"
+    autocomplete="off"
+    lqhInputDate
+    (ngModelChange)="inputChange({value: $event})"
+    [formControl]="formControl"
+    [required]="required"
+  />
   <mat-error>
     <lqh-error-message [control]="formControl"></lqh-error-message>
   </mat-error>

@@ -1,7 +1,7 @@
 import { Directive, Input, HostListener, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: '[appInputDate]',
+  selector: '[lqhInputDate]',
 })
 export class InputDateDirective {
   regexNumber = /^[0-9]*$/;
@@ -12,7 +12,7 @@ export class InputDateDirective {
   };
   constructor(private el: ElementRef) {}
 
-  @Input('appInputDate') inputDate: boolean;
+  @Input('lqhInputDate') inputDate: boolean;
 
   @HostListener('keydown', ['$event']) onKeyDown(event) {
     const e = <KeyboardEvent>event;

@@ -16,6 +16,8 @@ import { AvatarUploadingDialogComponent } from './avatar-uploading/avatar-upload
 import { SampleInputCustomComponent } from './sample-input-custom/sample-input-custom.component';
 import { AddressInputComponent } from './address-input/address-input.component';
 import { DateInputComponent } from './date-input/date-input.component';
+import { PasswordInputComponent } from './password-input/password-input.component';
+import { InputComponent } from './input/input.component';
 
 export const allSharedComponents = [
   LqhShellComponent,
@@ -34,6 +36,8 @@ export const allSharedComponents = [
   AvatarUploadingCardComponent,
   AvatarUploadingDialogComponent,
   SampleInputCustomComponent,
+  InputComponent,
   AddressInputComponent,
-  DateInputComponent
+  DateInputComponent,
+  PasswordInputComponent,
 ]

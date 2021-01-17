@@ -1,23 +1,21 @@
 import { Directive, Input, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appInputLetter]',
+  selector: '[lqhInputLetter]',
 })
 export class InputLetterDirective {
   regexLetter = /^[a-zA-Z]*$/;
   constructor() {}
 
-  @Input('appInputLetter') inputLetter: boolean;
+  @Input('lqhInputLetter') inputLetter: boolean;
 
   @HostListener('keydown', ['$event']) onKeyDown(event) {
     const e = <KeyboardEvent>event;
-    if (this.inputLetter) {
-      if (this.checkAllowKeyCode(e)) {
-        return;
-      }
-
-      this.checkLetterInput(e);
+    if (this.checkAllowKeyCode(e)) {
+      return;
     }
+
+    this.checkLetterInput(e);
   }
 
   checkLetterInput(event) {

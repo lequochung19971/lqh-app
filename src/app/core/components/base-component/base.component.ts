@@ -1,5 +1,5 @@
 import { Directive, Input, OnInit } from '@angular/core';
-import { BuilderConfig, ComponentConfig } from '../../interfaces-abstracts/builder-config.interface';
+import { BuilderConfig, ComponentConfig, MetadataBuilderConfig } from '../../interfaces-abstracts/builder-config.interface';
 import { BaseModel } from '../../models/base.model';
 
 @Directive()
@@ -15,6 +15,10 @@ export abstract class BaseComponent implements OnInit {
 
   ngAfterViewInit(): void {
     console.log(this.builderConfig);
+  }
+
+  getMetadataBuilderConfig(): MetadataBuilderConfig {
+    return this.builderConfig.metadata;
   }
 
 }

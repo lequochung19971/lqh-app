@@ -1,22 +1,20 @@
 import { Directive, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appInputNumber]',
+  selector: '[lqhInputNumber]',
 })
 export class InputNumberDirective {
   regexNumber = /^[0-9]*$/;
   constructor() {}
 
-  @Input('appInputNumber') inputNumber: boolean;
+  @Input('lqhInputNumber') inputNumber: boolean;
 
   @HostListener('keydown', ['$event']) onKeyDown(event) {
     const e = <KeyboardEvent>event;
-    if (this.inputNumber) {
-      if (this.checkAllowKeyCode(e)) {
-        return;
-      }
-      this.checkNumberInput(e);
+    if (this.checkAllowKeyCode(e)) {
+      return;
     }
+    this.checkNumberInput(e);
   }
 
   checkNumberInput(event) {

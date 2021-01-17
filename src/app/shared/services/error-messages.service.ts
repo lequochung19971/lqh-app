@@ -16,8 +16,12 @@ export class ErrorMessagesService {
       minLength: this.showMessage('MIN_LENGTH'),
       email: this.showMessage('INVALID_EMAIL'),
       maxLengthWithNumberAndFieldName: this.showMessage('MAX_LENGTH_OF_FIELD_NAME', {
-        fieldName: errorValue.fieldName,
+        fieldName: this.showMessage(errorValue.fieldName), 
         max: errorValue.max,
+      }),
+      minLengthWithNumberAndFieldName: this.showMessage('MIN_LENGTH_OF_FIELD_NAME', {
+        fieldName: this.showMessage(errorValue.fieldName), 
+        min: errorValue.min,
       }),
       invalidPassword: this.showMessage('INVALID_PASSWORD'),
       invalidConfirmPassword: this.showMessage('INVALID_CONFIRM_PASSWORD'),
@@ -29,6 +33,6 @@ export class ErrorMessagesService {
   }
 
   showMessage(key: string, params?: object): string {
-    return this.translateService.instant(key, params);
+    return key ? this.translateService.instant(key, params) : '';
   }
 }

@@ -1,20 +1,18 @@
-import { Component, Input, OnInit, Optional, Self } from '@angular/core';
+import { Component, OnInit, Optional, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { BaseControl } from '../../../core/components/base-control/base-control.component';
-import { ControlOpenDialog } from '../../../core/interfaces-abstracts/control-open-dialog.interface';
-import { DialogConfig } from '../../../core/interfaces-abstracts/dialog-config.interface';
-import { AddressModel } from '../../../core/models/address.model';
-import { DialogService } from '../../services/dialog.service';
-import { AddressDialogComponent } from '../address/address-dialog.component';
+import { DialogConfig } from '@core/interfaces-abstracts/dialog-config.interface';
+import { AddressModel } from '@core/models/address.model';
+import { DialogService } from '@shared/services/dialog.service';
+import { InputComponent } from '../input/input.component';
+import { AddressDialogComponent } from '@shared/components/address/address-dialog.component';
+import { ControlOpenDialog } from '@core/interfaces-abstracts/control-open-dialog.interface';
 
 @Component({
   selector: 'lqh-address-input',
   templateUrl: './address-input.component.html',
   styleUrls: ['./address-input.component.scss']
 })
-export class AddressInputComponent extends BaseControl implements OnInit, ControlOpenDialog {
-  @Input() label: string = '';
-  @Input() placeholder: string;
+export class AddressInputComponent extends InputComponent implements OnInit, ControlOpenDialog {
   value: string = '';
   dialogConfig: DialogConfig;
 
@@ -24,15 +22,9 @@ export class AddressInputComponent extends BaseControl implements OnInit, Contro
   ) { 
     super(ngControl);
   }
-  
-  ngOnInit(): void {
-    super.ngOnInit();
-  }
 
   writeValue(address: AddressModel): void {
-    this.bindingToView(address?.ward?.pathWithType || '')
-
-    this.bindingToModel(address);
+    this.value = address?.ward?.pathWithType || ''
     
     this.onTouched();
     this.onChanged(address);

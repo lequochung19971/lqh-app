@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DialogConfig } from 'src/app/core/interfaces-abstracts/dialog-config.interface';
-import { LqhDialogShellComponent } from '../components/lqh-dialog-shell/lqh-dialog-shell.component';
-import { LqhDialogShellCustomComponent } from '../components/lqh-dialog-shell-custom/lqh-dialog-shell-custom.component';
+import { DialogConfig } from '@core/interfaces-abstracts/dialog-config.interface';
+import { LqhDialogShellCustomComponent } from '@shared/components/lqh-dialog-shell-custom/lqh-dialog-shell-custom.component';
+import { LqhDialogShellComponent } from '@shared/components/lqh-dialog-shell/lqh-dialog-shell.component';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class DialogService {
     
   ) { }
 
-  openCustomDialog(dialogConfig: DialogConfig): MatDialogRef<LqhDialogShellComponent> {
+  openCustomDialog(dialogConfig: DialogConfig): MatDialogRef<LqhDialogShellCustomComponent> {
     return this.dialog.open(LqhDialogShellCustomComponent, {
       width: dialogConfig?.width,
       height: dialogConfig?.height,

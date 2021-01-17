@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogConfig } from 'src/app/core/interfaces-abstracts/dialog-config.interface';
-import { ComponentBuilderService } from '../../../core/services/component-builder.service';
+import { DialogConfig, DialogInstance } from '@core/interfaces-abstracts/dialog-config.interface';
+import { ComponentBuilderService } from '@core/services/component-builder.service';
 
 @Component({
   selector: 'lqh-dialog-shell',
@@ -22,7 +22,18 @@ export class LqhDialogShellComponent implements OnInit {
   ngOnInit(): void {
     this.title = this.dialogConfig.title;
     this.rightSide = this.dialogConfig.rightSide;
+    this.initComponentInstance();
     this.builder.renderDynamicComponent(this.dialogConfig.component, this.viewContainerRef, this.dialogConfig.componentInstance);
+  }
+
+  initComponentInstance() {
+    if (this.dialogConfig.componentInstance) {
+      this.dialogConfig.componentInstance.currentDialogRef = this.dialogRef;
+    } else {
+      this.dialogConfig.componentInstance = {
+        currentDialogRef: this.dialogRef
+      } as DialogInstance
+    }
   }
 
   onClose(): void {

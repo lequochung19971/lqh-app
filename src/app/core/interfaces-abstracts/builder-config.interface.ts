@@ -1,10 +1,15 @@
+import { MatDialogRef } from '@angular/material/dialog';
+import { DialogRefType } from './dialog-config.interface';
 export interface BuilderConfig {
   metadata?: MetadataBuilderConfig;
   components?: ComponentConfig[];
 }
-
 export interface MetadataBuilderConfig {
   cssClass?:ClassNameConfig;
+}
+
+export interface DialogMetadataBuilderConfig extends MetadataBuilderConfig {
+  currentDialogRef?: MatDialogRef<DialogRefType>
 }
 
 export interface ComponentConfig {

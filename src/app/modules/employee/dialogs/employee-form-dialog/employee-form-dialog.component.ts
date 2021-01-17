@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { DialogService } from '../../../../shared/services/dialog.service';
-import { BaseComponent } from '../../../../core/components/base-component/base.component';
+import { Component } from '@angular/core';
+import { BaseDialogComponent } from '@core/components/base-dialog/base-dialog.component';
 
 @Component({
   selector: 'lqh-employee-form-dialog',
   templateUrl: './employee-form-dialog.component.html',
   styleUrls: ['./employee-form-dialog.component.scss']
 })
-export class EmployeeFormDialogComponent extends BaseComponent implements OnInit {
+export class EmployeeFormDialogComponent extends BaseDialogComponent  {
 
-  constructor(
-    protected dialogService: DialogService,
-  ) { 
+  constructor() { 
     super();
   }
 
-  ngOnInit(): void {
-  }
 }

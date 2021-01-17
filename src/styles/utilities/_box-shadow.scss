@@ -12,6 +12,10 @@
   @include box-shadow-btn(rgba(255, 82, 82, 0.2));
 }
 
+.disable-shadow {
+  @include box-shadow-btn(rgba(0, 0, 0, 0.2));
+}
+
 .black-shadow {
   @include card-shadow($lqh-black-10-opacity);
 }

@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { JsonConfigService } from '../../../core/services/json-config.service';
 import { FormControl } from '@angular/forms';
 import { debounceTime, map } from 'rxjs/operators';
-import { Address, AddressModel } from '../../../core/models/address.model';
-import { AddressTypes, ProvinceType, DistrictType, WardType } from 'src/app/core/enums/address-types.enum';
 import { MatDialogRef } from '@angular/material/dialog';
 import * as _ from 'lodash-es';
-import { BaseComponent } from 'src/app/core/components/base-component/base.component';
+import { BaseComponent } from '@core/components/base-component/base.component';
+import { Address, AddressModel } from '@core/models/address.model';
+import { AddressTypes, DistrictType, ProvinceType, WardType } from '@core/enums/address-types.enum';
+import { JsonConfigService } from '@core/services/json-config.service';
 
 @Component({
   selector: 'lqh-address-dialog',

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { initialState, ModeThemeState } from '../states/mode-theme.state';
-import { BaseFacadeService } from '../../core/services/base-facade.service';
-import { LocatorFacadeService } from '../../core/services/locator-facade.service';
-import { FacadeConfig } from '../../core/interfaces-abstracts/facade-config.interface';
-import { SampleActionReducer } from '../reducers/sample.reducer';
-import { ModeTheme } from '../../core/enums/mode-theme.enum';
-import { ModeThemeActionType } from '../actions/mode-theme.action';
 import { Observable } from 'rxjs';
+import { BaseFacadeService } from '@core/services/base-facade.service';
+import { LocatorFacadeService } from '@core/services/locator-facade.service';
+import { ModeThemeActionReducer } from '../reducers/mode-theme.reducer';
+import { initialState, ModeThemeState } from '../states/mode-theme.state';
+import { ModeTheme } from '@core/enums/mode-theme.enum';
+import { ModeThemeActionType } from '../actions/mode-theme.action';
+import { FacadeConfig } from '@core/interfaces-abstracts/facade-config.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class ModeThemeFacadeService extends BaseFacadeService<ModeThemeState> {
 
   constructor(protected lfs: LocatorFacadeService) {
     super(
-      { initialState, actionReducer: new SampleActionReducer() } as FacadeConfig,
+      { initialState, actionReducer: new ModeThemeActionReducer() } as FacadeConfig,
       lfs
     );
   }

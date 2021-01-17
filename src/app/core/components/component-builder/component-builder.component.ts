@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { BuilderConfig } from '../../interfaces-abstracts/builder-config.interface';
+import { BuilderConfig, MetadataBuilderConfig } from '../../interfaces-abstracts/builder-config.interface';
 import { ComponentBuilderService } from '../../services/component-builder.service';
 import { RowLayoutComponent } from '../grid-layout/row-layout/row-layout.component';
 
@@ -11,6 +11,7 @@ export class ComponentBuilderComponent implements OnInit {
   @ViewChild('dynamicComponent', { read: ViewContainerRef, static: true }) viewContainerRef: ViewContainerRef;
   @Input() builderConfig: BuilderConfig;
   @Input() builderConfigName: string;
+  @Input() metadata: MetadataBuilderConfig;
 
   constructor(protected builder: ComponentBuilderService) { }
 
@@ -32,6 +33,10 @@ export class ComponentBuilderComponent implements OnInit {
   
     const params = {
       builderConfig: this.builderConfig
+    }
+
+    if (this.metadata) {
+      this.builderConfig.metadata = {...this.builderConfig.metadata, ...this.metadata };
     }
 
     this.builder.renderDynamicComponent(RowLayoutComponent, this.viewContainerRef, params)

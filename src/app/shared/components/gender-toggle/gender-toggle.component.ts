@@ -1,9 +1,9 @@
 import { Component, Input, Optional, Self } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
-import { GenderMetadata } from 'src/app/core/interfaces-abstracts/gender-metadata.interface';
-import { Gender } from 'src/app/core/enums/gender.enum';
-import { BaseControl } from 'src/app/core/components/base-control/base-control.component';
 import { NgControl } from '@angular/forms';
+import { GenderMetadata } from '@core/interfaces-abstracts/gender-metadata.interface';
+import { BaseControl } from '@core/components/base-control/base-control.component';
+import { Gender } from '@core/enums/gender.enum';
 
 @Component({
   selector: 'lqh-gender-toggle',
@@ -32,7 +32,6 @@ export class GenderToggleComponent extends BaseControl {
   }
 
   writeValue(val: Gender): void {
-    this.value = val;
     if (!this.selection) {
       this.initSelection(val as Gender);
     }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { BaseModel } from 'src/app/core/models/base.model';
+import { BaseModel } from '@core/models/base.model';
 import * as _ from 'lodash-es';
 
 @Injectable({
@@ -11,8 +11,8 @@ export abstract class BaseFormService<TModel extends BaseModel> {
   private _originalFormValue: TModel; 
 
   constructor(
-    initialForm: FormGroup,
     protected formBuilder: FormBuilder,
+    initialForm: FormGroup,
   ) { 
     this.initForm(initialForm);
   }
@@ -31,8 +31,35 @@ export abstract class BaseFormService<TModel extends BaseModel> {
   }
 
   resetForm() {
-    this.form.reset();
-    this.form.patchValue(this._originalFormValue);
+    this._form.reset();
+    this._form.patchValue(this._originalFormValue);
   }
 
+  getFormValue(): TModel {
+    return this._form.value;
+  }
+
+  getViewModel(): TModel {
+    return this._form.value;
+  }
+
+  hasChanged(): boolean {
+    return this._form.dirty;
+  }
+
+  hasError(): boolean {
+    let isError = false;
+
+    if (this._form?.errors?.length > 0) {
+      return true;
+    }
+
+    Object.values(this._form.controls).forEach(control => {
+      if (control.errors) {
+        isError = true;
+      }
+    })
+
+    return isError;
+  }
 }

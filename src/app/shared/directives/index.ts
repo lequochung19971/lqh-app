@@ -4,12 +4,18 @@ import { SkeletonMultipleTextDirective } from './skeletons/skeleton-multiple-tex
 import { PreventCharDirective } from './prevent-char.directive';
 import { InputDateDirective } from './input-date.directive';
 import { DisableControlDirective } from './disable-control.directive';
+import { InputLetterDirective } from './input-letter.directive';
+import { InputNumberDirective } from './input-number.directive';
+import { DoubleClickDirective } from './double-click.directive';
 
 export const allDirective = [
   SkeletonTextDirective,
   SkeletonMultipleTextDirective,
   SkeletonAvatarDirective,
   PreventCharDirective,
+  DisableControlDirective,
+  InputLetterDirective,
   InputDateDirective,
-  DisableControlDirective
+  InputNumberDirective,
+  DoubleClickDirective
 ]
