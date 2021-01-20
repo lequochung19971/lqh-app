@@ -2,9 +2,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { DialogConfig } from '@core/interfaces-abstracts/dialog-config.interface';
 import { EmployeeFormDialogComponent } from '@modules/employee/dialogs/employee-form-dialog/employee-form-dialog.component';
-import { EmployeeService } from '@modules/employee/services/employee.service';
+import { EmployeeRestService } from '@modules/employee/services/employee-rest.service';
 import { DialogService } from '@shared/services/dialog.service';
-import { EmployeeFE } from '../../../../core/models/employee-fe.model';
 
 @Component({
   selector: 'lqh-employee-table',
@@ -132,8 +131,8 @@ export class EmployeeTableComponent implements OnInit {
     },
   ]
   constructor(
-    protected employeeService: EmployeeService, 
-    protected dialogService: DialogService
+    protected dialogService: DialogService,
+    protected employeeRestService: EmployeeRestService 
   ) { }
 
   ngOnInit(): void {
@@ -185,10 +184,6 @@ export class EmployeeTableComponent implements OnInit {
       rightSide: true
     }
 
-    this.dialogService.openDialogFullPage(dialogConfig).afterClosed().subscribe((employee: EmployeeFE) => {
-      if(employee) {
-
-      }
-    });
+    this.dialogService.openDialogFullPage(dialogConfig);
   }
 }

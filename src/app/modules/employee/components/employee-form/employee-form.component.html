@@ -50,9 +50,8 @@
       <lqh-input
         formControlName="age"
         label="{{ 'AGE_LABEL' | translate }}"
-        [lqhDisableControl]="!!form.controls.age.value"
         placeholder="{{ 'AGE_LABEL' | translate }}"
-        required="true"
+        readonly="true"
       ></lqh-input>
     </div>
     <div class="col-10 id-card-info">

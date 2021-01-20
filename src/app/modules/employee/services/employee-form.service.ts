@@ -3,14 +3,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Departments } from '@core/enums/departments.enum';
 import { Gender } from '@core/enums/gender.enum';
 import { Positions } from '@core/enums/positions.enum';
-import { EmployeeFE } from '@core/models/employee-fe.model';
+import { EmployeeModel } from '@core/models/employee.model';
 import { BaseFormService } from '@shared/services/base-form.service';
 import { ValidationsService } from '@shared/services/validations.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EmployeeFormService extends BaseFormService<EmployeeFE> {
+export class EmployeeFormService extends BaseFormService<EmployeeModel> {
 
   constructor(
     public formBuilder: FormBuilder,

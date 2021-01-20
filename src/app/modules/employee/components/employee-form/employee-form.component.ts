@@ -9,10 +9,10 @@ import { DepartmentModel } from '@core/models/department.model';
 import { PositionModel } from '@core/models/position.model';
 import { JsonConfigService } from '@core/services/json-config.service';
 import { EmployeeFormService } from '@modules/employee/services/employee-form.service';
-import { EmployeeService } from '@modules/employee/services/employee.service';
 import { AddressDialogComponent } from '@shared/components/address/address-dialog.component';
 import { UtilitiesService } from '@shared/services/utilities.service';
 import { Dayjs } from 'dayjs';
+import { EmployeeRestService } from '../../services/employee-rest.service';
 
 @Component({
   selector: 'lqh-employee-form',
@@ -32,7 +32,7 @@ export class EmployeeFormComponent extends BaseComponent implements OnInit {
   currentDialogRef: MatDialogRef<DialogRefType>
 
   constructor(
-    protected employeeService: EmployeeService,
+    protected employeeRestService: EmployeeRestService,
     protected employeeFormService: EmployeeFormService,
     protected utilitiesService: UtilitiesService,
     protected jsonConfigService: JsonConfigService
@@ -97,7 +97,10 @@ export class EmployeeFormComponent extends BaseComponent implements OnInit {
   }
 
   saveEmployee() {
-    this.currentDialogRef.close(this.form.value);
+    this.employeeRestService.createEmployee(this.form.value).subscribe(res => {
+      if (res) {
+        this.currentDialogRef.close()
+      }
+    });
   }
-
 }

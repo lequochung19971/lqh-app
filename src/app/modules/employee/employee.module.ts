@@ -4,7 +4,6 @@ import { EmployeeRoutingModule } from './employee-routing.module';
 import { allEmployeePages } from './pages';
 import { MaterialModule } from '../../material/material.module';
 import { SharedModule } from '../../shared/shared.module';
-import { CoreModule } from '../../core/core.module';
 import { allEmployeeComponents } from './components';
 import { COMPONENT_TYPE_CONFIG_TOKEN, BUILDER_CONFIG_TOKEN } from '../../core/consts/injection-tokens.const';
 import { allEmployeeComponentConfigs } from './components/index';
@@ -22,7 +21,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     EmployeeRoutingModule,
-    CoreModule, 
     SharedModule, 
     MaterialModule,
     TranslateModule.forChild({
