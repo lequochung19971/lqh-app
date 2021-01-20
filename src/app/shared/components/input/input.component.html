@@ -1,4 +1,4 @@
-<mat-form-field appearance="standard" class="w100">
+<mat-form-field appearance="standard" class="w100" [ngClass]="{'lqh-form-field-input-readonly': readonly}">
   <mat-label>{{ label | translate }}</mat-label>
   <input
     matInput
@@ -6,6 +6,7 @@
     autocomplete="off"
     (ngModelChange)="inputChange({value: $event})"
     [formControl]="formControl"
+    [readonly]="readonly"
     [required]="required"
   />
   <mat-error>

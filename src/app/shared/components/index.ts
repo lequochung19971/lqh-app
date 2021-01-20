@@ -18,8 +18,14 @@ import { AddressInputComponent } from './address-input/address-input.component';
 import { DateInputComponent } from './date-input/date-input.component';
 import { PasswordInputComponent } from './password-input/password-input.component';
 import { InputComponent } from './input/input.component';
+import { ComponentBuilderComponent } from './component-builder/component-builder.component';
+import { ColLayoutComponent } from './grid-layout/col-layout/col-layout.component';
+import { RowLayoutComponent } from './grid-layout/row-layout/row-layout.component';
 
 export const allSharedComponents = [
+  ComponentBuilderComponent,
+  RowLayoutComponent,
+  ColLayoutComponent,
   LqhShellComponent,
   LqhAvatarComponent,
   LqhShellHeaderComponent,

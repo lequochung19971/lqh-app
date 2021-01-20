@@ -12,6 +12,7 @@ export class InputComponent extends BaseControl implements OnInit {
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() type: string = 'text';
+  @Input() readonly: boolean = false;
 
   constructor(@Optional() @Self() public ngControl: NgControl) { 
     super(ngControl);
