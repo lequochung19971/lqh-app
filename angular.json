@@ -17,6 +17,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "@automapper/classes",
+              "@automapper/core",
+              "@automapper/types"
+            ],
             "outputPath": "dist/lqh-web-app",
             "index": "src/index.html",
             "main": "src/main.ts",
