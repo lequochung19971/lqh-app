@@ -1,12 +1,18 @@
-import dayjs from "dayjs";
+import { AutoMap } from "@automapper/classes";
 import { Address } from "./address.model";
 import { BaseModel } from "./base.model";
 
-export class IDCard extends BaseModel {
+export class IDCardModel extends BaseModel {
+  @AutoMap()
   idNumber: string;
-  createDate: dayjs.Dayjs;
+
+  @AutoMap()
+  createDate: string;
+
+  @AutoMap(() => Address)
   createPlace: Address;
-  constructor(props?: IDCard) {
+  
+  constructor(props?: IDCardModel) {
     super(props)
   }
 }
