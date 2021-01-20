@@ -6,5 +6,5 @@ export const COMPONENT_TYPE_CONFIG_TOKEN = new InjectionToken<TypeConfig>('COMPO
 export const JSON_OBJECT_TYPE_CONFIG_TOKEN = new InjectionToken<TypeConfig>('JSON_OBJECT_TYPE_CONFIG_TOKEN');
 export const FACADE_CONFIG_TOKEN = new InjectionToken<TypeConfig>('FACADE_CONFIG_TOKEN');
 export const FACADE_ACTION_CONFIG_TOKEN = new InjectionToken<TypeConfig>('FACADE_ACTION_CONFIG_TOKEN');
-// export const FACADE_REDUCED_CONFIG_TOKEN = new InjectionToken<TypeConfig>('FACADE_REDUCED_CONFIG_TOKEN');
-// export const FACADE_STATE_CONFIG_TOKEN = new InjectionToken<TypeConfig>('FACADE_STATE_CONFIG_TOKEN');
+export const NAVIGATION_CONFIG_TOKEN = new InjectionToken<TypeConfig>('NAVIGATION_CONFIG_TOKEN');
+export const APP_CONFIG_TOKEN = new InjectionToken<TypeConfig>('APP_CONFIG_TOKEN');
