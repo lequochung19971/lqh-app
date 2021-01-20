@@ -17,7 +17,7 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
     label: 'label',
     value: 'value'
   }
-  @Input() allowAdd: boolean = false;
+  @Input() multiple: boolean = false;
   @Input() allowDuplicate: boolean = false;
   @Input() dialogConfig: DialogConfig;
   @Input() disable: boolean;
@@ -35,7 +35,7 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
   ngOnInit(): void {
   }
 
-  writeValue(val: any): void {
+  writeValue(val: any | any[]): void {
     if (this.dataSource) {
       this.updateDataSource(val);
     }
@@ -45,12 +45,22 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
     }
 
     this.onTouched();
-    this.onChanged(this.dataSource);
+
+    const hasOnlyOneItem = !!(val?.length === 1)
+    if (hasOnlyOneItem) {
+      this.onChanged(this.dataSource[0]);
+    } else {
+      this.onChanged(this.dataSource);
+    }
   }
 
   protected initDataSource(value: any) {
-    this.dataSource = [];
-    this.dataSource.push(value);
+    if (Array.isArray(value) && value.length) {
+      this.dataSource = value;
+    } else {
+      this.dataSource = [];
+      this.dataSource.push(value);
+    }
   }
 
   getLabel(data: any) {
@@ -74,8 +84,9 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
   }
 
   protected updateDataSource(data: any) {
-    if (this.allowAdd || !this.dataSource?.length) {
-      if (this.allowDuplicate || !this.checkDuplicate(data)) {
+    const canDuplicate = this.allowDuplicate || !this.checkDuplicate(data);
+    if (this.multiple || !this.dataSource?.length) {
+      if (canDuplicate) {
         this.dataSource.push(data);
       }
     } else {
