@@ -12,11 +12,11 @@ export class EmployeeRestService {
 
   constructor(
     protected proxy: ProxyService,
-    protected appConfigService: AppConfigService 
+    protected appConfigService: AppConfigService
   ) { }
 
-  createEmployee(data: EmployeeModel): Observable<DataResponse> {
+  createEmployee(data: EmployeeModel): Observable<DataResponse<EmployeeModel>> {
     const url = this.appConfigService.getEmployeeUrl();
-    return this.proxy.post<EmployeeModel>(url, data);
+    return this.proxy.post<DataResponse<EmployeeModel>>(url, data);
   }
 }

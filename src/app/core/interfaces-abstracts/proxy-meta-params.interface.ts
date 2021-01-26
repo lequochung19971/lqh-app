@@ -1,4 +1,4 @@
-export class ProxyMetaParams {
+export interface ProxyMetaParams {
   fetchByID?: string;
   fullResponse?: boolean;
 }

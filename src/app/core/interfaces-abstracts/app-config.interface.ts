@@ -3,5 +3,8 @@ export interface AppConfig {
 }
 
 export interface ApiConfig {
+  baseUrl: string;
   employeeUrl: string;
+  loginUrl: string;
+  refreshTokenUrl: string;
 }

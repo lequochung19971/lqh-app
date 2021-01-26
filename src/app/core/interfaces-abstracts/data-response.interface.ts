@@ -1,5 +1,5 @@
-export interface DataResponse {
-  DATA?: any;
+export interface DataResponse<TModel> {
+  DATA?: TModel | any;
   MESSEAGE?: any;
   STATUS?: any;
   META?: any;

@@ -1,26 +1,26 @@
 import { LoggerLevel } from '../../core/enums/logger-level.enum';
 
-const production: boolean = false;
+const production = false;
 
 export const log = (message: any, params?: any): void => {
   logger(message, params, LoggerLevel.LOG);
-}
+};
 
 export const warn = (message: any, params?: any): void => {
   logger(message, params, LoggerLevel.WARN);
-}
+};
 
 export const error = (message: any, params?: any): void => {
   logger(message, params, LoggerLevel.ERROR);
-}
+};
 
 export const info = (message: any, params?: any): void => {
   logger(message, params, LoggerLevel.INFO);
-}
+};
 
 export const debug = (message: any, params?: any): void => {
   logger(message, params, LoggerLevel.DEBUG);
-}
+};
 
 const logger = (message: any, params = '', level = LoggerLevel.LOG) => {
   if (!production) {
@@ -48,4 +48,5 @@ const logger = (message: any, params = '', level = LoggerLevel.LOG) => {
         break;
     }
   }
-}
+};
+

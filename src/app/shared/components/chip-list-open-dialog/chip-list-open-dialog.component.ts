@@ -17,7 +17,7 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
     label: 'label',
     value: 'value'
   }
-  @Input() multiple: boolean = false;
+  @Input() manyItems: boolean = false;
   @Input() allowDuplicate: boolean = false;
   @Input() dialogConfig: DialogConfig;
   @Input() disable: boolean;
@@ -85,7 +85,7 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
 
   protected updateDataSource(data: any) {
     const canDuplicate = this.allowDuplicate || !this.checkDuplicate(data);
-    if (this.multiple || !this.dataSource?.length) {
+    if (this.manyItems || !this.dataSource?.length) {
       if (canDuplicate) {
         this.dataSource.push(data);
       }

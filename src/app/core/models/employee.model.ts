@@ -1,49 +1,54 @@
-import { AutoMap } from '@automapper/classes';
-import { Departments } from '../enums/departments.enum';
+import 'reflect-metadata';
+import { Expose, Type } from 'class-transformer';
 import { Gender } from '../enums/gender.enum';
 import { Positions } from '../enums/positions.enum';
 import { AddressModel } from './address.model';
 import { BaseModel } from './base.model';
 import { IDCardModel } from './id-card.model';
-
-export class EmployeeModel extends BaseModel{
-  @AutoMap()
+import { DepartmentModel } from './department.model';
+import { PositionModel } from './position.model';
+export class EmployeeModel extends BaseModel {
+  @Expose()
   _id: string;
 
-  @AutoMap()
+  @Expose()
   firstName: string;
 
-  @AutoMap()
+  @Expose()
   lastName: string;
 
-  @AutoMap()
+  @Expose()
   dob: string;
 
-  @AutoMap()
+  @Expose()
   age: string;
 
-  @AutoMap()
+  @Expose()
   email: string;
 
-  @AutoMap()
+  @Expose()
   phone: string;
 
-  @AutoMap()
-  department: Departments;
+  @Expose()
+  @Type(() => DepartmentModel)
+  department: DepartmentModel;
 
-  @AutoMap()
+  @Expose()
+  @Type(() => PositionModel)
   position: Positions;
 
-  @AutoMap()
+  @Expose()
   gender: Gender;
 
-  @AutoMap(() => AddressModel)
+  @Expose()
+  @Type(() => AddressModel)
   addressInfo: AddressModel;
 
-  @AutoMap(() => IDCardModel)
+  @Expose()
+  @Type(() => IDCardModel)
   idCardInfo: IDCardModel;
-  
-  @AutoMap()
+
+  @Expose()
   password?: string;
   
   avatar?: string;
@@ -51,6 +56,6 @@ export class EmployeeModel extends BaseModel{
   confirmPassword?: string;
 
   constructor(props?: EmployeeModel) {
-    super(props)
+    super(props);
   }
 }

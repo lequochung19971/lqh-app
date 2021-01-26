@@ -1,0 +1,15 @@
+<div [formGroup]="formGroup" class="w100 h100 flex-between">
+  <mat-card class="login-card w-500 p-15px">
+    <div class="flex-between flex-column">
+      <mat-form-field appearance="standard" class="w100">
+        <mat-label>Email</mat-label>
+        <input formControlName="email" matInput placeholder="Email">
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="w100">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Password">
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" (click)="login()" class="w100">LOG IN</button>
+  </mat-card>
+</div>

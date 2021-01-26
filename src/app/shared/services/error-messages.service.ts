@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ErrorParams } from '@core/interfaces-abstracts/error-params.interface';
 import { TranslateService } from '@ngx-translate/core';
-import { ErrorParams } from '../../core/models/error-params.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { ErrorParams } from '../../core/models/error-params.model';
 export class ErrorMessagesService {
   constructor(protected translateService: TranslateService) {}
 
-  messages(errorValue: ErrorParams) {
+  messages(errorValue: ErrorParams): any {
     return {
       invalidDate: this.showMessage('INVALID_DATE'),
       required: this.showMessage('REQUIRED'),
@@ -16,11 +16,11 @@ export class ErrorMessagesService {
       minLength: this.showMessage('MIN_LENGTH'),
       email: this.showMessage('INVALID_EMAIL'),
       maxLengthWithNumberAndFieldName: this.showMessage('MAX_LENGTH_OF_FIELD_NAME', {
-        fieldName: this.showMessage(errorValue.fieldName), 
+        fieldName: this.showMessage(errorValue.fieldName),
         max: errorValue.max,
       }),
       minLengthWithNumberAndFieldName: this.showMessage('MIN_LENGTH_OF_FIELD_NAME', {
-        fieldName: this.showMessage(errorValue.fieldName), 
+        fieldName: this.showMessage(errorValue.fieldName),
         min: errorValue.min,
       }),
       invalidPassword: this.showMessage('INVALID_PASSWORD'),

@@ -1,15 +1,19 @@
-import { AutoMap } from "@automapper/classes";
+import 'reflect-metadata';
+import { Expose, Type } from "class-transformer";
 import { AddressTypes } from "../enums/address-types.enum";
 import { BaseModel } from "./base.model";
 
 export class AddressModel extends BaseModel {
-  @AutoMap(() => Address)
+  @Expose()
+  @Type(() => Address)
   province: Address;
   
-  @AutoMap(() => Address)
+  @Expose()
+  @Type(() => Address)
   district: Address;
 
-  @AutoMap(() => Address)
+  @Expose()
+  @Type(() => Address)
   ward: Address;
 
   constructor(props?: AddressModel) {
@@ -18,28 +22,28 @@ export class AddressModel extends BaseModel {
 }
 
 export class Address extends BaseModel {
-  @AutoMap()
+  @Expose()
   name?: string;
   
-  @AutoMap()
+  @Expose()
   type?: AddressTypes;
   
-  @AutoMap()
+  @Expose()
   nameWithType?: string;
   
-  @AutoMap()
+  @Expose()
   path?: string;
   
-  @AutoMap()
+  @Expose()
   pathWithType?:string;
   
-  @AutoMap()
+  @Expose()
   code?: string;
   
-  @AutoMap()
+  @Expose()
   parentCode?:string;
   
-  @AutoMap()
+  @Expose()
   slug?: string;
 
   constructor(props?: Address) {

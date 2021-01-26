@@ -1,10 +1,11 @@
 export interface StrongAndWeakPasswordModel {
   width: string;
   percent: number;
-  weakness: WeakPasswordModel[];
+  weaknesses: WeakPasswordModel[];
 }
 
 export interface WeakPasswordModel {
+  mismatched?: string;
   message: string;
   deduction: number;
 }

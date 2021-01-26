@@ -11,10 +11,10 @@ import { SharedModule } from '../shared/shared.module';
   exports: [],
   providers: [
     {
-      provide: NAVIGATION_CONFIG_TOKEN, useValue: navigationConfig 
+      provide: NAVIGATION_CONFIG_TOKEN, useValue: navigationConfig
     },
     {
-      provide: APP_CONFIG_TOKEN, useValue: appConfigs 
+      provide: APP_CONFIG_TOKEN, useValue: appConfigs
     }
   ]
 })

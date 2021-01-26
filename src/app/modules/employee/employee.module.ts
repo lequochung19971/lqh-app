@@ -21,7 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     EmployeeRoutingModule,
-    SharedModule, 
+    SharedModule,
     MaterialModule,
     TranslateModule.forChild({
       loader: {

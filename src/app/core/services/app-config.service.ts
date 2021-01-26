@@ -11,7 +11,19 @@ export class AppConfigService {
     @Inject(APP_CONFIG_TOKEN) protected appConfigs: AppConfig,
   ) { }
 
+  getBaseUrl(): string {
+    return this.appConfigs.API.baseUrl;
+  }
+
   getEmployeeUrl(): string {
     return this.appConfigs.API.employeeUrl;
+  }
+
+  getLoginUrl(): string {
+    return this.appConfigs.API.loginUrl;
+  }
+
+  getRefreshTokenUrl(): string {
+    return this.appConfigs.API.refreshTokenUrl;
   }
 }

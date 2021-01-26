@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpParams, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { log } from './logger.service';
 import { DataResponse } from '@core/interfaces-abstracts/data-response.interface';
-import { ProxyMetaParams } from '@core/models/proxy-meta-params';
+import { ProxyMetaParams } from '@core/interfaces-abstracts/proxy-meta-params.interface';
+import { AppConfigService } from '@core/services/app-config.service';
+import * as logger from '@shared/services/logger.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProxyService {
-  private endpoint: String = 'http://localhost:3000';
+  private endpoint: string;
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -23,17 +24,20 @@ export class ProxyService {
 
   constructor(
     private http: HttpClient,
-  ) {}
+    private appConfigService: AppConfigService
+  ) {
+    this.endpoint = this.appConfigService.getBaseUrl();
+  }
 
-  post<T>(url: string, dataModel: T | any): Observable<DataResponse> {
+  post<T>(url: string, dataModel: T | any): Observable<DataResponse<T> | T> {
     if (dataModel) {
       // // this.loadingService.open();
       const jsonData = JSON.stringify(dataModel);
       url = `${this.endpoint}${url}`;
 
-      return this.http.post<T>(url, jsonData, this.httpOptions).pipe(
+      return this.http.post<DataResponse<T>>(url, jsonData, this.httpOptions).pipe(
         catchError(this.handleError),
-        tap((res: T[] | any) => {
+        tap((res: DataResponse<T> | T | any) => {
           // // this.loadingService.close();
           return res;
         })
@@ -41,15 +45,14 @@ export class ProxyService {
     }
   }
 
-  put<T>(url: string, dataModel: T | any): Observable<T | T[] | DataResponse> {
+  put<T>(url: string, dataModel: T | any): Observable<T | T[] | DataResponse<T>> {
     if (dataModel) {
       // // this.loadingService.open();
       const jsonData = JSON.stringify(dataModel);
       url = `${this.endpoint}${url}`;
       return this.http.put<T>(url, jsonData, this.httpOptions).pipe(
-        catchError(this.handleError),
         tap((res: T[] | any) => {
-          log(res);
+          logger.log(res);
           // this.loadingService.close();
           return res;
         })
@@ -61,11 +64,12 @@ export class ProxyService {
     url: string,
     query?: HttpParams | string | any,
     meta?: ProxyMetaParams,
-  ): Observable<T | T[] | any | DataResponse> {
+  ): Observable<T | T[] | any | DataResponse<T>> {
     // this.loadingService.open();
     const httpOpts = Object.assign({}, this.httpOptions);
 
     if (meta && meta.fullResponse) {
+      // tslint:disable-next-line:no-string-literal
       httpOpts['observe'] = 'response';
     }
 
@@ -75,7 +79,7 @@ export class ProxyService {
     return this.http.get<T[] | T>(url, httpOpts).pipe(
       catchError(this.handleError),
       tap((res: T[] | T) => {
-        log(res);
+        logger.log(res);
         // this.loadingService.close();
         return res;
       })
@@ -90,15 +94,15 @@ export class ProxyService {
         catchError(this.handleError),
         tap((res: T[] | any) => {
           // this.loadingService.close();
-          log(res);
+          logger.log(res);
           return res;
         })
       );
     }
   }
 
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage: string = '';
+  private handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
+    let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       errorMessage = `${error.error.message}`;
@@ -108,7 +112,8 @@ export class ProxyService {
       errorMessage = `ON BACKEND: ${error.message}`;
     }
     // return an observable with a user-facing error message
-    return throwError(errorMessage);
+    logger.error(errorMessage);
+    return throwError(error);
   }
 
   private createParams(query: HttpParams | string | any): HttpParams {
