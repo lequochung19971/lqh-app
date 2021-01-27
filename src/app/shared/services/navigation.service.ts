@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { NAVIGATION_CONFIG_TOKEN } from '@core/consts/injection-tokens.const';
 import { NavigationId } from '@core/enums/navigation-ids.enum';
 import { NavigationName } from '@core/enums/navigation-names.enum';
@@ -22,7 +22,7 @@ export class NavigationService {
   }
 
   get currnetNavigationUrl(): string {
-    return this.router.url
+    return this.router.url;
   }
 
   getNavigationNameById(navId: string): NavigationName {
@@ -39,5 +39,9 @@ export class NavigationService {
 
   getCurrentNavigationId(): NavigationId {
     return (this._navigationItems || []).find(nav => nav.url === this.router.url)?.id as NavigationId;
+  }
+
+  navigateTo(commands: any[], extras?: NavigationExtras): void {
+    this.router.navigate(commands, extras);
   }
 }

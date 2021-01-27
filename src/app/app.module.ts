@@ -11,17 +11,13 @@ import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { EmployeeModule } from './modules/employee/employee.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { HttpTranslateLoader } from './core/services/http-translate-loader.service';
-import { LoginComponent } from './modules/login/login.component';
-import { MaterialModule } from './material/material.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { TokenInterceptor } from '@auth/http-interceptor/token.interceptor';
+import { AuthModule } from '@auth/auth.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -33,8 +29,7 @@ import { TokenInterceptor } from '@auth/http-interceptor/token.interceptor';
     SharedModule,
     SampleModule,
     EmployeeModule,
-    MaterialModule,
-    ReactiveFormsModule,
+    AuthModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -43,13 +38,7 @@ import { TokenInterceptor } from '@auth/http-interceptor/token.interceptor';
       },
     }),
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

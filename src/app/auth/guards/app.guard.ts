@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { NavigationService } from '../../shared/services/navigation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    protected authService: AuthService, 
+    protected navigationService: NavigationService 
+  ) { }
 
   canActivate(): boolean {
     return this.canLoad();
@@ -15,7 +19,7 @@ export class AppGuard implements CanActivate {
 
   canLoad(): boolean {
     if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
+      this.navigationService.navigateTo(['/login']);
     }
 
     return this.authService.isLoggedIn();

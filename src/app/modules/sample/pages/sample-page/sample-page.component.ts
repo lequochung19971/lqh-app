@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { SampleFadadeService } from '../../../../store/facades/sample-fadade.service';
 import { SampleState } from '../../../../store/states/sample.state';
 import * as _ from 'lodash-es';
+import { ProxyService } from '../../../../shared/services/proxy.service';
 
 @Component({
   selector: 'lqh-sample-page',
@@ -18,10 +19,17 @@ export class SamplePageComponent implements OnInit {
   temp2: string;
   vm: SampleState;
   constructor(
+    protected proxy: ProxyService,
     protected sampleFacade: SampleFadadeService,
   ) { }
 
   ngOnInit(): void {
+    this.proxy.get<any>('/test').subscribe(() => {
+      console.log('API 1');
+    });
+    this.proxy.get<any>('/test').subscribe(() => {
+      console.log('API 2');
+    });
     this.vm$ = this.sampleFacade.stateChange();
     this.vm$.subscribe(value => {
       // console.log(value);
@@ -41,7 +49,7 @@ export class SamplePageComponent implements OnInit {
   }
 
   tempClick2() {
-    this.temp2 = 'Le Quoc Hung'
+    this.temp2 = 'Le Quoc Hung';
   }
 
   onClick(): void {

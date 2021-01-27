@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 import { Tokens } from '@core/interfaces-abstracts/tokens.interface';
 
 @Injectable()
-export class TokenInterceptor implements HttpInterceptor {
-  private _isRefreshing = false;
+export class AuthInterceptor implements HttpInterceptor {
+  private _isRefreshing = false;  // To handle when refreshToken is call from many places.
   private _refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(protected authService: AuthService) {}
@@ -17,6 +17,8 @@ export class TokenInterceptor implements HttpInterceptor {
     const currenJwtToken = this.authService.getJwtToken();
     if (currenJwtToken) {
       request = this.addToken(request, currenJwtToken);
+    } else {
+      this.authService.removeTokens();
     }
 
     return next.handle(request).pipe(
@@ -52,7 +54,7 @@ export class TokenInterceptor implements HttpInterceptor {
       })
     );
   }
-  
+
   private addToken(request: HttpRequest<any>, token: string): HttpRequest<any> {
     return request.clone({
       setHeaders: {

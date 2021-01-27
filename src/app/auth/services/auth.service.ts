@@ -32,8 +32,20 @@ export class AuthService {
     );
   }
 
+  logout(): Observable<boolean> {
+    return new Observable(subscribe => {
+      this.doLogoutUser();
+      subscribe.next(true);
+      subscribe.complete();
+    });
+  }
+
   isLoggedIn(): boolean {
     return !!this.getJwtToken();
+  }
+
+  hasRefreshToken(): boolean {
+    return !!this.getRefreshToken();
   }
 
   getJwtToken(): string {
@@ -41,6 +53,9 @@ export class AuthService {
   }
 
   refreshToken(): Observable<any> {
+    // if (!this.hasRefreshToken()) {
+    //   return throwError(new HttpErrorResponse({error: {message: ''}}));
+    // }
     const url = this.appConfigService.getRefreshTokenUrl();
     const refreshTokenModel = {
       refreshToken: this.getRefreshToken()
@@ -50,6 +65,16 @@ export class AuthService {
       tap((tokens: Tokens) => {
       this.storeJwtToken(tokens.jwtToken);
     }));
+  }
+  
+  removeTokens(): void {
+    localStorage.removeItem(this.JWT_TOKEN);
+    localStorage.removeItem(this.REFRESH_TOKEN);
+  }
+
+  private doLogoutUser(): void {
+    this._loggerAccount = null;
+    this.removeTokens();
   }
 
   private doLogin(accountName: string, tokens: Tokens): void {
@@ -62,11 +87,6 @@ export class AuthService {
     localStorage.setItem(this.REFRESH_TOKEN, tokens.refreshToken);
   }
 
-  // private doLogoutUser(): void {
-  //   this.loggerAccount = null;
-  //   this.removeTokens();
-  // }
-
   private getRefreshToken(): string {
     return localStorage.getItem(this.REFRESH_TOKEN);
   }
@@ -74,14 +94,4 @@ export class AuthService {
   private storeJwtToken(jwt: string): void {
     localStorage.setItem(this.JWT_TOKEN, jwt);
   }
-
-  // private storeTokens(tokens: Tokens): void {
-  //   localStorage.setItem(this.JWT_TOKEN, tokens.jwt);
-  //   localStorage.setItem(this.REFRESH_TOKEN, tokens.refreshToken);
-  // }
-
-  // private removeTokens(): void {
-  //   localStorage.removeItem(this.JWT_TOKEN);
-  //   localStorage.removeItem(this.REFRESH_TOKEN);
-  // }
 }

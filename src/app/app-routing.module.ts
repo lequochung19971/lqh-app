@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LqhShellComponent } from './shared/components/lqh-shell/lqh-shell.component';
-import { LoginComponent } from './modules/login/login.component';
 import { AuthGuard } from '@auth/guards/auth.guard';
 import { AppGuard } from '@auth/guards/app.guard';
+import { LoginComponent } from '@auth/components/login/login.component';
 
 const routes: Routes = [
   {
@@ -27,6 +27,8 @@ const routes: Routes = [
     path: 'employees',
     component: LqhShellComponent,
     loadChildren: () => import('./modules/employee/employee.module').then((m) => m.EmployeeModule),
+    canActivate: [AppGuard],
+    canLoad: [AppGuard]
   },
   {
     path: 'login',

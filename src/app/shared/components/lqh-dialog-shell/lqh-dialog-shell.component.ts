@@ -26,13 +26,13 @@ export class LqhDialogShellComponent implements OnInit {
     this.builder.renderDynamicComponent(this.dialogConfig.component, this.viewContainerRef, this.dialogConfig.componentInstance);
   }
 
-  initComponentInstance() {
+  initComponentInstance(): void {
     if (this.dialogConfig.componentInstance) {
       this.dialogConfig.componentInstance.currentDialogRef = this.dialogRef;
     } else {
       this.dialogConfig.componentInstance = {
         currentDialogRef: this.dialogRef
-      } as DialogInstance
+      } as DialogInstance;
     }
   }
 

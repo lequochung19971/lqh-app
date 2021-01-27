@@ -103,7 +103,7 @@ export class ProxyService {
 
   private handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
     let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
+    if (error?.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       errorMessage = `${error.error.message}`;
     } else {

@@ -4,6 +4,7 @@ import { BreakPointService } from '../../services/break-point.service';
 import { NavigationConfig } from '../../../core/interfaces-abstracts/navigation-config.interface';
 import { NavigationService } from '../../services/navigation.service';
 import { ModeThemeService } from '../../services/mode-theme.service';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'lqh-shell-left-side',
@@ -19,9 +20,18 @@ export class LqhShellLeftSideComponent implements OnInit {
   constructor(
     protected breakPointService: BreakPointService,
     protected navigationService: NavigationService,
-    protected modeThemeService: ModeThemeService
+    protected modeThemeService: ModeThemeService,
+    protected authService: AuthService
   ) {}
 
   ngOnInit(): void {
+  }
+
+  logout(): void {
+    this.authService.logout().subscribe(res => {
+      if (res) {
+        this.navigationService.navigateTo(['/login']);
+      }
+    });
   }
 }

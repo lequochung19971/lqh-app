@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { AuthService } from '../../auth/services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '@auth/services/auth.service';
+import { NavigationService } from '../../../shared/services/navigation.service';
 
 @Component({
   selector: 'lqh-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     protected authService: AuthService,
-    protected router: Router
+    protected router: Router,
+    protected navigationService: NavigationService
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class LoginComponent implements OnInit {
       password: this.formGroup.value.password
     }).subscribe(success => {
       if (success) {
-        this.router.navigate(['/dashboard']);
+        this.navigationService.navigateTo(['/dashboard']);
       }
     });
   }
