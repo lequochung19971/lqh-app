@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional, Self } from '@angular/core';
+import { Component, Optional, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Dayjs } from 'dayjs';
 import { UtilitiesService } from '../../services/utilities.service';
@@ -9,7 +9,7 @@ import { InputComponent } from '../input/input.component';
   templateUrl: './date-input.component.html',
   styleUrls: ['./date-input.component.scss'],
 })
-export class DateInputComponent extends InputComponent implements OnInit {
+export class DateInputComponent extends InputComponent {
   dateFormat = 'DD/MM/YYYY';
 
   constructor(

@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, Optional, Self } from '@angular/core';
+import { Component, OnInit, Optional, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { DialogConfig } from '@core/interfaces-abstracts/dialog-config.interface';
 import { AddressModel } from '@core/models/address.model';
 import { DialogService } from '@shared/services/dialog.service';
-import { InputComponent } from '../input/input.component';
 import { AddressDialogComponent } from '@shared/components/address/address-dialog.component';
 import { ControlOpenDialog } from '@core/interfaces-abstracts/control-open-dialog.interface';
+import { InputComponent } from '../input/input.component';
 
 @Component({
   selector: 'lqh-address-input',
@@ -14,7 +14,6 @@ import { ControlOpenDialog } from '@core/interfaces-abstracts/control-open-dialo
 })
 export class AddressInputComponent extends InputComponent implements OnInit, ControlOpenDialog {
   dialogConfig: DialogConfig;
-  @Input() viewToModel: () => {};
 
   constructor(
     @Optional() @Self() public ngControl: NgControl,
@@ -24,16 +23,17 @@ export class AddressInputComponent extends InputComponent implements OnInit, Con
   }
 
   bindViewToModel(): void {
-    if (this.viewToModel) {
-      this.viewToModel();
-    }
     if (!this.viewModel[this.pathName]) {
       this.viewModel[this.pathName] = new AddressModel();
     }
   }
 
-  bindModelToView(address: AddressModel): void {
-    super.bindModelToView(address?.ward?.pathWithType ?? '');
+  bindModelToView(address: AddressModel | string): void {
+    if (typeof address === 'object') {
+      super.bindModelToView(address?.ward?.pathWithType ?? '');
+    } else {
+      super.bindModelToView(address);
+    }
   }
 
   openDialog(): void {

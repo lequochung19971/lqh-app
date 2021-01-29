@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional, Self, ViewChild, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Optional, Self, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { MismatchedPassword, ProgressLayoutModel, StrongAndWeakPasswordModel, WeakPasswordModel } from '@core/models/strong-weak-password.model';
 import { PasswordService } from '@shared/services/password.service';
@@ -12,7 +12,6 @@ import { InputComponent } from '../input/input.component';
   selector: 'lqh-password-input',
   templateUrl: './password-input.component.html',
   styleUrls: ['./password-input.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordInputComponent extends InputComponent implements OnInit, AfterViewInit {
   @ViewChild('tooltip') tooltip: MatTooltip;
@@ -22,7 +21,8 @@ export class PasswordInputComponent extends InputComponent implements OnInit, Af
     protected passwordService: PasswordService,
     protected validationsService: ValidationsService,
     protected utilitiesService: UtilitiesService,
-    protected translateService: TranslateService
+    protected translateService: TranslateService,
+    protected changeDetectorRef: ChangeDetectorRef
   ) { 
     super(ngControl);
   }
@@ -39,7 +39,7 @@ export class PasswordInputComponent extends InputComponent implements OnInit, Af
   progressElementID: string;
   iconElementID: string;
 
-  status: string;
+  status = 'medium';
   passwordMeter: StrongAndWeakPasswordModel = new StrongAndWeakPasswordModel();
 
   mismatchedMessages: MismatchedPassword[] = [...this.passwordService.mismatchedMessagesConfig];
@@ -56,7 +56,8 @@ export class PasswordInputComponent extends InputComponent implements OnInit, Af
     this.iconElement = document.getElementById(this.iconElementID);
 
     if (!this.disabled) {
-      this.setProgressBarDefault();
+      this.changeProgressBarStatus(this.formControl.value);
+      this.changeDetectorRef.detectChanges();
     }
   }
 
@@ -103,11 +104,6 @@ export class PasswordInputComponent extends InputComponent implements OnInit, Af
     }
   }
 
-  protected setProgressBarDefault(): void {
-    this.setLayoutProgress({ width: '0', color: this.mediumColor, status: 'medium' });
-    this.changeProgressBarStatus(this.formControl.value);
-  }
-
   protected strong(width: string): void {
     this.setLayoutProgress({ width, color: this.strongColor, status: 'strong' });
   }
@@ -138,4 +134,7 @@ export class PasswordInputComponent extends InputComponent implements OnInit, Af
       .join('\n');
   }
 
+  getStatus(level: string): boolean {
+    return this.status === level;
+  }
 }

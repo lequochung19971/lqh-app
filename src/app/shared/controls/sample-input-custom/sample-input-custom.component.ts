@@ -36,10 +36,7 @@ export class SampleInputCustomComponent implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  ngOnInit(): void {
-  }
-
-  changeValue($event) {
+  changeValue($event): void {
     this.onTouched();
     this.onChanged($event.currentTarget.value);
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Self, Optional, Input } from '@angular/core';
+import { Component, Self, Optional, Input } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { BaseControl } from '@core/components/base-control/base-control.component';
 
@@ -7,7 +7,7 @@ import { BaseControl } from '@core/components/base-control/base-control.componen
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss']
 })
-export class InputComponent extends BaseControl implements OnInit {
+export class InputComponent extends BaseControl {
   @Input() required = false;
   @Input() label = '';
   @Input() placeholder = '';
