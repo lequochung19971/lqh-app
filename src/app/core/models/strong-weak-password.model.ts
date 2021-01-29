@@ -11,9 +11,9 @@ export class WeakPasswordModel {
 }
 
 export class ProgressLayoutModel {
-  width: string;
-  color: string;
-  status: string;
+  width?: string;
+  color?: string;
+  status?: string;
 }
 
 export enum MismatchedPassword {

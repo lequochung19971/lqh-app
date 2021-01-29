@@ -79,7 +79,7 @@ export abstract class BaseControl implements OnInit, ControlValueAccessor {
     this.onChanged(value);
   }
 
-  protected setBindingModel(data: any, path: string | null, value: any): void {
-    _.set(data, path, value);
+  protected setBindingModel(modelData: any, path: string | null, value: any): void {
+    _.set(modelData, path, value);
   }
 }

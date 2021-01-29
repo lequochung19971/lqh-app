@@ -2,7 +2,12 @@
   <div class="row {{ rowCss }}">
     <div *ngFor="let config of componentConfigs" class="{{ getGridColumn(config.layoutDefinition) }}">
       <div class="{{ config?.cssClass?.col }}">
-        <lqh-col-layout [componentConfig]="config" [builderConfig]="builderConfig"></lqh-col-layout>
+        <lqh-col-layout 
+          [componentConfig]="config" 
+          [builderConfig]="builderConfig"
+          [viewModel]="viewModel"
+          [parentViewModel]="parentViewModel"
+        ></lqh-col-layout>
       </div>
     </div>
   </div>

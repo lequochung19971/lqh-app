@@ -194,9 +194,14 @@ export class EmployeeTableComponent implements OnInit, AfterViewInit {
   }
 
   openDialogForm(title: string): void {
+    const model = new EmployeeModel();
+    model.dob = '12/12/2000';
     const dialogConfig: DialogConfig = {
       title,
       component: EmployeeFormDialogComponent,
+      componentInstance: {
+        viewModel: model || new EmployeeModel()
+      },
       rightSide: true
     };
 

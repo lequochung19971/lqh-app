@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { BuilderConfig, ComponentConfig } from '@core/interfaces-abstracts/builder-config.interface';
 import { ComponentBuilderService } from '@core/services/component-builder.service';
+import { BaseModel } from '../../../../core/models/base.model';
 
 @Component({
   selector: 'lqh-col-layout',
@@ -11,6 +12,8 @@ export class ColLayoutComponent implements OnInit {
   @ViewChild('dynamicCol', { read: ViewContainerRef, static: true }) viewContainerRef: ViewContainerRef;
   @Input() componentConfig: ComponentConfig;
   @Input() builderConfig: BuilderConfig;
+  @Input() viewModel: BaseModel;
+  @Input() parentViewModel: BaseModel;
 
   constructor(protected builder: ComponentBuilderService) { }
 
@@ -18,11 +21,13 @@ export class ColLayoutComponent implements OnInit {
     this.renderColumn();
   }
 
-  componentInstance() {
+  componentInstance(): object {
     return {
       componentConfig: this.componentConfig,
-      builderConfig: this.builderConfig
-    }
+      builderConfig: this.builderConfig,
+      viewModel: this.viewModel,
+      parentViewModel: this.parentViewModel
+    };
   }
 
   renderColumn(): void {

@@ -8,14 +8,15 @@ import * as _ from 'lodash-es';
 })
 export abstract class BaseFormService<TModel extends BaseModel> {
   private _form: FormGroup;
-  private _originalFormValue: TModel; 
+  private _originalFormValue: any;
+  private _viewModel: TModel;
 
   constructor(
     protected formBuilder: FormBuilder,
-    initialForm: FormGroup,
   ) { 
-    this.initForm(initialForm);
   }
+
+  abstract initialize(data: TModel): void;
 
   get form(): FormGroup {
     return this._form;
@@ -23,6 +24,22 @@ export abstract class BaseFormService<TModel extends BaseModel> {
 
   get originalFormValue(): TModel {
     return this._originalFormValue;
+  }
+
+  get viewModel(): TModel {
+    return this._viewModel;
+  }
+
+  set viewModel(model: TModel) {
+    this._viewModel = model;
+  }
+
+  getViewModel(): TModel {
+    return this.viewModel;
+  }
+
+  setViewModel(model: TModel): void {
+    this.viewModel = model;
   }
 
   protected initForm(initialForm: FormGroup): void {
@@ -36,10 +53,6 @@ export abstract class BaseFormService<TModel extends BaseModel> {
   }
 
   getFormValue(): TModel {
-    return this._form.value;
-  }
-
-  getViewModel(): TModel {
     return this._form.value;
   }
 

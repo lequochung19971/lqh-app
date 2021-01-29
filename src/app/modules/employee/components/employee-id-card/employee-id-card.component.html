@@ -1,0 +1,31 @@
+<div class="row" [formGroup]="formGroup">
+  <div class="col-6 px-30px pb-10px">
+    <lqh-input
+      path="idNumber"
+      [viewModel]="viewModel"
+      formControlName="idNumber"
+      label="{{ 'ID_CARD_LABEL' | translate }}"
+      placeholder="{{ 'ID_CARD_LABEL' | translate }}"
+      required="true"
+    ></lqh-input>
+  </div>
+  <div class="col-6 px-30px pb-10px">
+    <lqh-date-input
+      path="createDate"
+      [viewModel]="viewModel"
+      formControlName="createDate"
+      label="CREATE_DATE_LABEL"
+      placeholder="CREATE_DATE_LABEL"
+    ></lqh-date-input>
+  </div>
+  <div class="col-12 px-30px pb-10px">
+    <div class="lqh-label-field">{{ 'CREATE_PLACE_LABEL' | translate }}</div>
+    <lqh-chip-list-open-dialog
+      path="createPlace"
+      [dialogConfig]="getDialogConfigForChipList()"
+      [dataSourceMetadata]="getChiplistDataSourceMetadata()"
+      formControlName="createPlace"
+      [viewModel]="viewModel"
+    ></lqh-chip-list-open-dialog>
+  </div>
+</div>

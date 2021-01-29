@@ -1,10 +1,12 @@
 import { TypeConfig } from '../../../core/interfaces-abstracts/type-config.interface';
 import { EmployeeTableComponent } from './employee-table/employee-table.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
+import { EmployeeIdCardComponent } from './employee-id-card/employee-id-card.component';
 export const allEmployeeComponents = [
   EmployeeTableComponent,
-  EmployeeFormComponent
-]
+  EmployeeFormComponent,
+  EmployeeIdCardComponent
+];
 
 export const allEmployeeComponentConfigs: TypeConfig[] = [
   {
@@ -14,5 +16,9 @@ export const allEmployeeComponentConfigs: TypeConfig[] = [
   {
     name: 'employeeForm',
     type: EmployeeFormComponent
+  },
+  {
+    name: 'employeeIdCard',
+    type: EmployeeIdCardComponent
   }
-]
+];

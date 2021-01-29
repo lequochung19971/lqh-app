@@ -1,4 +1,4 @@
 export interface DatasourceMetadata {
-  label: string;
+  display: string;
   value: any;
 }

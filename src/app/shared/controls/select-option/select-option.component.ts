@@ -19,4 +19,8 @@ export class SelectOptionComponent extends DataSourceComponent {
   ) { 
     super(ngControl, translateService);
   }
+
+  selectionChange(value: any): void {
+    this.writeValue(value);
+  }
 }

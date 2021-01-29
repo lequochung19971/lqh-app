@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent } from '@core/components/base-component/base.component';
 import { DialogMetadataBuilderConfig } from '@core/interfaces-abstracts/builder-config.interface';
-import { DatasourceMetadata } from '@core/interfaces-abstracts/data-source-metadata.interface';
-import { DialogConfig, DialogRefType } from '@core/interfaces-abstracts/dialog-config.interface';
+import { DialogRefType } from '@core/interfaces-abstracts/dialog-config.interface';
 import { DepartmentModel } from '@core/models/department.model';
 import { EmployeeModel } from '@core/models/employee.model';
 import { PositionModel } from '@core/models/position.model';
 import { JsonConfigService } from '@core/services/json-config.service';
 import { EmployeeFormService } from '@modules/employee/services/employee-form.service';
-import { AddressDialogComponent } from '@shared/components/address/address-dialog.component';
 import { UtilitiesService } from '@shared/services/utilities.service';
 import { Dayjs } from 'dayjs';
 import { EmployeeRestService } from '../../services/employee-rest.service';
@@ -24,9 +22,9 @@ import { EmployeeRestService } from '../../services/employee-rest.service';
     // }
   ]
 })
-export class EmployeeFormComponent extends BaseComponent implements OnInit {
+export class EmployeeFormComponent extends BaseComponent implements OnInit, AfterViewInit {
+  @Input() viewModel: EmployeeModel;
   form: FormGroup;
-  viewModel: EmployeeModel;
   departments: DepartmentModel[];
   positions: PositionModel[];
   currentDialogRef: MatDialogRef<DialogRefType>;
@@ -35,36 +33,23 @@ export class EmployeeFormComponent extends BaseComponent implements OnInit {
     protected employeeRestService: EmployeeRestService,
     protected employeeFormService: EmployeeFormService,
     protected utilitiesService: UtilitiesService,
-    protected jsonConfigService: JsonConfigService
+    protected jsonConfigService: JsonConfigService,
+    protected changeDetectorRef: ChangeDetectorRef
   ) { 
     super();
   }
 
   ngOnInit(): void {
+    this.viewModel = this.viewModel || new EmployeeModel();
+    this.employeeFormService.initialize(this.viewModel);
     this.form = this.employeeFormService.form;
-    this.viewModel = new EmployeeModel();
     this.departments = this.jsonConfigService.getDepartmentsConfig();
     this.currentDialogRef = (this.getMetadataBuilderConfig() as DialogMetadataBuilderConfig).currentDialogRef;
     this.filterPositions();
   }
 
-  getDialogConfigForChipList(): DialogConfig {
-    return {
-      title: 'PROVINCE_ADDRESS_DIALOG_TITLE',
-      component: AddressDialogComponent,
-      componentInstance: {
-        isFullAddressMode: false
-      },
-      height: '550px',
-      width: '850px'
-    };
-  }
-  
-  getChiplistDataSourceMetadata(): DatasourceMetadata {
-    return {
-      label: 'nameWithType',
-      value: 'code'
-    };
+  ngAfterViewInit(): void {
+    this.forcingChangeDetection(this.changeDetectorRef);
   }
 
   dateChange(): void {
@@ -98,14 +83,10 @@ export class EmployeeFormComponent extends BaseComponent implements OnInit {
   }
 
   saveEmployee(): void {
-    this.employeeRestService.createEmployee(this.form.value).subscribe(res => {
+    this.employeeRestService.createEmployee(this.viewModel).subscribe(res => {
       if (res) {
         this.currentDialogRef.close();
       }
     });
-  }
-
-  tempConverter(_params?: any): void {
-    console.log('render');
   }
 }

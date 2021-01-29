@@ -19,11 +19,11 @@ export class ValidationsService {
 
       if (value) {
         const isStringAndLengthLessThan10: boolean = typeof value === 'string' && value.length < 10;
-        let isDayJsAndInvalid: boolean = false;
+        let isDayJsAndInvalid = false;
   
         if (value.length === 10) {
-          const convertedValue = this.utilitiesService.convertDateStringToDateDayjs(value, 'DD/MM/YYYY')
-          isDayJsAndInvalid = typeof convertedValue === 'object' && !(convertedValue as Dayjs).isValid()
+          const convertedValue = this.utilitiesService.convertDateStringToDateDayjs(value, 'DD/MM/YYYY');
+          isDayJsAndInvalid = typeof convertedValue === 'object' && !(convertedValue as Dayjs).isValid();
         }
   
         if (isStringAndLengthLessThan10 || isDayJsAndInvalid) {
@@ -32,7 +32,7 @@ export class ValidationsService {
       }
   
       return null;
-    }
+    };
   }
 
   invalidMaxLengthWithFieldName(max: number, fieldName: string): ValidatorFn {
@@ -42,7 +42,7 @@ export class ValidationsService {
       }
 
       return null;    
-    }
+    };
   }
   invalidMinLengthWithFieldName(min: number, fieldName: string): ValidatorFn {
     return (control: AbstractControl) => {
@@ -51,20 +51,20 @@ export class ValidationsService {
       }
 
       return null;    
-    }
+    };
   }
 
   invaliedIDCardInfo(): ValidatorFn {
     return (group: FormGroup) => {
       if (group?.value) {
-        let hasError = this.utilitiesService.formGroupHasErrors(group);
+        const hasError = this.utilitiesService.formGroupHasErrors(group);
 
         if (hasError) {
-          return { invalidIDCard: true }
+          return { invalidIDCard: true };
         }
       }
       return null;
-    }
+    };
   }
 
   invalidPassword(): ValidatorFn {
@@ -85,15 +85,15 @@ export class ValidationsService {
   invalidConfirmPassword(): ValidatorFn {
     return (control: FormControl) => {
       const { value } = control;
+      const { parent: formGroup } = control;
 
-      if (value) {
-        const { parent: formGroup } = control;
+      if (value && formGroup) {
         const passwordControl = formGroup.get('password');
         const passwordEqualConfirmPassword = passwordControl?.value && (control.value === passwordControl.value);
         return passwordEqualConfirmPassword ? null : { invalidConfirmPassword: true };
       }
 
       return null;
-    }
+    };
   }
 }

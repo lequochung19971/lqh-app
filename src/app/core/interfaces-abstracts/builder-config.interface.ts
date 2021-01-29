@@ -5,17 +5,17 @@ export interface BuilderConfig {
   components?: ComponentConfig[];
 }
 export interface MetadataBuilderConfig {
-  cssClass?:ClassNameConfig;
+  cssClass?: ClassNameConfig;
 }
 
 export interface DialogMetadataBuilderConfig extends MetadataBuilderConfig {
-  currentDialogRef?: MatDialogRef<DialogRefType>
+  currentDialogRef?: MatDialogRef<DialogRefType>;
 }
 
 export interface ComponentConfig {
   type: string;
   layoutDefinition?: LayoutDefinition;
-  cssClass?:ClassNameConfig;
+  cssClass?: ClassNameConfig;
   metadata?: any;
 }
 

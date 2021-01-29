@@ -10,4 +10,5 @@ export const allEmployeeBuilderConfigs: TypeConfig[] = [
     name: 'employeeFormDialog',
     type: JSON.stringify(employeeFormDialogConfig)
   }
-]
+];
+

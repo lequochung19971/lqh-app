@@ -63,9 +63,16 @@
       ></lqh-input>
     </div>
     <div class="col-10 id-card-info">
-      <div class="row" formGroupName="idCardInfo">
+      <lqh-employee-id-card
+        path="idCardInfo"
+        [formGroup]="form.controls.idCardInfo"
+        [viewModel]="viewModel.idCardInfo"
+        [parentViewModel]="viewModel"
+      ></lqh-employee-id-card>
+      <!-- <div class="row" formGroupName="idCardInfo">
         <div class="col-6 px-30px pb-10px">
           <lqh-input
+            path="idCardInfo.idNumber"
             [viewModel]="viewModel"
             formControlName="idNumber"
             label="{{ 'ID_CARD_LABEL' | translate }}"
@@ -75,6 +82,7 @@
         </div>
         <div class="col-6 px-30px pb-10px">
           <lqh-date-input
+            path="idCardInfo.createDate"
             [viewModel]="viewModel"
             formControlName="createDate"
             label="CREATE_DATE_LABEL"
@@ -84,47 +92,37 @@
         <div class="col-12 px-30px pb-10px">
           <div class="lqh-label-field">{{ 'CREATE_PLACE_LABEL' | translate }}</div>
           <lqh-chip-list-open-dialog
+            path="idCardInfo.createPlace"
             [dialogConfig]="getDialogConfigForChipList()"
             [dataSourceMetadata]="getChiplistDataSourceMetadata()"
             formControlName="createPlace"
             [viewModel]="viewModel"
           ></lqh-chip-list-open-dialog>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="col-5 px-30px pb-10px">
-      <mat-form-field appearance="standard" class="w100">
-        <mat-label>{{ 'DEPARTMENTS_LABEL' | translate }}</mat-label>
-        <mat-select
-          formGroupName="department"
-          placeholder="{{ 'DEPARTMENTS_LABEL' | translate }}"
-          required
-        >
-          <mat-option *ngFor="let department of departments" [value]="department">{{
-            department.name | translate
-          }}</mat-option>
-        </mat-select>
-        <mat-error>
-          <lqh-error-message [control]="form.controls.departments"></lqh-error-message>
-        </mat-error>
-      </mat-form-field>
+      <lqh-select-option 
+        label="DEPARTMENTS_LABEL"
+        placeholder="DEPARTMENTS_LABEL"
+        formControlName="department"
+        [viewModel]="viewModel"
+        [dataSource]="departments"
+        [dataSourceMetadata]="{display: 'name'}"
+        required="true"
+        ></lqh-select-option>
     </div>
     <div class="col-5 px-30px pb-10px">
-      <mat-form-field *ngIf="positions?.length" appearance="standard" class="w100">
-        <mat-label>{{ 'POSITIONS_LABEL' | translate }}</mat-label>
-        <mat-select
-          formControlName="position"
-          placeholder="{{ 'POSITIONS_LABEL' | translate }}"
-          required
-        >
-          <mat-option *ngFor="let position of positions" [value]="position">{{
-            position.name | translate
-          }}</mat-option>
-        </mat-select>
-        <mat-error>
-          <lqh-error-message [control]="form.controls.positions"></lqh-error-message>
-        </mat-error>
-      </mat-form-field>
+      <lqh-select-option
+        *ngIf="positions?.length"
+        label="POSITIONS_LABEL"
+        placeholder="POSITIONS_LABEL"
+        formControlName="position"
+        [viewModel]="viewModel"
+        [dataSource]="positions"
+        [dataSourceMetadata]="{display: 'name'}"
+        required="true"
+        ></lqh-select-option>
     </div>
     <div class="col-5 px-30px pb-10px">
       <lqh-input
@@ -151,7 +149,6 @@
         placeholder="WARDS_DISTRICT_PROVINCE_LABEL"
         [viewModel]="viewModel"
         formControlName="addressInfo"
-        [viewToModel]="tempConverter"
         required="true"
       ></lqh-address-input>
     </div>

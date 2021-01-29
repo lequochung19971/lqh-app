@@ -4,6 +4,7 @@
     placeholder="{{ placeholder | translate }}"
     [formControl]="formControl"
     [required]="required"
+    (ngModelChange)="selectionChange($event)"
   >
     <mat-option *ngFor="let data of dataSource" [value]="getValue(data)">{{
       getDisplay(data) | translate

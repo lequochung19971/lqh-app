@@ -11,8 +11,9 @@ import { allSharedPipes } from './pipes';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpTranslateLoader } from '../core/services/http-translate-loader.service';
 import { HttpClient } from '@angular/common/http';
+import { allSharedControls } from './controls';
 @NgModule({
-  declarations: [...allSharedComponents, ...allDirective, ...allSharedPipes ],
+  declarations: [...allSharedComponents, ...allSharedControls, ...allDirective, ...allSharedPipes ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -29,6 +30,7 @@ import { HttpClient } from '@angular/common/http';
   ],
   exports: [
     ...allSharedComponents,
+    ...allSharedControls,
     ...allDirective,
     ...allSharedPipes
   ],

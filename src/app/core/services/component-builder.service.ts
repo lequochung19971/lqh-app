@@ -30,12 +30,12 @@ export class ComponentBuilderService extends TypeConfigService {
   renderDynamicComponent<TComponent>(component: Type<TComponent>, viewContainerRef: ViewContainerRef, params?: any): TComponent {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     const componentRef = viewContainerRef.createComponent(componentFactory);
-    const dynamicComponentInstance = <TComponent>componentRef.instance;
+    const dynamicComponentInstance = componentRef.instance as TComponent;
     
     if (params) {
       Object.keys(params).forEach(key => {
-        dynamicComponentInstance[key] = params[key]
-      })
+        dynamicComponentInstance[key] = params[key];
+      });
     }
 
     return dynamicComponentInstance;

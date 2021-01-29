@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BuilderConfig, ComponentConfig, LayoutDefinition } from '@core/interfaces-abstracts/builder-config.interface';
 import { ComponentBuilderService } from '@core/services/component-builder.service';
+import { BaseModel } from '../../../../core/models/base.model';
 
 @Component({
   selector: 'lqh-row-layout',
@@ -9,6 +10,8 @@ import { ComponentBuilderService } from '@core/services/component-builder.servic
 })
 export class RowLayoutComponent implements OnInit {
   @Input() builderConfig: BuilderConfig;
+  @Input() viewModel: BaseModel;
+  @Input() parentViewModel: BaseModel;
   rowCss: string;
   containerCss: string;
   componentConfigs: ComponentConfig[];
@@ -22,7 +25,7 @@ export class RowLayoutComponent implements OnInit {
   }
 
   protected getGridColumn(layouts: LayoutDefinition): string {
-    let cols: string = '';
+    let cols = '';
 
     if (layouts) {
       Object.keys(layouts).forEach(key => {
@@ -30,7 +33,7 @@ export class RowLayoutComponent implements OnInit {
         if (layout) {
           cols = `${cols} col-${key.slice(-2)}-${layout}`;
         }
-      }) 
+      });
     }
 
     return cols;

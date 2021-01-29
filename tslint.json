@@ -150,6 +150,7 @@
       "lqh",
       "kebab-case"
     ],
-    "no-trailing-whitespace": false
+    "no-trailing-whitespace": false,
+    "no-bitwise": false
   }
 }
