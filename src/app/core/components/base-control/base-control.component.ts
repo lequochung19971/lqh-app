@@ -1,31 +1,37 @@
 import { Input, OnInit, Directive, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NgControl } from '@angular/forms';
 import { BaseModel } from '../../models/base.model';
-
+import * as _ from 'lodash-es';
 @Directive()
 export abstract class BaseControl implements OnInit, ControlValueAccessor {
   @Input() viewModel: any;
   @Input() parentViewModel: BaseModel;
   @Input() parentFormControl: FormGroup;
+  @Input() path: string;
   @Input() viewToModelFn: (params?: any) => any;
   @Input() modelToViewFn: (params?: any) => any;
   formControl: FormControl;
   disabled: boolean;
   value: any;
-  private _pathName: string | number | null;
   private onChanged: any = () => {};
   private onTouched: any = () => {};
-
-
 
   constructor(@Optional() @Self() public ngControl: NgControl) { 
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
     }
   }
+
+  ngOnInit(): void {
+    this.formControl = this.ngControl ? this.ngControl.control as FormControl : new FormControl();
+  }
   
-  get pathName(): string | null | number {
-    return this._pathName || this.ngControl.name;
+  get pathName(): string {
+    return this.path || this.ngControl.name as string;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
   
   writeValue(value: any): void {
@@ -55,17 +61,7 @@ export abstract class BaseControl implements OnInit, ControlValueAccessor {
       this.updateModel(value);
     }
   }
-
-  private updateModel(value: any): void {
-    this.viewModel[this.pathName] = value;
-  }
-
-  private updateView(value: any): void {
-    this.value = value;
-    this.onTouched();
-    this.onChanged(value);
-  }
-
+  
   registerOnChange(fn: any): void {
     this.onChanged = fn;
   }
@@ -73,12 +69,17 @@ export abstract class BaseControl implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+  protected updateModel(value: any): void {
+    this.setBindingModel(this.viewModel, this.pathName, value);
   }
 
-  ngOnInit(): void {
-    this.formControl = this.ngControl ? this.ngControl.control as FormControl : new FormControl();
-    this._pathName = this.ngControl ? this.ngControl.name : '';
+  protected updateView(value: any): void {
+    this.value = value;
+    this.onTouched();
+    this.onChanged(value);
+  }
+
+  protected setBindingModel(data: any, path: string | null, value: any): void {
+    _.set(data, path, value);
   }
 }
