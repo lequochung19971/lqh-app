@@ -1,0 +1,71 @@
+@import '../variables';
+
+.lqh-login {
+  background: linear-gradient(
+    120deg,
+    $lqh-light-primary-80-opacity 10%,
+    $lqh-light-primary-40-opacity 40%,
+    $lqh-white 100%
+  );
+  &__wrapper {
+    @include w-h-100;
+    @extend .bg-white;
+    @extend .mx-90px;
+    @extend .my-150px;
+    max-height: 70%;
+    max-width: 1200px;
+    box-shadow: 0px 50px 200px $lqh-primary-30-opacity;
+    border-radius: 20px;
+    background-color: transparent;
+  }
+  
+  &__card {
+    height: 100%;
+  }
+
+  .logo {
+    align-self: center;
+  }
+
+  .row {
+    height: 100%;
+  }
+
+  .title {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.7;
+    margin-top: 30px;
+  }
+
+  .caption {
+    color: $lqh-grey;
+  }
+
+  .form {
+    margin-top: 15px;
+  }
+
+  .left-side {
+    @extend .flex-column;
+    display: flex;
+    border-radius: 20px;
+    padding: 70px;
+  }
+
+  .right-side {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: $lqh-primary;
+  }
+
+  .forgot-password {
+    color: $lqh-primary;
+    margin-top: 25px;
+    text-align: center;
+  }
+
+  .btn-login {
+    margin-top: 25px;
+  }
+}

@@ -1,15 +1,27 @@
-<div [formGroup]="formGroup" class="w100 h100 flex-between">
-  <mat-card class="login-card w-500 p-15px">
-    <div class="flex-between flex-column">
-      <mat-form-field appearance="standard" class="w100">
-        <mat-label>Email</mat-label>
-        <input formControlName="email" matInput placeholder="Email">
-      </mat-form-field>
-      <mat-form-field appearance="standard" class="w100">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="password" placeholder="Password">
-      </mat-form-field>
+<div class="lqh-login flex-between h100 w100">
+  <div class="lqh-login__wrapper">
+    <div class="row">
+      <section class="lqh-login__card left-side col-5">
+        <div class="logo">
+          <img src="../../../../assets/icons/logo-login.svg" alt="logo-login">
+        </div>
+        <div class="title">Log in.</div>
+        <div class="caption">Login in with your email and password</div>
+        <div class="form" [formGroup]="formGroup">
+          <mat-form-field appearance="standard" class="w100">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" type="email" matInput placeholder="Email">
+          </mat-form-field>
+          <mat-form-field appearance="standard" class="w100">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" placeholder="Password">
+          </mat-form-field>
+          <button mat-button class="btn btn-raised btn-primary mr-30px w100 btn-login" (click)="login()">Login</button>
+        </div>
+        <div class="forgot-password">Forgot password?</div>
+      </section>
+      <section class="lqh-login__card right-side col-7"></section>
     </div>
-    <button mat-raised-button color="primary" (click)="login()" class="w100">LOG IN</button>
-  </mat-card>
+  </div>
 </div>
+
