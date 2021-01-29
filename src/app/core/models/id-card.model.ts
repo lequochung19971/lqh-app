@@ -1,7 +1,7 @@
 import 'reflect-metadata';
-import { Expose, Type } from "class-transformer";
-import { Address } from "./address.model";
-import { BaseModel } from "./base.model";
+import { Expose, Transform, Type } from 'class-transformer';
+import { Address } from './address.model';
+import { BaseModel } from './base.model';
 
 export class IDCardModel extends BaseModel {
   @Expose()
@@ -12,9 +12,10 @@ export class IDCardModel extends BaseModel {
 
   @Expose()
   @Type(() => Address)
+  @Transform(({value}) => value[0], { toPlainOnly: true })
   createPlace: Address;
   
   constructor(props?: IDCardModel) {
-    super(props)
+    super(props);
   }
 }

@@ -29,15 +29,15 @@ export class ProxyService {
     this.endpoint = this.appConfigService.getBaseUrl();
   }
 
-  post<T>(url: string, dataModel: T | any): Observable<DataResponse<T> | T> {
+  post<T>(url: string, dataModel: T | any): Observable<T> {
     if (dataModel) {
       // // this.loadingService.open();
       const jsonData = JSON.stringify(dataModel);
       url = `${this.endpoint}${url}`;
 
-      return this.http.post<DataResponse<T>>(url, jsonData, this.httpOptions).pipe(
+      return this.http.post<T>(url, jsonData, this.httpOptions).pipe(
         catchError(this.handleError),
-        tap((res: DataResponse<T> | T | any) => {
+        tap((res: T) => {
           // // this.loadingService.close();
           return res;
         })
@@ -64,9 +64,9 @@ export class ProxyService {
     url: string,
     query?: HttpParams | string | any,
     meta?: ProxyMetaParams,
-  ): Observable<T | T[] | any | DataResponse<T>> {
+  ): Observable<T> {
     // this.loadingService.open();
-    const httpOpts = Object.assign({}, this.httpOptions);
+    const httpOpts = {...this.httpOptions};
 
     if (meta && meta.fullResponse) {
       // tslint:disable-next-line:no-string-literal
@@ -76,9 +76,9 @@ export class ProxyService {
     url = `${this.endpoint}${url}`;
     httpOpts.params = this.createParams(query);
 
-    return this.http.get<T[] | T>(url, httpOpts).pipe(
+    return this.http.get<T>(url, httpOpts).pipe(
       catchError(this.handleError),
-      tap((res: T[] | T) => {
+      tap((res: T) => {
         logger.log(res);
         // this.loadingService.close();
         return res;

@@ -2,6 +2,7 @@
   <div class="row" *ngIf="form" [formGroup]="form">
     <div class="col-5 px-30px pb-10px">
       <lqh-input
+        [viewModel]="viewModel"
         formControlName="firstName"
         label="{{ 'FIRST_NAME_LABEL' | translate }}"
         placeholder="{{ 'FIRST_NAME_LABEL' | translate }}"
@@ -11,6 +12,7 @@
     </div>
     <div class="col-5 px-30px pb-10px">
       <lqh-input
+        [viewModel]="viewModel"
         formControlName="lastName"
         label="{{ 'LAST_NAME_LABEL' | translate }}"
         placeholder="{{ 'LAST_NAME_LABEL' | translate }}"
@@ -20,6 +22,7 @@
     </div>
     <div class="col-5 px-30px pb-10px">
       <lqh-password-input
+        [viewModel]="viewModel"
         formControlName="password"
         label="PASSWORD_LABEL"
         placeholder="PASSWORD_LABEL"
@@ -28,6 +31,7 @@
     </div>
     <div class="col-5 px-30px pb-10px">
       <lqh-password-input
+        [viewModel]="viewModel"
         formControlName="confirmPassword"
         label="CONFIRM_PASSWORD_LABEL"
         placeholder="CONFIRM_PASSWORD_LABEL"
@@ -35,10 +39,13 @@
     </div>
     <div class="col-10 px-30px pb-10px">
       <div class="lqh-label-field">{{ 'GENDER_LABEL' | translate }}</div>
-      <lqh-gender-toggle formControlName="gender"></lqh-gender-toggle>
+      <lqh-gender-toggle 
+        [viewModel]="viewModel"
+        formControlName="gender"></lqh-gender-toggle>
     </div>
     <div class="col-5 px-30px pb-10px">
       <lqh-date-input
+        [viewModel]="viewModel"
         formControlName="dob"
         label="DOB_LABEL"
         placeholder="DOB_LABEL"
@@ -48,6 +55,7 @@
     </div>
     <div class="col-5 px-30px pb-10px">
       <lqh-input
+        [viewModel]="viewModel"
         formControlName="age"
         label="{{ 'AGE_LABEL' | translate }}"
         placeholder="{{ 'AGE_LABEL' | translate }}"
@@ -58,6 +66,7 @@
       <div class="row" formGroupName="idCardInfo">
         <div class="col-6 px-30px pb-10px">
           <lqh-input
+            [viewModel]="viewModel"
             formControlName="idNumber"
             label="{{ 'ID_CARD_LABEL' | translate }}"
             placeholder="{{ 'ID_CARD_LABEL' | translate }}"
@@ -66,6 +75,7 @@
         </div>
         <div class="col-6 px-30px pb-10px">
           <lqh-date-input
+            [viewModel]="viewModel"
             formControlName="createDate"
             label="CREATE_DATE_LABEL"
             placeholder="CREATE_DATE_LABEL"
@@ -77,6 +87,7 @@
             [dialogConfig]="getDialogConfigForChipList()"
             [dataSourceMetadata]="getChiplistDataSourceMetadata()"
             formControlName="createPlace"
+            [viewModel]="viewModel"
           ></lqh-chip-list-open-dialog>
         </div>
       </div>
@@ -85,7 +96,7 @@
       <mat-form-field appearance="standard" class="w100">
         <mat-label>{{ 'DEPARTMENTS_LABEL' | translate }}</mat-label>
         <mat-select
-          formControlName="department"
+          formGroupName="department"
           placeholder="{{ 'DEPARTMENTS_LABEL' | translate }}"
           required
         >
@@ -118,6 +129,7 @@
     <div class="col-5 px-30px pb-10px">
       <lqh-input
         formControlName="phone"
+        [viewModel]="viewModel"
         label="{{ 'PHONE_LABEL' | translate }}"
         placeholder="{{ 'PHONE_LABEL' | translate }}"
         lqhInputNumber
@@ -127,6 +139,7 @@
     <div class="col-5 px-30px pb-10px">
       <lqh-input
         formControlName="email"
+        [viewModel]="viewModel"
         label="{{ 'EMAIL_LABEL' | translate }}"
         placeholder="{{ 'EMAIL_LABEL' | translate }}"
         required="true"
@@ -136,9 +149,9 @@
       <lqh-address-input
         label="WARDS_DISTRICT_PROVINCE_LABEL"
         placeholder="WARDS_DISTRICT_PROVINCE_LABEL"
-        [viewModel]="viewModel.addressInfo"
-        [parentViewModel]="viewModel"
+        [viewModel]="viewModel"
         formControlName="addressInfo"
+        [viewToModel]="tempConverter"
         required="true"
       ></lqh-address-input>
     </div>

@@ -8,27 +8,17 @@ import { BaseControl } from '@core/components/base-control/base-control.componen
   styleUrls: ['./input.component.scss']
 })
 export class InputComponent extends BaseControl implements OnInit {
-  @Input() required: boolean = false;
-  @Input() label: string = '';
-  @Input() placeholder: string = '';
-  @Input() type: string = 'text';
-  @Input() readonly: boolean = false;
+  @Input() required = false;
+  @Input() label = '';
+  @Input() placeholder = '';
+  @Input() type = 'text';
+  @Input() readonly = false;
 
   constructor(@Optional() @Self() public ngControl: NgControl) { 
     super(ngControl);
   }
 
-  ngOnInit(): void {
-    super.ngOnInit();
-  }
-
-  writeValue(value?: any): void {
-    this.value = value;
-    this.onTouched();
-    this.onChanged(value);
-  }
-
-  inputChange({value}: {value: any}) {
+  inputChange({ value }: { value: string }): void {
     this.writeValue(value);
   }
 

@@ -24,12 +24,6 @@ export class SamplePageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.proxy.get<any>('/test').subscribe(() => {
-      console.log('API 1');
-    });
-    this.proxy.get<any>('/test').subscribe(() => {
-      console.log('API 2');
-    });
     this.vm$ = this.sampleFacade.stateChange();
     this.vm$.subscribe(value => {
       // console.log(value);

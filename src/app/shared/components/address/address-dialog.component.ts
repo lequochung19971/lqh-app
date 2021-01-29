@@ -46,7 +46,7 @@ export class AddressDialogComponent extends BaseComponent implements OnInit {
     this.startSearchingAddress();
   }
 
-  protected initAddressConfig() {
+  protected initAddressConfig(): void {
     this.provinces = this.jsonConfigService.getProvincesConfig();
     this.districts = this.jsonConfigService.getDistrictsConfig();
     this.wards = this.jsonConfigService.getWardsConfig();
@@ -55,7 +55,7 @@ export class AddressDialogComponent extends BaseComponent implements OnInit {
     this.wardTypes = [WardType.phuong, WardType.thiTran, WardType.xa];
   }
 
-  protected initAddressDataSource() {
+  protected initAddressDataSource(): void {
     this.originalDataSource = this.provinces;
 
     if (this.addressModel.province) {
@@ -73,7 +73,7 @@ export class AddressDialogComponent extends BaseComponent implements OnInit {
     this.dataSource = this.originalDataSource;
   }
 
-  protected initAddressChiplist() {
+  protected initAddressChiplist(): void {
     this.addressChipList = [];
 
     if (this.addressModel?.province) {
@@ -89,28 +89,28 @@ export class AddressDialogComponent extends BaseComponent implements OnInit {
     }
   }
 
-  protected initAddressModel() {
+  protected initAddressModel(): void {
     this.addressModel = this.viewModel ? _.cloneDeep(this.viewModel) : new AddressModel();
   }
 
-  protected startSearchingAddress() {
+  protected startSearchingAddress(): void {
     this.searchControl = new FormControl('');
     this.searchControl.valueChanges.pipe(
       debounceTime(500),
       map((key: string) => {
         key = key.toLocaleLowerCase();
-        this.dataSource = this.originalDataSource.filter((source: Address) => this.filterAddress(source, key))
+        this.dataSource = this.originalDataSource.filter((source: Address) => this.filterAddress(source, key));
       })
     ).subscribe();
   }
 
-  protected filterAddress(source: Address, key: string) {
+  protected filterAddress(source: Address, key: string): boolean {
     const normalString = source.slug.split('-').join(' ').toLowerCase();
     const localeString = source.name.toLocaleLowerCase();
     return normalString.includes(key) || localeString.includes(key);
   }
 
-  protected onSelectedAddress(address: Address) {
+  protected onSelectedAddress(address: Address): void {
     const { length: chipListLength } = this.addressChipList;
     if (chipListLength === 3) { return; }
 
@@ -136,7 +136,7 @@ export class AddressDialogComponent extends BaseComponent implements OnInit {
     }
   }
 
-  updateDataModel() {
+  updateDataModel(): void {
     if (this.viewModel) {
       const { province, district, ward } = this.addressModel;
       this.viewModel.province = province;
@@ -150,14 +150,14 @@ export class AddressDialogComponent extends BaseComponent implements OnInit {
   }
 
   protected isDistrict(address: Address): boolean {
-    return address.parentCode && this.districtTypes.includes(address.type as AddressTypes)
+    return address.parentCode && this.districtTypes.includes(address.type as AddressTypes);
   }
 
   protected isWard(address: Address): boolean {
-    return address.parentCode && this.wardTypes.includes(address.type as AddressTypes)
+    return address.parentCode && this.wardTypes.includes(address.type as AddressTypes);
   }
 
-  protected removeAddress(address: Address) {
+  protected removeAddress(address: Address): void {
     if (this.isProvince(address)) {
       this.addressChipList = [];
       this.originalDataSource = this.provinces;
@@ -165,12 +165,12 @@ export class AddressDialogComponent extends BaseComponent implements OnInit {
       this.addressModel.district = null;
       this.addressModel.ward = null;
     } else if (this.isDistrict(address)) {
-      this.addressChipList.splice(1, 2)
+      this.addressChipList.splice(1, 2);
       this.addressModel.district = null;
       this.addressModel.ward = null;
       this.originalDataSource = this.districts.filter(district => district.parentCode === this.addressModel.province.code);
     } else if (this.isWard(address)) {
-      this.addressChipList.splice(2, 1)
+      this.addressChipList.splice(2, 1);
       this.addressModel.ward = null;
     }
 
@@ -178,7 +178,7 @@ export class AddressDialogComponent extends BaseComponent implements OnInit {
     this.resetSearchControl();
   }
   
-  protected resetSearchControl() {
+  protected resetSearchControl(): void {
     this.searchControl.patchValue('');
   }
 }

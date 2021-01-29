@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional, Self, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Optional, Self, ViewChild, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { MismatchedPassword, ProgressLayoutModel, StrongAndWeakPasswordModel, WeakPasswordModel } from '@core/models/strong-weak-password.model';
 import { PasswordService } from '@shared/services/password.service';
@@ -14,7 +14,7 @@ import { InputComponent } from '../input/input.component';
   styleUrls: ['./password-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PasswordInputComponent extends InputComponent implements OnInit {
+export class PasswordInputComponent extends InputComponent implements OnInit, AfterViewInit {
   @ViewChild('tooltip') tooltip: MatTooltip;
   
   constructor(
@@ -27,9 +27,9 @@ export class PasswordInputComponent extends InputComponent implements OnInit {
     super(ngControl);
   }
 
-  weakColor: string = '#ff5252';
-  mediumColor: string = '#f6bb6a';
-  strongColor: string = '#2edba3';
+  weakColor = '#ff5252';
+  mediumColor = '#f6bb6a';
+  strongColor = '#2edba3';
 
   barElement: HTMLElement;
   progressElement: HTMLElement;
@@ -42,8 +42,8 @@ export class PasswordInputComponent extends InputComponent implements OnInit {
   status: string;
   passwordMeter: StrongAndWeakPasswordModel = new StrongAndWeakPasswordModel();
 
-  mismatchedMessages: MismatchedPassword[] = [...this.passwordService.mismatchedMessagesConfig]
-  tooltipHideDelay: number = 2000;
+  mismatchedMessages: MismatchedPassword[] = [...this.passwordService.mismatchedMessagesConfig];
+  tooltipHideDelay = 2000;
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -59,14 +59,8 @@ export class PasswordInputComponent extends InputComponent implements OnInit {
       this.setProgressBarDefault();
     }
   }
-  
-  writeValue(val: string): void {
-    this.value = val;
-    this.onTouched();
-    this.onChanged(val);
-  }
 
-  inputChange({value}: {value: string}) {
+  inputChange({value}: {value: string}): void {
     this.writeValue(value);
 
     if (value === null || value === undefined) {
@@ -100,7 +94,7 @@ export class PasswordInputComponent extends InputComponent implements OnInit {
     }
   }
 
-  protected toggleTooltip(tooltip: MatTooltip) {
+  protected toggleTooltip(tooltip: MatTooltip): void {
     const hasWeaknesses = this.passwordMeter.weaknesses.some(weakness => weakness);
     if (hasWeaknesses) {
       tooltip.show();
@@ -132,13 +126,13 @@ export class PasswordInputComponent extends InputComponent implements OnInit {
     this.status = layout.status;
   }
 
-  protected setMismatchedMessages(weaknesses: WeakPasswordModel[]) {
+  protected setMismatchedMessages(weaknesses: WeakPasswordModel[]): void {
     this.mismatchedMessages = this.passwordService.mismatchedMessagesConfig.filter(mess => {
-      return !!weaknesses.find(weakness => weakness?.mismatched === mess)
-    })
+      return !!weaknesses.find(weakness => weakness?.mismatched === mess);
+    });
   }
 
-  getTooltipMismatchedMessages() {
+  getTooltipMismatchedMessages(): string {
     return this.mismatchedMessages
       .map(mess => this.translateService.instant(mess))
       .join('\n');

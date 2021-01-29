@@ -1,5 +1,5 @@
 import { Inject, Injectable, Injector } from '@angular/core';
-import { FACADE_CONFIG_TOKEN, FACADE_ACTION_CONFIG_TOKEN } from '../consts/injection-tokens.const';
+import { FACADE_ACTION_CONFIG_TOKEN } from '../consts/injection-tokens.const';
 import { TypeConfig } from '../interfaces-abstracts/type-config.interface';
 import { TypeConfigService } from './type-config.service';
 import { BaseAction } from '../interfaces-abstracts/base-action.interface';
@@ -11,7 +11,6 @@ export class LocatorFacadeService extends TypeConfigService {
 
   constructor(
     protected injector: Injector,
-    @Inject(FACADE_CONFIG_TOKEN) public allFacades: [TypeConfig[]],
     @Inject(FACADE_ACTION_CONFIG_TOKEN) public allActions: [TypeConfig[]],
   ) { 
     super();

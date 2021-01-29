@@ -16,9 +16,9 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
   @Input() dataSourceMetadata: DatasourceMetadata = {
     label: 'label',
     value: 'value'
-  }
-  @Input() manyItems: boolean = false;
-  @Input() allowDuplicate: boolean = false;
+  };
+  @Input() manyItems = false;
+  @Input() allowDuplicate = false;
   @Input() dialogConfig: DialogConfig;
   @Input() disable: boolean;
 
@@ -32,29 +32,24 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
     super(ngControl);
   }
 
-  ngOnInit(): void {
-  }
-
   writeValue(val: any | any[]): void {
     if (this.dataSource) {
       this.updateDataSource(val);
     }
 
     if (!this.dataSource && val) {
-      this.initDataSource(val)
+      this.initDataSource(val);
     }
 
-    this.onTouched();
-
-    const hasOnlyOneItem = !!(val?.length === 1)
+    const hasOnlyOneItem = !!(val?.length === 1);
     if (hasOnlyOneItem) {
-      this.onChanged(this.dataSource[0]);
+      this.bindTwoWay(this.dataSource[0]);
     } else {
-      this.onChanged(this.dataSource);
+      this.bindTwoWay(this.dataSource);
     }
   }
 
-  protected initDataSource(value: any) {
+  protected initDataSource(value: any): void {
     if (Array.isArray(value) && value.length) {
       this.dataSource = value;
     } else {
@@ -63,29 +58,29 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
     }
   }
 
-  getLabel(data: any) {
+  getLabel(data: any): string {
     return this.translateService.instant(data[this.dataSourceMetadata.label] || '');
   }
 
-  getValue(data: any) {
+  getValue(data: any): string {
     return this.translateService.instant(data[this.dataSourceMetadata.value] || '');
   }
 
-  openDialog() {
+  openDialog(): void {
     this.dialogService.openCustomDialog(this.dialogConfig).afterClosed().subscribe(data => {
       if (data) {
         this.handleAfterDialogClose(data);
       }
-    })
+    });
   }
 
-  protected handleAfterDialogClose(data: any) {
+  protected handleAfterDialogClose(data: any): void {
     this.writeValue(data);
   }
 
-  protected updateDataSource(data: any) {
+  protected updateDataSource(data: any): void {
     const canDuplicate = this.allowDuplicate || !this.checkDuplicate(data);
-    if (this.manyItems || !this.dataSource?.length) {
+    if (this.manyItems) {
       if (canDuplicate) {
         this.dataSource.push(data);
       }
@@ -94,7 +89,7 @@ export class ChipListOpenDialogComponent extends BaseControl implements ControlO
     }
   }
 
-  protected checkDuplicate(data: any) {
+  protected checkDuplicate(data: any): boolean {
     return !!this.dataSource.find(source => source === data || this.getValue(source) === this.getValue(data));
   }
 }

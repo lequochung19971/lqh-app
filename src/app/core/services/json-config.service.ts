@@ -7,15 +7,16 @@ import districts from '../json-config/districts.json';
 import wards from '../json-config/wards.json';
 import departments from '../json-config/departments.json';
 import positions from '../json-config/positions.json';
+import { plainToClass } from 'class-transformer';
 @Injectable({
   providedIn: 'root'
 })
 export class JsonConfigService {
-  private _provinces = provinces as Address[];
-  private _districts = districts as Address[];
-  private _wards = wards as Address[];
-  private _departments = departments as DepartmentModel[];
-  private _positions = positions as PositionModel[];
+  private _provinces = plainToClass(Address, provinces) as Address[];
+  private _districts = plainToClass(Address, districts) as Address[];
+  private _wards = plainToClass(Address, wards) as Address[];
+  private _departments = plainToClass(DepartmentModel, departments) as DepartmentModel[];
+  private _positions = plainToClass(PositionModel, positions) as PositionModel[];
 
   constructor() { 
   }

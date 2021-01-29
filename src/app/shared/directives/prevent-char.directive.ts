@@ -7,15 +7,15 @@ export class PreventCharDirective {
   regexLetter = /^[a-zA-Z]*$/;
   constructor() {}
 
-  @HostListener('keydown', ['$event']) onKeyDown(event) {
+  @HostListener('keydown', ['$event']) onKeyDown(event): void {
     event.preventDefault();
   }
 
-  @HostListener('keyup', ['$event']) onKeyUp(event) {
+  @HostListener('keyup', ['$event']) onKeyUp(event): void {
     event.preventDefault();
   }
 
-  @HostListener('keyup', ['$event']) onKeyPress(event) {
+  @HostListener('keyup', ['$event']) onKeyPress(event): void {
     event.preventDefault();
   }
 

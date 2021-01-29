@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional, Self } from '@angular/core';
+import { Component, Input, OnInit, Optional, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { DialogConfig } from '@core/interfaces-abstracts/dialog-config.interface';
 import { AddressModel } from '@core/models/address.model';
@@ -13,8 +13,8 @@ import { ControlOpenDialog } from '@core/interfaces-abstracts/control-open-dialo
   styleUrls: ['./address-input.component.scss']
 })
 export class AddressInputComponent extends InputComponent implements OnInit, ControlOpenDialog {
-  value: string = '';
   dialogConfig: DialogConfig;
+  @Input() viewToModel: () => {};
 
   constructor(
     @Optional() @Self() public ngControl: NgControl,
@@ -23,11 +23,17 @@ export class AddressInputComponent extends InputComponent implements OnInit, Con
     super(ngControl);
   }
 
-  writeValue(address: AddressModel): void {
-    this.value = address?.ward?.pathWithType || ''
-    
-    this.onTouched();
-    this.onChanged(address);
+  bindViewToModel(): void {
+    if (this.viewToModel) {
+      this.viewToModel();
+    }
+    if (!this.viewModel[this.pathName]) {
+      this.viewModel[this.pathName] = new AddressModel();
+    }
+  }
+
+  bindModelToView(address: AddressModel): void {
+    super.bindModelToView(address?.ward?.pathWithType ?? '');
   }
 
   openDialog(): void {
@@ -36,19 +42,20 @@ export class AddressInputComponent extends InputComponent implements OnInit, Con
       component: AddressDialogComponent,
       componentInstance: {
         isFullAddressMode: true,
-        viewModel: this.viewModel
+        viewModel: this.viewModel[this.pathName]
       },
       height: '550px',
       width: '850px'
-    }
+    };
+
     this.dialogService.openCustomDialog(this.dialogConfig).afterClosed().subscribe((data: AddressModel) => {
       if (data) {
         this.handleAfterDialogClose(data);
       }
-    })  
+    });
   }
 
-  handleAfterDialogClose(data: AddressModel) {
+  handleAfterDialogClose(data: AddressModel): void {
     this.writeValue(data);
   }
 }

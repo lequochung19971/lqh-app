@@ -1,6 +1,7 @@
 import { TypeConfig } from '../../core/interfaces-abstracts/type-config.interface';
 import { GetSample, PostSample, SampleActionType } from './sample.action';
 import { ModeThemeActionType, UpdateDarkMode, UpdateLightMode, AutoChangeMode } from './mode-theme.action';
+import { EmployeeActionType, FetchEmployeesDataTable } from './employee.action';
 
 export const allActionConfig: TypeConfig[] = [
   {
@@ -22,6 +23,9 @@ export const allActionConfig: TypeConfig[] = [
   {
     name: ModeThemeActionType.AUTO,
     type: AutoChangeMode
+  },
+  {
+    name: EmployeeActionType.FETCH_EMPLOYEES_DATA_TABLE,
+    type: FetchEmployeesDataTable
   }
-  
 ]

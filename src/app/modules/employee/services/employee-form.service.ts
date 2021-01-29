@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Departments } from '@core/enums/departments.enum';
 import { Gender } from '@core/enums/gender.enum';
 import { Positions } from '@core/enums/positions.enum';
+import { DepartmentModel } from '@core/models/department.model';
 import { EmployeeModel } from '@core/models/employee.model';
 import { BaseFormService } from '@shared/services/base-form.service';
 import { ValidationsService } from '@shared/services/validations.service';
@@ -26,7 +26,8 @@ export class EmployeeFormService extends BaseFormService<EmployeeModel> {
         age: [''],
         email: ['', [Validators.required, Validators.email]],
         phone: ['', [Validators.required, validationsService.invalidMaxLengthWithFieldName(10, 'PHONE_LABEL')]],
-        department: ['' as Departments, [Validators.required]],
+        department: [new DepartmentModel(), [Validators.required]],
+        // department: formBuilder.group(new DepartmentModel()),
         position: ['' as Positions, [Validators.required]],
         gender : [Gender.male],
         idCardInfo: formBuilder.group({
@@ -34,7 +35,7 @@ export class EmployeeFormService extends BaseFormService<EmployeeModel> {
           createDate: ['', [Validators.required]],
           createPlace: [null, [Validators.required, validationsService.invalidDate()]]
         }, { validators: validationsService.invaliedIDCardInfo() }),
-        addressInfo: [null, [Validators.required]],
+        addressInfo: ['', [Validators.required]],
         password: ['', [Validators.required, validationsService.invalidPassword()]],
         confirmPassword: ['', [validationsService.invalidConfirmPassword()]]
       }));

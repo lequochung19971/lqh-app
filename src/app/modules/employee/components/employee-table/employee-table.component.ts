@@ -1,16 +1,24 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Output, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { DialogConfig } from '@core/interfaces-abstracts/dialog-config.interface';
+import { EmployeeModel } from '@core/models/employee.model';
 import { EmployeeFormDialogComponent } from '@modules/employee/dialogs/employee-form-dialog/employee-form-dialog.component';
-import { EmployeeRestService } from '@modules/employee/services/employee-rest.service';
 import { DialogService } from '@shared/services/dialog.service';
+import { EmployeeFacadeService } from 'app/store/facades/employee-facade.service';
+import { EventEmitter } from 'events';
+import { merge, Observable } from 'rxjs';
+import { startWith, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'lqh-employee-table',
   templateUrl: './employee-table.component.html',
   styleUrls: ['./employee-table.component.scss']
 })
-export class EmployeeTableComponent implements OnInit {
+export class EmployeeTableComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
   displayedColumns: string[] = [
     'select',
     'fullName',
@@ -129,48 +137,56 @@ export class EmployeeTableComponent implements OnInit {
       status: 'active',
       avatar: 'images/unnamed.jpg'
     },
-  ]
+  ];
+
+  dataSource$: Observable<EmployeeModel[]>;
+
+  @Output() tempEvent: EventEmitter;
   constructor(
     protected dialogService: DialogService,
-    protected employeeRestService: EmployeeRestService 
+    protected employeeFacadeService: EmployeeFacadeService 
   ) { }
 
   ngOnInit(): void {
     this.selection.changed.subscribe(data => {
       console.log(data);
-    })
+    });
   }
 
-  edit() {
+  ngAfterViewInit(): void {
+    this.setTableData();
   }
 
-  delete() {
-  }
+  // edit() {
+  // }
 
-  masterToggle() {
+  // delete() {
+  // }
+
+  masterToggle(): void {
     this.areAllSelected() ? this.clearAllSelections() : this.selectAllSelections();
   }
 
-  isSelected(row) {
+  isSelected(row: any): boolean {
     return this.selection.isSelected(row);
   }
 
-  areAllSelected() {
+  areAllSelected(): boolean {
     const { length: numSelected } = this.selection.selected;
     const { length: numRows } = this.dataSource;
     return numSelected === numRows;
   }
 
-  toggleSelection(row) {
+  toggleSelection(row): void {
     this.selection.toggle(row);
   }
 
-  clearAllSelections() {
+  clearAllSelections(): void {
     this.selection.clear();
   }
 
-  selectAllSelections() {
-    this.dataSource.forEach(row => this.selection.select(row))
+  selectAllSelections(): void {
+    this.dataSource.forEach(row => this.selection.select(row));
   }
 
   createEmployee(): void {
@@ -179,11 +195,27 @@ export class EmployeeTableComponent implements OnInit {
 
   openDialogForm(title: string): void {
     const dialogConfig: DialogConfig = {
-      title: title,
+      title,
       component: EmployeeFormDialogComponent,
       rightSide: true
-    }
+    };
 
     this.dialogService.openDialogFullPage(dialogConfig);
+  }
+
+  setTableData(): void {
+    merge(this.paginator.page, this.sort.sortChange).pipe(
+      startWith({}),
+      tap(() => {
+        const params = {
+          sort: this.sort.active || '',
+          order: this.sort.direction || '',
+          page: this.paginator.pageIndex + 1,
+          limit: this.paginator.pageSize
+        };
+
+        this.employeeFacadeService.updateDataTable(params);
+      })
+    ).subscribe();
   }
 }

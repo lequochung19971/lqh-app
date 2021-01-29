@@ -25,12 +25,12 @@ export abstract class BaseFormService<TModel extends BaseModel> {
     return this._originalFormValue;
   }
 
-  protected initForm(initialForm: FormGroup) {
+  protected initForm(initialForm: FormGroup): void {
     this._originalFormValue = _.cloneDeep(initialForm.value);
     this._form = initialForm;
   }
 
-  resetForm() {
+  resetForm(): void {
     this._form.reset();
     this._form.patchValue(this._originalFormValue);
   }
@@ -58,7 +58,7 @@ export abstract class BaseFormService<TModel extends BaseModel> {
       if (control.errors) {
         isError = true;
       }
-    })
+    });
 
     return isError;
   }

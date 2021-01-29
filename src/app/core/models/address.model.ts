@@ -1,7 +1,8 @@
 import 'reflect-metadata';
+// tslint:disable-next-line:quotemark
 import { Expose, Type } from "class-transformer";
-import { AddressTypes } from "../enums/address-types.enum";
-import { BaseModel } from "./base.model";
+import { AddressTypes } from '../enums/address-types.enum';
+import { BaseModel } from './base.model';
 
 export class AddressModel extends BaseModel {
   @Expose()
@@ -35,13 +36,13 @@ export class Address extends BaseModel {
   path?: string;
   
   @Expose()
-  pathWithType?:string;
+  pathWithType?: string;
   
   @Expose()
   code?: string;
   
   @Expose()
-  parentCode?:string;
+  parentCode?: string;
   
   @Expose()
   slug?: string;

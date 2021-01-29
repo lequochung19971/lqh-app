@@ -6,6 +6,7 @@ import { DialogMetadataBuilderConfig } from '@core/interfaces-abstracts/builder-
 import { DatasourceMetadata } from '@core/interfaces-abstracts/data-source-metadata.interface';
 import { DialogConfig, DialogRefType } from '@core/interfaces-abstracts/dialog-config.interface';
 import { DepartmentModel } from '@core/models/department.model';
+import { EmployeeModel } from '@core/models/employee.model';
 import { PositionModel } from '@core/models/position.model';
 import { JsonConfigService } from '@core/services/json-config.service';
 import { EmployeeFormService } from '@modules/employee/services/employee-form.service';
@@ -13,23 +14,22 @@ import { AddressDialogComponent } from '@shared/components/address/address-dialo
 import { UtilitiesService } from '@shared/services/utilities.service';
 import { Dayjs } from 'dayjs';
 import { EmployeeRestService } from '../../services/employee-rest.service';
-
 @Component({
   selector: 'lqh-employee-form',
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.scss'],
   providers: [
-    {
-      provide: EmployeeFormService, useClass: EmployeeFormService
-    }
+    // {
+    //   provide: EmployeeFormService, useClass: EmployeeFormService
+    // }
   ]
 })
 export class EmployeeFormComponent extends BaseComponent implements OnInit {
   form: FormGroup;
-  viewModel: any;
+  viewModel: EmployeeModel;
   departments: DepartmentModel[];
   positions: PositionModel[];
-  currentDialogRef: MatDialogRef<DialogRefType>
+  currentDialogRef: MatDialogRef<DialogRefType>;
 
   constructor(
     protected employeeRestService: EmployeeRestService,
@@ -42,7 +42,7 @@ export class EmployeeFormComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.employeeFormService.form;
-    this.viewModel = this.employeeFormService.getViewModel();
+    this.viewModel = new EmployeeModel();
     this.departments = this.jsonConfigService.getDepartmentsConfig();
     this.currentDialogRef = (this.getMetadataBuilderConfig() as DialogMetadataBuilderConfig).currentDialogRef;
     this.filterPositions();
@@ -57,24 +57,24 @@ export class EmployeeFormComponent extends BaseComponent implements OnInit {
       },
       height: '550px',
       width: '850px'
-    }
+    };
   }
   
   getChiplistDataSourceMetadata(): DatasourceMetadata {
     return {
       label: 'nameWithType',
       value: 'code'
-    }
+    };
   }
 
-  dateChange() {
+  dateChange(): void {
     const dobControl = this.form.get('dob');
     if (dobControl.valid) {
       this.updateAge(dobControl?.value);
     }
   }
 
-  updateAge(date: Dayjs | string) {
+  updateAge(date: Dayjs | string): void {
     const ageControl = this.form.get('age');
     const age: string = this.utilitiesService.calculateAgeByDOB(date);
     ageControl.patchValue(age);
@@ -89,18 +89,23 @@ export class EmployeeFormComponent extends BaseComponent implements OnInit {
   }
 
   filterPositions(): void {
-    this.form.get('department').valueChanges.subscribe((value: DepartmentModel) => {
+    const departmentGroup = this.form.get('department');
+    departmentGroup.valueChanges.subscribe((value: DepartmentModel) => {
       if (value) {
-        this.positions = this.jsonConfigService.getPositionsConfig().filter(pos => pos.departmentId === value.id)
-      }
-    })
-  }
-
-  saveEmployee() {
-    this.employeeRestService.createEmployee(this.form.value).subscribe(res => {
-      if (res) {
-        this.currentDialogRef.close()
+        this.positions = this.jsonConfigService.getPositionsConfig().filter(pos => pos.departmentId === value.id);
       }
     });
+  }
+
+  saveEmployee(): void {
+    this.employeeRestService.createEmployee(this.form.value).subscribe(res => {
+      if (res) {
+        this.currentDialogRef.close();
+      }
+    });
+  }
+
+  tempConverter(_params?: any): void {
+    console.log('render');
   }
 }

@@ -10,7 +10,7 @@ import { InputComponent } from '../input/input.component';
   styleUrls: ['./date-input.component.scss'],
 })
 export class DateInputComponent extends InputComponent implements OnInit {
-  dateFormat: string = 'DD/MM/YYYY';
+  dateFormat = 'DD/MM/YYYY';
 
   constructor(
     @Optional() @Self() public ngControl: NgControl,
@@ -19,16 +19,10 @@ export class DateInputComponent extends InputComponent implements OnInit {
     super(ngControl);
   }
 
-  ngOnInit(): void {
-    super.ngOnInit();
-  }
-
   writeValue(val: Dayjs | string): void {
     if (typeof val !== 'string') {
       val = this.utilitiesService.convertDateDayJsToDateString(val as Dayjs, this.dateFormat);
     }
-    
-    this.onTouched();
-    this.onChanged(val);
+    super.writeValue(val);
   }
 }

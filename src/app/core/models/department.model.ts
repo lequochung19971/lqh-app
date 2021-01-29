@@ -8,5 +8,9 @@ export class DepartmentModel extends BaseModel {
   id: Departments;
   
   @Expose()
-  name: string
+  name: string;
+
+  constructor(props?: DepartmentModel) {
+    super(props);
+  }
 }

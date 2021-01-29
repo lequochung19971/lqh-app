@@ -1,4 +1,4 @@
-import { Component, Input, Optional, Self } from '@angular/core';
+import { Component, Input, OnInit, Optional, Self } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { NgControl } from '@angular/forms';
 import { GenderMetadata } from '@core/interfaces-abstracts/gender-metadata.interface';
@@ -10,7 +10,7 @@ import { Gender } from '@core/enums/gender.enum';
   templateUrl: './gender-toggle.component.html',
   styleUrls: ['./gender-toggle.component.scss'],
 })
-export class GenderToggleComponent extends BaseControl {
+export class GenderToggleComponent extends BaseControl implements OnInit {
   @Input() metadata: GenderMetadata[] = [
     {
       label: 'Male',
@@ -36,11 +36,10 @@ export class GenderToggleComponent extends BaseControl {
       this.initSelection(val as Gender);
     }
 
-    this.onTouched();
-    this.onChanged(val);
+    super.writeValue(val);
   }
 
-  protected initSelection(val: Gender) {
+  protected initSelection(val: Gender): void {
     this.selection = new SelectionModel(false, [val]);
   }
 

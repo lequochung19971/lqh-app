@@ -1,9 +1,9 @@
-import { Directive, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Directive, Input, OnInit } from '@angular/core';
 import { BuilderConfig, ComponentConfig, MetadataBuilderConfig } from '../../interfaces-abstracts/builder-config.interface';
 import { BaseModel } from '../../models/base.model';
 
 @Directive()
-export abstract class BaseComponent implements OnInit {
+export abstract class BaseComponent implements OnInit, AfterViewInit {
   @Input() builderConfig: BuilderConfig;
   @Input() componentConfig: ComponentConfig;
   @Input() viewModel: BaseModel;
