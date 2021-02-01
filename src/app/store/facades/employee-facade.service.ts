@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { EmployeeActionReducer } from '../reducers/employee.reducer';
 import { EmployeeState } from '../states/employee.state';
 import { initialState } from '../states/employee.state';
+import { EmployeeActionType } from '../actions/employee.action';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class EmployeeFacadeService extends BaseFacadeService<EmployeeState> {
   updateDataTable(params?: any): void {
     this.employeeRestService.fetchEmployees(params).pipe(
       map(res => {
-        console.log(res);
+        this.invokeAction(EmployeeActionType.FETCH_EMPLOYEES_DATA_TABLE, res);
       })
     ).subscribe();
   }

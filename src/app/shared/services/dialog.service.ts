@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogConfig } from '@core/interfaces-abstracts/dialog-config.interface';
 import { LqhDialogShellCustomComponent } from '@shared/components/lqh-dialog-shell-custom/lqh-dialog-shell-custom.component';
 import { LqhDialogShellComponent } from '@shared/components/lqh-dialog-shell/lqh-dialog-shell.component';
+import { cloneDeep } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,10 @@ export class DialogService {
       disableClose: dialogConfig?.disableClose || false,
       autoFocus: dialogConfig?.autoFocus || false,
       panelClass: dialogConfig?.panelClass || 'lqh-dialog',
-      data: dialogConfig
+      data: {
+        ...dialogConfig,
+        componentInstance: dialogConfig.componentInstance ? cloneDeep(dialogConfig.componentInstance) : dialogConfig.componentInstance  
+      }
     });
   }
 
@@ -38,7 +42,10 @@ export class DialogService {
       disableClose: dialogConfig?.disableClose || true,
       autoFocus: dialogConfig?.autoFocus || true,
       panelClass: dialogConfig?.panelClass || 'lqh-full-dialog',
-      data: dialogConfig
+      data: {
+        ...dialogConfig,
+        componentInstance: dialogConfig.componentInstance ? cloneDeep(dialogConfig.componentInstance) : dialogConfig.componentInstance  
+      }
     });
   }
 }

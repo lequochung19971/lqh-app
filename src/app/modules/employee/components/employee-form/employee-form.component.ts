@@ -12,14 +12,16 @@ import { EmployeeFormService } from '@modules/employee/services/employee-form.se
 import { UtilitiesService } from '@shared/services/utilities.service';
 import { Dayjs } from 'dayjs';
 import { EmployeeRestService } from '../../services/employee-rest.service';
+import { cloneDeep } from 'lodash';
+import { BindingViewModelFn } from '@core/components/base-control/base-control.component';
 @Component({
   selector: 'lqh-employee-form',
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.scss'],
   providers: [
-    // {
-    //   provide: EmployeeFormService, useClass: EmployeeFormService
-    // }
+    {
+      provide: EmployeeFormService, useClass: EmployeeFormService
+    }
   ]
 })
 export class EmployeeFormComponent extends BaseComponent implements OnInit, AfterViewInit {
@@ -41,11 +43,12 @@ export class EmployeeFormComponent extends BaseComponent implements OnInit, Afte
 
   ngOnInit(): void {
     this.viewModel = this.viewModel || new EmployeeModel();
-    this.employeeFormService.initialize(this.viewModel);
+    this.employeeFormService.initialize(cloneDeep(this.viewModel));
     this.form = this.employeeFormService.form;
     this.departments = this.jsonConfigService.getDepartmentsConfig();
     this.currentDialogRef = (this.getMetadataBuilderConfig() as DialogMetadataBuilderConfig).currentDialogRef;
     this.filterPositions();
+    this.disablePasswordField();
   }
 
   ngAfterViewInit(): void {
@@ -75,18 +78,59 @@ export class EmployeeFormComponent extends BaseComponent implements OnInit, Afte
 
   filterPositions(): void {
     const departmentGroup = this.form.get('department');
-    departmentGroup.valueChanges.subscribe((value: DepartmentModel) => {
+    departmentGroup.valueChanges.subscribe((value: string) => {
       if (value) {
-        this.positions = this.jsonConfigService.getPositionsConfig().filter(pos => pos.departmentId === value.id);
+        this.positions = this.jsonConfigService.getPositionsConfig().filter(pos => pos.departmentId === value);
       }
     });
   }
 
   saveEmployee(): void {
-    this.employeeRestService.createEmployee(this.viewModel).subscribe(res => {
-      if (res) {
-        this.currentDialogRef.close();
+    const avatarFile = this.form.get('avatar').value;
+    this.employeeRestService.uploadAvatar(avatarFile as File).subscribe(image => {
+      this.viewModel.avatar = image.fileUrl;
+      if (this.isCreateMode(this.viewModel)) {
+        this.employeeRestService.createEmployee(this.viewModel).subscribe(res => {
+          if (res) {
+            this.currentDialogRef.close(res);
+          }
+        });
+      } else {
+        this.employeeRestService.updateEmployee(this.viewModel).subscribe(res => {
+          if (res) {
+            this.currentDialogRef.close(res);
+          }
+        });
       }
     });
+  }
+
+  convertDepartmentModel(): BindingViewModelFn {
+    return ({value}) => {
+      const currentDepartmentModel = this.departments.find(department => department.id === value);
+      return currentDepartmentModel;
+    };
+  }
+
+  convertPositionModel(): BindingViewModelFn {
+    return ({value}) => {
+      const currentPositionModel = this.positions.find(department => department.id === value);
+      return currentPositionModel;
+    };
+  }
+
+  isCreateMode(viewModel: EmployeeModel): boolean {
+    return !viewModel._id;
+  }
+
+  isEditMode(viewModel: EmployeeModel): boolean {
+    return !!viewModel._id;
+  }
+
+  disablePasswordField(): void {
+    if (this.isEditMode) {
+      this.form.get('password').disable();
+      this.form.get('confirmPassword').disable();
+    }
   }
 }

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, map } from 'rxjs/operators';
 import { MatDialogRef } from '@angular/material/dialog';
-import * as _ from 'lodash-es';
+import { cloneDeep } from 'lodash';
 import { BaseComponent } from '@core/components/base-component/base.component';
 import { Address, AddressModel } from '@core/models/address.model';
 import { AddressTypes, DistrictType, ProvinceType, WardType } from '@core/enums/address-types.enum';
@@ -90,7 +90,7 @@ export class AddressDialogComponent extends BaseComponent implements OnInit {
   }
 
   protected initAddressModel(): void {
-    this.addressModel = this.viewModel ? _.cloneDeep(this.viewModel) : new AddressModel();
+    this.addressModel = this.viewModel ? cloneDeep(this.viewModel) : new AddressModel();
   }
 
   protected startSearchingAddress(): void {

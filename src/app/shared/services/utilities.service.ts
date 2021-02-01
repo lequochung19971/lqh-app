@@ -9,11 +9,11 @@ import dayjs, { Dayjs } from 'dayjs';
   providedIn: 'any'
 })
 export class UtilitiesService implements DateTimeUtilities, FormUtilities, RandomUitilities {
-  dateFormat: string = 'DD/MM/YYYY';
+  dateFormat = 'DD/MM/YYYY';
 
   constructor() { }
 
-  calculateAgeByDOB(date: Dayjs | string) {
+  calculateAgeByDOB(date: Dayjs | string): string {
     if (typeof date === 'string') {
       date = this.convertDateStringToDateDayjs(date, this.dateFormat);
     }
@@ -30,17 +30,17 @@ export class UtilitiesService implements DateTimeUtilities, FormUtilities, Rando
 
   convertDateStringToDateDayjs(date: string, format: string): Dayjs {
     const dateReverse = date.split('/').reverse().join('/');
-    return dayjs(dateReverse, {format: format, utc: true})
+    return dayjs(dateReverse, { format, utc: true });
   }
 
   formGroupHasErrors(group: FormGroup): boolean {
     let hasError = false;
 
-      Object.values(group.controls).forEach((control: FormControl) => {
-        if (control.errors || control.invalid) {
-          hasError = true;
-        }
-      })
+    Object.values(group.controls).forEach((control: FormControl) => {
+      if (control.errors || control.invalid) {
+        hasError = true;
+      }
+    });
 
     return hasError; 
   }
@@ -49,9 +49,9 @@ export class UtilitiesService implements DateTimeUtilities, FormUtilities, Rando
     return String(new Date().getMilliseconds());
   }
 
-  getRandomStringByLength(length: number) {
+  getRandomStringByLength(length: number): string {
     let result = '';
-    let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     for (let i = 0; i < length; i++) {
       result += chars.charAt(Math.floor(Math.random() * chars.length));

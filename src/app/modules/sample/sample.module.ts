@@ -8,10 +8,11 @@ import { allSamplePageComponent } from './pages';
 import { allSampleBuilderConfig } from './configs/index';
 import { SharedModule } from '../../shared/shared.module';
 import { MaterialModule } from '../../material/material.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [...allSamplePageComponent, ...allSampleComponents],
-  imports: [CommonModule, SampleRoutingModule, SharedModule, MaterialModule],
+  imports: [CommonModule, SampleRoutingModule, SharedModule, MaterialModule, ReactiveFormsModule, FormsModule],
   providers: [
     {
       provide: COMPONENT_TYPE_CONFIG_TOKEN,

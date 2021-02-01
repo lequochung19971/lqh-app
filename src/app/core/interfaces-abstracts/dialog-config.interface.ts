@@ -14,6 +14,7 @@ export interface DialogInstance extends ComponentInstance {
   currentDialogRef?: MatDialogRef<DialogRefType>;
   viewModel?: BaseModel;
   parentViewMode?: BaseModel;
+  metadata?: any;
 }
 
 

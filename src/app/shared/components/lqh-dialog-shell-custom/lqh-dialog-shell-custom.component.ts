@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
 import { LqhDialogShellComponent } from '../lqh-dialog-shell/lqh-dialog-shell.component';
 import { ComponentBuilderService } from '../../../core/services/component-builder.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -9,7 +9,7 @@ import { DialogConfig } from '../../../core/interfaces-abstracts/dialog-config.i
   templateUrl: './lqh-dialog-shell-custom.component.html',
   styleUrls: ['./lqh-dialog-shell-custom.component.scss']
 })
-export class LqhDialogShellCustomComponent extends LqhDialogShellComponent implements OnInit {
+export class LqhDialogShellCustomComponent extends LqhDialogShellComponent implements OnInit, AfterViewInit {
   height: string;
   constructor(
     protected builder: ComponentBuilderService,
@@ -27,14 +27,14 @@ export class LqhDialogShellCustomComponent extends LqhDialogShellComponent imple
     this.calculateHeightOfMainContent();
   }
 
-  calculateHeightOfMainContent() {
-    const dialogs = document.querySelectorAll('.lqh-dialog-shell-custom') as NodeList
-    const currentDialog: HTMLElement | null = dialogs ? dialogs[dialogs.length - 1] as HTMLElement: null;
+  calculateHeightOfMainContent(): void {
+    const dialogs = document.querySelectorAll('.lqh-dialog-shell-custom') as NodeList;
+    const currentDialog: HTMLElement | null = dialogs ? dialogs[dialogs.length - 1] as HTMLElement : null;
     const header = currentDialog.querySelector('.lqh-dialog-shell-custom__header');
     const main: HTMLElement = currentDialog.querySelector('.lqh-dialog-shell-custom__main');
     const dialogHight = currentDialog.clientHeight;
     const headerHeight = header.clientHeight;
-    main.style.height = `${dialogHight - headerHeight}px` 
+    main.style.height = `${dialogHight - headerHeight}px`;
   }
 
 }

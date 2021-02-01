@@ -25,7 +25,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "class-transformer": "^0.3.2",
     "dayjs": "^1.9.7",
-    "lodash-es": "^4.17.15",
+    "lodash": "^4.17.20",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

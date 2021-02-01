@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SampleFadadeService } from '../../../../store/facades/sample-fadade.service';
 import { SampleState } from '../../../../store/states/sample.state';
-import * as _ from 'lodash-es';
 import { ProxyService } from '../../../../shared/services/proxy.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'lqh-sample-page',
@@ -12,16 +12,19 @@ import { ProxyService } from '../../../../shared/services/proxy.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SamplePageComponent implements OnInit {
+  constructor(
+    protected proxy: ProxyService,
+    protected http: HttpClient,
+    protected sampleFacade: SampleFadadeService,
+  ) { }
   vm$: Observable<SampleState>;
   sampleData$: Observable<any>;
   tempValue$: Observable<any>;
   temp: string;
   temp2: string;
   vm: SampleState;
-  constructor(
-    protected proxy: ProxyService,
-    protected sampleFacade: SampleFadadeService,
-  ) { }
+
+  imgSrc: string;
 
   ngOnInit(): void {
     this.vm$ = this.sampleFacade.stateChange();
@@ -38,13 +41,29 @@ export class SamplePageComponent implements OnInit {
     this.tempValue$ = this.sampleFacade.tempValue;
   }
 
-  tempClick() {
-    this.temp = '1000000000000';
+  onFileUploaded(event): void {
+    const uploadedFile = event.target.files;
+    if (uploadedFile && uploadedFile.length > 0) {
+      if (uploadedFile.length === 1) {
+        this.uploadOnlyOneImage(uploadedFile[0]);
+      }
+    }
   }
 
-  tempClick2() {
-    this.temp2 = 'Le Quoc Hung';
+  uploadOnlyOneImage(file): void {
+    const formData = new FormData();
+    formData.append('image', file, file.name);
+    this.proxy.post('/uploadFiles', formData).subscribe(res => {
+      console.log(res);
+    });
   }
+
+  showPreviewImage(file): void {
+    const reader = new FileReader();
+    reader.onload = (e: any) => (this.imgSrc = e.target.result);
+    reader.readAsDataURL(file);
+  }
+
 
   onClick(): void {
     this.sampleFacade.updateSampleData('Le Quoc Hung');

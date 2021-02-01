@@ -18,28 +18,29 @@ export class EmployeeFormService extends BaseFormService<EmployeeModel> {
     super(formBuilder);
   }
 
-  initialize(dataModel: EmployeeModel): void {
+  initialize(viewModel: EmployeeModel): void {
     const form = this.formBuilder.group({
-      _id: [dataModel?._id || ''],
-      firstName: [dataModel?.firstName ?? '', [Validators.required, Validators.maxLength(30)]],
-      lastName: [dataModel?.lastName ?? '', [Validators.required, Validators.maxLength(30)]],
-      dob: [dataModel?.dob ?? '', [Validators.required, this.validationsService.invalidDate()]],
-      age: [dataModel?.age ?? ''],
-      email: [dataModel?.email ?? '', [Validators.required, Validators.email]],
-      phone: [dataModel?.phone ?? '', [Validators.required, this.validationsService.invalidMaxLengthWithFieldName(10, 'PHONE_LABEL')]],
-      department: [dataModel?.department ?? '', [Validators.required]],
-      position: [dataModel?.position ?? '' as Positions, [Validators.required]],
-      gender : [dataModel?.gender ?? Gender.male],
+      _id: [viewModel?._id || ''],
+      firstName: [viewModel?.firstName ?? '', [Validators.required, Validators.maxLength(30)]],
+      lastName: [viewModel?.lastName ?? '', [Validators.required, Validators.maxLength(30)]],
+      dob: [viewModel?.dob ?? '', [Validators.required, this.validationsService.invalidDate()]],
+      age: [viewModel?.age ?? ''],
+      email: [viewModel?.email ?? '', [Validators.required, Validators.email]],
+      phone: [viewModel?.phone ?? '', [Validators.required, this.validationsService.invalidMaxLengthWithFieldName(10, 'PHONE_LABEL')]],
+      department: [viewModel?.department ?? '', [Validators.required]],
+      position: [viewModel?.position ?? '' as Positions, [Validators.required]],
+      gender : [viewModel?.gender ?? Gender.male],
       idCardInfo: this.formBuilder.group({
-        idNumber: [dataModel?.idCardInfo?.idNumber ?? '', [Validators.required, this.validationsService.invalidMinLengthWithFieldName(10, 'ID_CARD_LABEL')]],
-        createDate: [dataModel?.idCardInfo?.createDate ?? '', [Validators.required]],
-        createPlace: [dataModel?.idCardInfo?.createPlace ?? '', [Validators.required, this.validationsService.invalidDate()]]
+        idNumber: [viewModel?.idCardInfo?.idNumber ?? '', [Validators.required, this.validationsService.invalidMinLengthWithFieldName(10, 'ID_CARD_LABEL')]],
+        createDate: [viewModel?.idCardInfo?.createDate ?? '', [Validators.required]],
+        createPlace: [viewModel?.idCardInfo?.createPlace ?? '', [Validators.required, this.validationsService.invalidDate()]]
       }, { validators: this.validationsService.invaliedIDCardInfo() }),
-      addressInfo: [dataModel?.addressInfo ?? '', [Validators.required]],
-      password: [dataModel?.password ?? '', [Validators.required, this.validationsService.invalidPassword()]],
-      confirmPassword: [dataModel?.confirmPassword ?? '', [this.validationsService.invalidConfirmPassword()]]
+      addressInfo: [viewModel?.addressInfo ?? '', [Validators.required]],
+      password: [viewModel?.password ?? '', [Validators.required, this.validationsService.invalidPassword()]],
+      confirmPassword: [viewModel?.confirmPassword ?? '', [this.validationsService.invalidConfirmPassword()]],
+      avatar: [viewModel?.avatar]
     });
-    this.viewModel = dataModel;
+    this.viewModel = viewModel;
     this.initForm(form);
   }
 }

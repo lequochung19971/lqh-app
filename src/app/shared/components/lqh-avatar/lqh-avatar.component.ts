@@ -9,15 +9,15 @@ import { Component, Input, OnInit } from '@angular/core';
 export class LqhAvatarComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() imageSrc: string;
   @Input() imageSize: AvatarSize;
-  @Input() firstName: string = 'Hung';
-  @Input() lastName: string = 'Le';
+  @Input() firstName: string;
+  @Input() lastName: string;
   avatarId: string;
   url: string;
   currentAvatar: HTMLElement;
-  textAvatar: string = `${this.firstName[0]}${this.lastName[0]}`;
+  textAvatar: string;
   
   constructor() { }
-  get avatarSize() {
+  get avatarSize(): string {
     const sizes = [AvatarSize.large, AvatarSize.medium, AvatarSize.small, AvatarSize.standard];
 
     if (sizes.indexOf(this.imageSize) === -1) {
@@ -33,6 +33,7 @@ export class LqhAvatarComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.textAvatar = this.firstName && this.lastName ? `${this.firstName[0]}${this.lastName[0]}` : '';
   }
 
   ngAfterViewInit(): void {
@@ -57,21 +58,21 @@ export class LqhAvatarComponent implements OnInit, OnChanges, AfterViewInit {
       const id = this.imageSrc.split('/').join('-');
       return `lqh-avatar-${id}-${Math.random()}`;
     } else {
-      return `lqh-avatar-${this.firstName}-${this.lastName}-${Math.floor(Math.random() * 1000000)}`
+      return `lqh-avatar-${this.firstName}-${this.lastName}-${Math.floor(Math.random() * 1000000)}`;
     }
   }
 
   initAvatarUrl(): void {
     if (this.imageSrc) {
-      this.url = `../../assets/${this.imageSrc}`
+      this.url = this.imageSrc;
     }
   }
 
-  generateBackgroundImage(currentAvatar: HTMLElement) {
+  generateBackgroundImage(currentAvatar: HTMLElement): void {
     currentAvatar.style.backgroundImage = `url(${this.url})`;
   }
 
-  generateBackgroundText(currentAvatar: HTMLElement) {
+  generateBackgroundText(currentAvatar: HTMLElement): void {
     currentAvatar.style.setProperty('--red', this.randomColorRGB());
     currentAvatar.style.setProperty('--green', this.randomColorRGB());
     currentAvatar.style.setProperty('--blue', this.randomColorRGB());

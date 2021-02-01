@@ -3,7 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { AppConfigService } from '@core/services/app-config.service';
 import { catchError, tap, mapTo } from 'rxjs/operators';
 import { ProxyService } from '../../shared/services/proxy.service';
-import { HttpErrorResponse, HttpClient } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Tokens } from '@core/interfaces-abstracts/tokens.interface';
 
 @Injectable({
@@ -15,7 +15,6 @@ export class AuthService {
   private _loggerAccount: string;
 
   constructor(
-    protected http: HttpClient,
     protected proxy: ProxyService,
     protected appConfigService: AppConfigService
   ) { }

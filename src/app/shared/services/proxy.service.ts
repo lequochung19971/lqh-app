@@ -3,7 +3,6 @@ import { HttpHeaders, HttpParams, HttpClient, HttpErrorResponse } from '@angular
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { DataResponse } from '@core/interfaces-abstracts/data-response.interface';
-import { ProxyMetaParams } from '@core/interfaces-abstracts/proxy-meta-params.interface';
 import { AppConfigService } from '@core/services/app-config.service';
 import * as logger from '@shared/services/logger.service';
 
@@ -13,13 +12,8 @@ import * as logger from '@shared/services/logger.service';
 export class ProxyService {
   private endpoint: string;
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      // 'Authorization': 'auth-token'
-    }),
-
-    params: new HttpParams(),
+  private _httpOptions = {
+    headers: new HttpHeaders({})
   };
 
   constructor(
@@ -29,13 +23,25 @@ export class ProxyService {
     this.endpoint = this.appConfigService.getBaseUrl();
   }
 
-  post<T>(url: string, dataModel: T | any): Observable<T> {
-    if (dataModel) {
+  post<T>(url: string, body: T | any, options?: {
+    headers?: HttpHeaders | {
+        [header: string]: string | string[];
+    };
+    observe?: string;
+    params?: HttpParams | {
+        [param: string]: string | string[];
+    };
+    reportProgress?: boolean;
+    responseType?: string;
+    withCredentials?: boolean;
+  }): Observable<T> {
+    const httpOptions = options ? this.createHttpOption(options) : this._httpOptions;
+
+    if (body) {
       // // this.loadingService.open();
-      const jsonData = JSON.stringify(dataModel);
       url = `${this.endpoint}${url}`;
 
-      return this.http.post<T>(url, jsonData, this.httpOptions).pipe(
+      return this.http.post<T>(url, body, httpOptions).pipe(
         catchError(this.handleError),
         tap((res: T) => {
           // // this.loadingService.close();
@@ -45,13 +51,25 @@ export class ProxyService {
     }
   }
 
-  put<T>(url: string, dataModel: T | any): Observable<T | T[] | DataResponse<T>> {
-    if (dataModel) {
+  put<T>(url: string, body: T | any, options?: {
+    headers?: HttpHeaders | {
+        [header: string]: string | string[];
+    };
+    observe?: string;
+    params?: HttpParams | {
+        [param: string]: string | string[];
+    };
+    reportProgress?: boolean;
+    responseType?: string;
+    withCredentials?: boolean;
+  }): Observable<T> {
+    const httpOptions = options ? this.createHttpOption(options) : this._httpOptions;
+
+    if (body) {
       // // this.loadingService.open();
-      const jsonData = JSON.stringify(dataModel);
       url = `${this.endpoint}${url}`;
-      return this.http.put<T>(url, jsonData, this.httpOptions).pipe(
-        tap((res: T[] | any) => {
+      return this.http.put<T>(url, body, httpOptions).pipe(
+        tap((res: T) => {
           logger.log(res);
           // this.loadingService.close();
           return res;
@@ -62,23 +80,26 @@ export class ProxyService {
 
   get<T>(
     url: string,
-    query?: HttpParams | string | any,
-    meta?: ProxyMetaParams,
-  ): Observable<T> {
-    // this.loadingService.open();
-    const httpOpts = {...this.httpOptions};
-
-    if (meta && meta.fullResponse) {
-      // tslint:disable-next-line:no-string-literal
-      httpOpts['observe'] = 'response';
+    options?: {
+      headers?: HttpHeaders | {
+          [header: string]: string | string[];
+      };
+      observe?: string;
+      params?: HttpParams | {
+          [param: string]: string | string[];
+      };
+      reportProgress?: boolean;
+      responseType?: string;
+      withCredentials?: boolean;
     }
+  ): Observable<T> {
+    const httpOptions = options ? this.createHttpOption(options) : this._httpOptions;
+    // this.loadingService.open();
 
     url = `${this.endpoint}${url}`;
-    httpOpts.params = this.createParams(query);
 
-    return this.http.get<T>(url, httpOpts).pipe(
-      catchError(this.handleError),
-      tap((res: T) => {
+    return this.http.get<T>(url, httpOptions).pipe(
+      tap((res: any) => {
         logger.log(res);
         // this.loadingService.close();
         return res;
@@ -86,19 +107,28 @@ export class ProxyService {
     );
   }
 
-  delete<T>(model: T | any, dataModel: T | any): Observable<T | T[]> {
-    if (dataModel) {
-      const url = `${this.endpoint}${model.tableName}/${dataModel._id}`;
-
-      return this.http.delete<T | T[]>(url, this.httpOptions).pipe(
-        catchError(this.handleError),
-        tap((res: T[] | any) => {
-          // this.loadingService.close();
-          logger.log(res);
-          return res;
-        })
-      );
-    }
+  delete<T>(url: string, options?: {
+    headers?: HttpHeaders | {
+        [header: string]: string | string[];
+    };
+    observe?: string;
+    params?: HttpParams | {
+        [param: string]: string | string[];
+    };
+    reportProgress?: boolean;
+    responseType?: string;
+    withCredentials?: boolean;
+  }): Observable<DataResponse<T>> {
+    const httpOptions = options ? this.createHttpOption(options) : this._httpOptions;
+    url = `${this.endpoint}${url}`;
+    return this.http.delete<T>(url, httpOptions).pipe(
+      catchError(this.handleError),
+      tap((res: T[] | any) => {
+        // this.loadingService.close();
+        logger.log(res);
+        return res;
+      })
+    );
   }
 
   private handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
@@ -139,4 +169,42 @@ export class ProxyService {
 
     return newParams;
   }
+
+  private createHttpOption(options: {
+    headers?: HttpHeaders | {
+        [header: string]: string | string[];
+    };
+    observe?: string;
+    params?: HttpParams | {
+        [param: string]: string | string[];
+    };
+    reportProgress?: boolean;
+    responseType?: string;
+    withCredentials?: boolean;
+  }): object {
+    const httpOptions: any = {...this._httpOptions};
+    if (options.headers) {
+      httpOptions.headers = options.headers;
+    }
+    if (options.observe) {
+      httpOptions.observe = options.observe;
+    }
+    if (options.params) {
+      httpOptions.params = this.createParams(options.params);
+    }
+    if (options.reportProgress) {
+      httpOptions.reportProgress = options.reportProgress;
+    }
+    if (options.responseType) {
+      httpOptions.responseType = options.responseType;
+    }
+    if (options.withCredentials) {
+      httpOptions.withCredentials = options.withCredentials;
+    }
+    return httpOptions;
+  }
+}
+
+export enum ContentType {
+  json = 'application/json',
 }

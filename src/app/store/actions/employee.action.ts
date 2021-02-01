@@ -1,4 +1,4 @@
-import { BaseAction } from "@core/interfaces-abstracts/base-action.interface";
+import { BaseAction } from '@core/interfaces-abstracts/base-action.interface';
 
 export enum EmployeeActionType {
   FETCH_EMPLOYEES_DATA_TABLE = '@Employee/FetchDataTable',

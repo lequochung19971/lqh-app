@@ -20,20 +20,22 @@
         required="true"
       ></lqh-input>
     </div>
-    <div class="col-5 px-30px pb-10px">
+    <div class="col-5 px-30px pb-10px" *ngIf="isCreateMode(viewModel)">
       <lqh-password-input
         [viewModel]="viewModel"
         formControlName="password"
         label="PASSWORD_LABEL"
         placeholder="PASSWORD_LABEL"
+        [disabledControl]="isEditMode(viewModel)"
         required="true"
       ></lqh-password-input>
     </div>
-    <div class="col-5 px-30px pb-10px">
+    <div class="col-5 px-30px pb-10px" *ngIf="isCreateMode(viewModel)">
       <lqh-password-input
         [viewModel]="viewModel"
         formControlName="confirmPassword"
         label="CONFIRM_PASSWORD_LABEL"
+        [disabledControl]="isEditMode(viewModel)"
         placeholder="CONFIRM_PASSWORD_LABEL"
       ></lqh-password-input>
     </div>
@@ -69,37 +71,6 @@
         [viewModel]="viewModel.idCardInfo"
         [parentViewModel]="viewModel"
       ></lqh-employee-id-card>
-      <!-- <div class="row" formGroupName="idCardInfo">
-        <div class="col-6 px-30px pb-10px">
-          <lqh-input
-            path="idCardInfo.idNumber"
-            [viewModel]="viewModel"
-            formControlName="idNumber"
-            label="{{ 'ID_CARD_LABEL' | translate }}"
-            placeholder="{{ 'ID_CARD_LABEL' | translate }}"
-            required="true"
-          ></lqh-input>
-        </div>
-        <div class="col-6 px-30px pb-10px">
-          <lqh-date-input
-            path="idCardInfo.createDate"
-            [viewModel]="viewModel"
-            formControlName="createDate"
-            label="CREATE_DATE_LABEL"
-            placeholder="CREATE_DATE_LABEL"
-          ></lqh-date-input>
-        </div>
-        <div class="col-12 px-30px pb-10px">
-          <div class="lqh-label-field">{{ 'CREATE_PLACE_LABEL' | translate }}</div>
-          <lqh-chip-list-open-dialog
-            path="idCardInfo.createPlace"
-            [dialogConfig]="getDialogConfigForChipList()"
-            [dataSourceMetadata]="getChiplistDataSourceMetadata()"
-            formControlName="createPlace"
-            [viewModel]="viewModel"
-          ></lqh-chip-list-open-dialog>
-        </div>
-      </div> -->
     </div>
     <div class="col-5 px-30px pb-10px">
       <lqh-select-option 
@@ -108,7 +79,8 @@
         formControlName="department"
         [viewModel]="viewModel"
         [dataSource]="departments"
-        [dataSourceMetadata]="{display: 'name'}"
+        [dataSourceMetadata]="{ value: 'id', display: 'name' }"
+        [viewToModelFn]="convertDepartmentModel()"
         required="true"
         ></lqh-select-option>
     </div>
@@ -120,7 +92,8 @@
         formControlName="position"
         [viewModel]="viewModel"
         [dataSource]="positions"
-        [dataSourceMetadata]="{display: 'name'}"
+        [dataSourceMetadata]="{ value: 'id', display: 'name' }"
+        [viewToModelFn]="convertPositionModel()"
         required="true"
         ></lqh-select-option>
     </div>
@@ -153,7 +126,10 @@
       ></lqh-address-input>
     </div>
     <div class="col-10 px-30px pb-10px">
-      <lqh-avatar-uploading-card></lqh-avatar-uploading-card>
+      <lqh-avatar-uploading-card 
+        [viewModel]="viewModel"
+        formControlName="avatar"
+      ></lqh-avatar-uploading-card>
     </div>
     <div class="col-10 px-30px pb-10px">
       <button

@@ -12,7 +12,7 @@ export class IDCardModel extends BaseModel {
 
   @Expose()
   @Type(() => Address)
-  @Transform(({value}) => value[0], { toPlainOnly: true })
+  @Transform(({value}) => Array.isArray(value) ? value[0] : value, { toPlainOnly: true })
   createPlace: Address;
   
   constructor(props?: IDCardModel) {

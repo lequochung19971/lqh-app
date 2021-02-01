@@ -28,4 +28,4 @@ export const allActionConfig: TypeConfig[] = [
     name: EmployeeActionType.FETCH_EMPLOYEES_DATA_TABLE,
     type: FetchEmployeesDataTable
   }
-]
+];

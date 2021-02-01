@@ -3,6 +3,7 @@ import { BaseState } from '../../core/interfaces-abstracts/base-state.abstract';
 
 export class EmployeeState extends BaseState {
   tableData: EmployeeModel[];
+  totalEmployees: number;
   
   constructor(props?: any) {
     super(props);

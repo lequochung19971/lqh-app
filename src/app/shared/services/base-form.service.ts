@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BaseModel } from '@core/models/base.model';
-import * as _ from 'lodash-es';
+import { cloneDeep } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +43,7 @@ export abstract class BaseFormService<TModel extends BaseModel> {
   }
 
   protected initForm(initialForm: FormGroup): void {
-    this._originalFormValue = _.cloneDeep(initialForm.value);
+    this._originalFormValue = cloneDeep(initialForm.value);
     this._form = initialForm;
   }
 
