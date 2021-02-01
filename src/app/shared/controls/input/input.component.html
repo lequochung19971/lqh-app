@@ -6,8 +6,10 @@
     autocomplete="off"
     (ngModelChange)="inputChange({value: $event})"
     [formControl]="formControl"
+    [value]="value"
     [readonly]="readonly"
     [required]="required"
+    [disabledControl]="disabledControl"
   />
   <mat-error>
     <lqh-error-message [control]="formControl"></lqh-error-message>

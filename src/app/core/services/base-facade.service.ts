@@ -39,7 +39,7 @@ export abstract class BaseFacadeService<TState extends BaseState> {
     return this._state;
   }
 
-  private initState(state: TState) {
+  private initState(state: TState): void {
     this._state = state;
     this._storeSubject = new BehaviorSubject<TState>(this._state);
     this._state$ = this._storeSubject.asObservable();
@@ -55,7 +55,7 @@ export abstract class BaseFacadeService<TState extends BaseState> {
       if (this.checkAction(action)) {
         this._reducerSubject.next({state: this._state, action});
       }
-    })
+    });
   }
 
   private initReducer(reducer: ActionReducer): void {
@@ -68,7 +68,7 @@ export abstract class BaseFacadeService<TState extends BaseState> {
     ).subscribe(({action, state}: BaseReducer) => {
       this.FacadeLogging(action);
       this.dispatch(this._actionReducer.reduce({state, action}));
-    })
+    });
   }
   
   public stateChange(): Observable<TState> {
@@ -107,7 +107,7 @@ export abstract class BaseFacadeService<TState extends BaseState> {
     this._actionSubject.next(action);
   }
 
-  protected select(stateFunction: (state: TState) => any): Observable<null | TState | any> {
+  select(stateFunction: (state: TState) => any): Observable<null | TState | any> {
     return this._state$.pipe(
       map(stateFunction)
     );
@@ -137,7 +137,7 @@ export abstract class BaseFacadeService<TState extends BaseState> {
     return true;
   }
 
-  private FacadeLogging(action: BaseAction) {
+  private FacadeLogging(action: BaseAction): void {
     logger.log('-------------------------------------------');
     logger.log('+ Action Type:', action.type);
     logger.log('+ Action payload:', action.payload);

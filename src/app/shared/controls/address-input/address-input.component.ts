@@ -22,17 +22,29 @@ export class AddressInputComponent extends InputComponent implements OnInit, Con
     super(ngControl);
   }
 
-  bindViewToModel(): void {
-    if (!this.viewModel[this.pathName]) {
-      this.viewModel[this.pathName] = new AddressModel();
+  ngOnInit(): void {
+    super.ngOnInit();
+    if (this.value) {
+      this.writeValue(this.value);
+    }
+  }
+
+  writeValue(value: any): void {
+    this.bindModelToView(value);
+    this.bindViewToModel(value);
+  }
+
+  bindViewToModel(address: AddressModel | string): void {
+    if (typeof address === 'object') {
+      this.viewModel[this.pathName] = address;
     }
   }
 
   bindModelToView(address: AddressModel | string): void {
     if (typeof address === 'object') {
-      super.bindModelToView(address?.ward?.pathWithType ?? '');
+      this.updateView(address?.ward?.pathWithType ?? '');
     } else {
-      super.bindModelToView(address);
+      this.updateView(address);
     }
   }
 

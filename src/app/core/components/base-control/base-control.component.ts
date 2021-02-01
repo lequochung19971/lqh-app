@@ -1,39 +1,50 @@
-import { Input, OnInit, Directive, Optional, Self } from '@angular/core';
+import { Input, OnInit, Directive, Optional, Self, AfterViewInit } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NgControl } from '@angular/forms';
 import { BaseModel } from '../../models/base.model';
-import * as _ from 'lodash-es';
+import { set } from 'lodash';
+
+export type BindingViewModelFn = ({
+  accessor,
+  value,
+}: {
+  accessor?: BaseControl;
+  value?: any;
+}) => any;
 @Directive()
-export abstract class BaseControl implements OnInit, ControlValueAccessor {
+export abstract class BaseControl implements OnInit, ControlValueAccessor, AfterViewInit {
   @Input() viewModel: any;
   @Input() parentViewModel: BaseModel;
   @Input() parentFormControl: FormGroup;
   @Input() path: string;
-  @Input() viewToModelFn: (params?: any) => any;
-  @Input() modelToViewFn: (params?: any) => any;
+  @Input() viewToModelFn: ({ accessor, value }: { accessor?: BaseControl; value?: any }) => any;
+  @Input() modelToViewFn: ({ accessor, value }: { accessor?: BaseControl; value?: any }) => any;
+  @Input() disabledControl: boolean;
   formControl: FormControl;
   disabled: boolean;
   value: any;
-  private onChanged: any = () => {};
-  private onTouched: any = () => {};
+  onChanged: any = () => {};
+  onTouched: any = () => {};
 
-  constructor(@Optional() @Self() public ngControl: NgControl) { 
+  constructor(@Optional() @Self() public ngControl: NgControl) {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
     }
   }
 
   ngOnInit(): void {
-    this.formControl = this.ngControl ? this.ngControl.control as FormControl : new FormControl();
+    this.formControl = this.ngControl ? (this.ngControl.control as FormControl) : new FormControl();
   }
-  
+
+  ngAfterViewInit(): void {}
+
   get pathName(): string {
-    return this.path || this.ngControl.name as string;
+    return this.path || (this.ngControl.name as string);
   }
 
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
-  
+
   writeValue(value: any): void {
     this.bindModelToView(value);
     this.bindViewToModel(value);
@@ -43,25 +54,25 @@ export abstract class BaseControl implements OnInit, ControlValueAccessor {
     this.updateModel(value);
     this.updateView(value);
   }
-  
+
   bindModelToView(value?: any): any {
     if (this.modelToViewFn) {
-      const result = this.modelToViewFn(value);
+      const result = this.modelToViewFn({ accessor: this, value });
       this.updateView(result);
     } else {
       this.updateView(value);
     }
   }
-  
+
   bindViewToModel(value?: any): any {
     if (this.viewToModelFn) {
-      const result = this.viewToModelFn(value);
+      const result = this.viewToModelFn({ accessor: this, value });
       this.updateModel(result);
     } else {
       this.updateModel(value);
     }
   }
-  
+
   registerOnChange(fn: any): void {
     this.onChanged = fn;
   }
@@ -69,17 +80,17 @@ export abstract class BaseControl implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  protected updateModel(value: any): void {
-    this.setBindingModel(this.viewModel, this.pathName, value);
+  updateModel(value: any): void {
+    this.setBindingData(this.viewModel, this.pathName, value);
   }
 
-  protected updateView(value: any): void {
+  updateView(value: any): void {
     this.value = value;
     this.onTouched();
     this.onChanged(value);
   }
 
-  protected setBindingModel(modelData: any, path: string | null, value: any): void {
-    _.set(modelData, path, value);
+  setBindingData(modelData: any, path: string | null, value: any): void {
+    set(modelData, path, value);
   }
 }

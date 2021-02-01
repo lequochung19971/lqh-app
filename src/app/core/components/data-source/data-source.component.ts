@@ -17,11 +17,18 @@ export abstract class DataSourceComponent extends BaseControl {
     super(ngControl);
   }
 
-  protected getDisplay(value: any): string {
-    return this.dataSourceMetadata?.display ? this.translateService.instant(value[this.dataSourceMetadata.display]) : value;
+  getDisplay(value: any): string {
+    if (this.dataSourceMetadata?.display) {
+      return this.translateService.instant(value[this.dataSourceMetadata.display]) ?? value;
+    }
+
+    return value;
   }
 
-  protected getValue(value: any): any {
-    return this.dataSourceMetadata?.value ? value[this.dataSourceMetadata.value] : value;
+  getValue(value: any): any {
+    if (this.dataSourceMetadata?.value) {
+      return value[this.dataSourceMetadata.value] ?? value;
+    }
+    return value;
   }
 }

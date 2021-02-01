@@ -7,7 +7,9 @@
     lqhInputDate
     (ngModelChange)="inputChange({value: $event})"
     [formControl]="formControl"
+    [value]="value"
     [required]="required"
+    [disabledControl]="disabledControl"
   />
   <mat-error>
     <lqh-error-message [control]="formControl"></lqh-error-message>

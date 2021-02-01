@@ -1,15 +1,18 @@
-<mat-form-field appearance="standard" class="w100">
+<mat-form-field appearance="standard" class="w100" [ngClass]="{'lqh-form-field-input-readonly': readonly}">
   <mat-label>{{ label | translate }}</mat-label>
   <input
     matInput
     placeholder="{{ placeholder | translate }}"
-    [(ngModel)]="value"
+    [value]="value"
+    [formControl]="formControl"
     (click)="openDialog()"
-    autocomplete="off"
     lqhPreventChar
     [required]="required"
+    [readonly]="readonly"
+    [disabledControl]="disabledControl"
+    autocomplete="off"
   />
-  <mat-icon matSuffix>arrow_drop_down</mat-icon>
+  <!-- <mat-icon matSuffix>arrow_drop_down</mat-icon> -->
   <mat-error>
     <lqh-error-message [control]="formControl"></lqh-error-message>
   </mat-error>

@@ -2,12 +2,12 @@ import { Directive, Input } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 @Directive({
-  selector: '[lqhDisableControl]',
+  selector: '[disabledControl]',
 })
-export class DisableControlDirective {
+export class DisabledControlDirective {
   constructor(protected ngControl: NgControl) {}
 
-  @Input('lqhDisableControl') set disabledControl(condition: boolean) {
+  @Input('disabledControl') set disabledControl(condition: boolean) {
     const action = condition ? 'disable' : 'enable';
     if (this.ngControl.control) {
       this.ngControl.control[action]();
