@@ -23,6 +23,10 @@ export class AppConfigService {
     return this.appConfigs.API.loginUrl;
   }
 
+  getLogoutUrl(): string {
+    return this.appConfigs.API.logoutUrl;
+  }
+
   getRefreshTokenUrl(): string {
     return this.appConfigs.API.refreshTokenUrl;
   }

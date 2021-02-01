@@ -3,7 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { AppConfigService } from '@core/services/app-config.service';
 import { catchError, tap, mapTo } from 'rxjs/operators';
 import { ProxyService } from '../../shared/services/proxy.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Tokens } from '@core/interfaces-abstracts/tokens.interface';
 
 @Injectable({
@@ -15,6 +15,7 @@ export class AuthService {
   private _loggerAccount: string;
 
   constructor(
+    protected http: HttpClient,
     protected proxy: ProxyService,
     protected appConfigService: AppConfigService
   ) { }
@@ -33,11 +34,16 @@ export class AuthService {
   }
 
   logout(): Observable<boolean> {
-    return new Observable(subscribe => {
-      this.doLogoutUser();
-      subscribe.next(true);
-      subscribe.complete();
-    });
+    const url = this.appConfigService.getLogoutUrl();
+    const refreshToken = this.getRefreshToken();
+    return this.proxy.post<boolean>(url, { refreshToken }).pipe(
+      tap(() => this.doLogoutUser()),
+      mapTo(true),
+      catchError((error: HttpErrorResponse) => {
+        alert(error.error);
+        return throwError(error);
+      })
+    );
   }
 
   isLoggedIn(): boolean {
@@ -53,9 +59,6 @@ export class AuthService {
   }
 
   refreshToken(): Observable<any> {
-    // if (!this.hasRefreshToken()) {
-    //   return throwError(new HttpErrorResponse({error: {message: ''}}));
-    // }
     const url = this.appConfigService.getRefreshTokenUrl();
     const refreshTokenModel = {
       refreshToken: this.getRefreshToken()

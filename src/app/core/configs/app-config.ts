@@ -5,6 +5,7 @@ export const appConfigs: AppConfig = {
     baseUrl: 'http://localhost:3000',
     employeeUrl: '/employees',
     loginUrl: '/auth/login',
+    logoutUrl: '/auth/logout',
     refreshTokenUrl: '/auth/refresh',
   }
 };
