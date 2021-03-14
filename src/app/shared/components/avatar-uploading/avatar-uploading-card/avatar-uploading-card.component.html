@@ -4,7 +4,7 @@
     (change)="onFileUploaded($event)"
     #inputImage
   />
-  <div class="avatar-card-container" [ngClass]="hasImage ? 'has-image' : 'empty'">
+  <div class="avatar-card-container" [ngClass]="hasImage() ? 'has-image' : 'empty'">
     <div class="avatar-card">
       <div class="avatar-card__image">
         <div class="image">
